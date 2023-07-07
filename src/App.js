@@ -1,23 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+
+
+// Delete unneccessary code and check if still works
+// Merge to main
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>-- first commit --</p>
+
+        <h1>-- Empty page -- </h1>
       </header>
     </div>
   );
