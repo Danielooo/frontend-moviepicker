@@ -1,15 +1,13 @@
 import './App.css';
 
-
-// Delete unneccessary code and check if still works
-// Merge to main
+// Create pages:
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
 
-        <h1>-- .idea/ check -- </h1>
+        <h1>-- Empty page -- </h1>
       </header>
     </div>
   );
