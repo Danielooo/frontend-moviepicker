@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        <h1>-- Empty page -- </h1>
+        <h1>-- .idea/ check -- </h1>
       </header>
     </div>
   );
