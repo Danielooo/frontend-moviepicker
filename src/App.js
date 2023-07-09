@@ -1,6 +1,8 @@
 import './App.css';
 
 // Create pages:
+// TODO: Create NavBar page
+// TODO: Create Routes on Home page
 
 function App() {
   return (
