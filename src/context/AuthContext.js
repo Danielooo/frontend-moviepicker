@@ -1,17 +1,14 @@
 // copy from banana securyty.
-// TODO: change url to https://frontend-educational-backend.herokuapp.com/
-// TODO: get server response > GET /api/test/all
-
+// TODO: create logout function
 
 import React, { createContext, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import isTokenValid from "../helpers/IsTokenValid";
+import IsTokenValid from "../helpers/IsTokenValid";
 
 // zorgt ervoor dat andere pages kunnen abonneren op de context
 export const AuthContext = createContext(null);
-
 
 function AuthContextProvider({ children }) {
   const navigate = useNavigate();
@@ -25,7 +22,7 @@ function AuthContextProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem('token');
 
-    if (token && isTokenValid(token)) {
+    if (token && IsTokenValid(token)) {
       const decodedToken = jwt_decode(token);
       void fetchUserData(decodedToken.sub, token,);
     } else {
@@ -43,6 +40,7 @@ function AuthContextProvider({ children }) {
     const decodedToken = jwt_decode(JWT);
 
     void fetchUserData(decodedToken.sub, JWT, '/profile');
+    console.log('login invoked')
   }
 
   function logout() {
@@ -55,20 +53,13 @@ function AuthContextProvider({ children }) {
       status: 'done',
     });
     navigate('/');
+    console.log('logout invoked')
   }
 
-  async function testNoviBackend() {
-    try {
-      const result = await axios.get(`https://frontend-educational-backend.herokuapp.com/api/test/all`);
-      console.log(result);
-    } catch (e) {
-      console.error(e);
-    }
-  }
 
   async function fetchUserData ( id, token, redirectUrl ) {
     try {
-      const result = await axios.get(` https://frontend-educational-backend.herokuapp.com/${id}`, {
+      const result = await axios.get(`https://frontend-educational-backend.herokuapp.com/api/user`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -103,12 +94,13 @@ function AuthContextProvider({ children }) {
     }
   }
 
+  // Geeft onderstaande elementen door aan de AuthContext
+  // Delete testNoviBackend na afmaken project
   const contextData = {
     isAuth: auth.isAuth,
     user: auth.user,
     login,
     logout,
-    testNoviBackend,
   }
 
   return (
