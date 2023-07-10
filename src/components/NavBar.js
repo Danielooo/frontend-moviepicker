@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import camera from '../assets/camera-icon.jpg';
 import avatar from '../assets/avatar-icon.jpg';
 import { Link, useNavigate } from "react-router-dom";
+// import { testNoviBackend } from "../context/AuthContext";
+
+import { AuthContext } from "../context/AuthContext";
 
 import './NavBar.css';
+import axios from "axios";
 
 
 function NavBar() {
+  const { isAuth, user, login, logout, testNoviBackend } = useContext(AuthContext);
   const navigate = useNavigate()
 
   return (
@@ -45,6 +50,27 @@ function NavBar() {
             <img src={avatar} alt='camera-icon' />
           </Link>
 
+
+          <button
+            type="button"
+            onClick={login}
+            >
+            Log in (mock)
+          </button>
+
+          <button
+            type="button"
+            onClick={logout}
+            >
+            Log out (mock)
+          </button>
+
+          <button
+            type="button"
+            onClick={testNoviBackend}
+            >
+            Test Novi Backend (inspect console)
+          </button>
 
           {/* Conditionally rendered when the user is logged in */}
           <button
