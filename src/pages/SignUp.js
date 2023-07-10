@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Profile() {
+function SignUp() {
 
     return (
         <>
@@ -9,3 +9,5 @@ function Profile() {
         </>
     )
 }
+
+export default SignUp;
