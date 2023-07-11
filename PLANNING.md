@@ -1,13 +1,18 @@
-~~1. Routing naar pagina's~~
-~~2. Inloggen en registreren met button click~~
-~~3. Registreren met email en wachtwoord inbouwen~~
 
-4. Profiel data aanpas functies inbouwen
-5. Api calls maken naar backend en tonen op pagina
-5. Pagina text en boxen bouwen
-6. CSS styling maken
-7. Responsive maken
-8. Verslag afmaken
+~~- Routing naar pagina's~~
+~~- Inloggen en registreren met button click~~
+~~- Registreren met email en wachtwoord inbouwen~~
+~~- Design opdracht geven voor camera en avatar~~
+~~- Links maken van navbar buttons~~
+
+- Api calls maken naar backend en tonen op pagina 
+  ~~- api key aanvragen~~
+  - env files maken en api key erin zetten
+  - film zoekopdracht tonen
+- Pagina text en boxen bouwen 
+- CSS styling maken 
+- Responsive maken 
+- Verslag afmaken
 
 
 

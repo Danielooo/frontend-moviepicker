@@ -12,3 +12,7 @@ nav {
     justify-content: space-between;
     width: 150px;
 }
+
+.nav-links > .nav-link {
+    padding-left: 10px;
+}
