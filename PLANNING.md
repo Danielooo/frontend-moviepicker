@@ -7,12 +7,13 @@
 
 - Api calls maken naar backend en tonen op pagina 
   ~~- api key aanvragen~~
-  - env files maken en api key erin zetten
-  - film zoekopdracht tonen
+  ~~- env files maken en api key erin zetten~~
+  ~~- film zoekopdracht tonen in inspect~~
+  - fetchMovies endpoint maken op title en genre
 - Pagina text en boxen bouwen 
 - CSS styling maken 
 - Responsive maken 
 - Verslag afmaken
 
 
-
+https://api.themoviedb.org/3/genre/movie/list/
