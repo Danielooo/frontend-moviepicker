@@ -1,10 +1,10 @@
 import './App.css';
 import NavBar from './components/NavBar';
-import Home from './pages/Home';
-import About from './pages/About';
-import Profile from './pages/Profile';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
+import Home from './pages/home/Home';
+import About from './pages/about/About';
+import Profile from './pages/profile/Profile';
+import SignIn from './pages/signIn/SignIn';
+import SignUp from './pages/signUp/SignUp';
 
 import { Routes, Route } from 'react-router-dom';
 
