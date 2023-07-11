@@ -1,5 +1,8 @@
 import React from 'react';
 
+// TODO Implementeer async fetchMovies functie
+
+
 function Home() {
 
   return (
@@ -7,7 +10,6 @@ function Home() {
       <h1>Home page</h1>
 
       {/*Movie filters*/}
-
 
       {/*Movie selection*/}
 
