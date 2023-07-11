@@ -1,6 +1,7 @@
 import React from 'react';
 
 // TODO Implementeer async fetchMovies functie
+// TODO Implementeer invoerveld om fetchMovies te testen
 
 
 function Home() {
