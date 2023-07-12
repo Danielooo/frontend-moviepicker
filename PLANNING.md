@@ -9,7 +9,10 @@
   ~~- api key aanvragen~~
   ~~- env files maken en api key erin zetten~~
   ~~- film zoekopdracht tonen in inspect~~
-  - fetchMovies endpoint maken op title en genre
+  - selectie maken van x aantal films
+  - shortlist maken
+  - film op shortlist kunnen zetten
+  - shortlist films kunnen verwijderen
 - Pagina text en boxen bouwen 
 - CSS styling maken 
 - Responsive maken 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 
 // Form vraagt om input naam acteur
@@ -6,13 +6,30 @@ import axios from 'axios';
 // Op basis van acteur worden tien populairste films getoond
 // Uit die selectie van 10 wordt 1 film random als suggestie gegeven
 
+// created header with bearer token variable
+// implemented token var in endpoint
+
+// TODO delete random movie part >> random choice will come from LocalStorage list
+// TODO get 5 random movies out of total pages
+// TODO get best acclaimed movie by actor
+// TODO get worst acclaimed movie by actor
+
+// TODO create shortlist
+
 function Home() {
   const [actorName, setActorName] = useState('');
   const [actorId, setActorId] = useState(null);
   const [movies, setMovies] = useState([]);
   const [randomMovie, setRandomMovie] = useState(null);
 
-  const apiKey = process.env.REACT_APP_API_KEY;
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`
+    }
+  };
+
 
 
   useEffect(() => {
@@ -24,7 +41,6 @@ function Home() {
         })
         .then(movieList => {
           setMovies(movieList);
-          setRandomMovie(getRandomMovieFromList(movieList));
         })
         .catch(error => console.error(error.message));
     }
@@ -33,7 +49,7 @@ function Home() {
   async function findActorIdByName( name ) {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/search/person?api_key=${ apiKey }&query=${ name }`
+        `https://api.themoviedb.org/3/search/person?query=${ name }`, options
       );
 
       if (response.status === 200) {
@@ -52,7 +68,7 @@ function Home() {
   async function findMoviesByActorId(id) {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_cast=${id}&sort_by=popularity.desc&language=en-US&page=1`
+        `https://api.themoviedb.org/3/discover/movie?with_cast=${ id }&sort_by=popularity.desc&language=en-US&page=1`, options
       );
 
       if (response.status === 200) {
@@ -65,11 +81,6 @@ function Home() {
     }
   }
 
-
-  function getRandomMovieFromList(movieList) {
-    const randomIndex = Math.floor(Math.random() * movieList.length);
-    return movieList[randomIndex];
-  }
 
   function handleInputChange(e) {
     setActorName(e.target.value);
@@ -86,45 +97,39 @@ function Home() {
         })
         .then(movieList => {
           setMovies(movieList);
-          setRandomMovie(getRandomMovieFromList(movieList));
         })
         .catch(error => console.error(error.message));
     }
   };
 
   return (
-    <div>
-      <h1>Home</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="actorNameInput">Actor Name:</label>
-        <input
-          type="text"
-          id="actorNameInput"
-          value={actorName}
-          onChange={handleInputChange}
-        />
-        <button type="submit">Search</button>
-      </form>
 
-      {actorId && (
+
         <div>
-          <p>Actor ID: {actorId}</p>
-          <h2>Movies:</h2>
-          <ul>
-            {movies.map(movie => (
-              <li key={movie.id}>{movie.title}</li>
-            ))}
-          </ul>
-          {randomMovie && (
+          <h1>Home</h1>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="actorNameInput">Actor Name:</label>
+            <input
+              type="text"
+              id="actorNameInput"
+              value={actorName}
+              onChange={handleInputChange}
+            />
+            <button type="submit">Search</button>
+          </form>
+
+          {actorId && (
             <div>
-              <h2>Random Movie:</h2>
-              <p>Title: {randomMovie.title}</p>
-              <p>Overview: {randomMovie.overview}</p>
+              <p>Actor ID: {actorId}</p>
+              <h2>Movies:</h2>
+              <ul>
+                {movies.map(movie => (
+                  <li key={movie.id}>{movie.title}</li>
+                ))}
+              </ul>
             </div>
           )}
         </div>
-      )}
-    </div>
   );
 };
 
