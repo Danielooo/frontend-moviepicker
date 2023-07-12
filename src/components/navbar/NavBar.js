@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import camera from '../assets/camera-icon.jpg';
-import avatar from '../assets/avatar-icon.jpg';
+import camera from '../../assets/camera-icon.jpg';
+import avatar from '../../assets/avatar-icon.jpg';
 import {Link, NavLink, useNavigate} from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import './NavBar.css';
 import axios from "axios";
 
