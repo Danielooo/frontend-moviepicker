@@ -5,14 +5,10 @@ import About from './pages/about/About';
 import Profile from './pages/profile/Profile';
 import SignIn from './pages/signIn/SignIn';
 import SignUp from './pages/signUp/SignUp';
+import Wheel from './pages/wheel/Wheel';
 
 import { Routes, Route } from 'react-router-dom';
 
-
-// Create pages:
-// TODO: Create NavBar page
-// TODO: Create Routes on Home page
-// TODO: create Routes, import Router, Routes
 
 function App() {
   return (
@@ -27,6 +23,7 @@ function App() {
           <Route path='/signin' element={<SignIn />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/signup' element={<SignUp />} />
+          <Route path='/wheel' element={<Wheel />} />
         </Routes>
       </div>
     </>
