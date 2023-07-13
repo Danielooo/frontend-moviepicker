@@ -4,15 +4,6 @@ import axios from 'axios';
 // Form vraagt om input naam acteur
 // Endpoint vraagt om acteur id, findActorIdByName vindt id op basis van naam
 // Op basis van acteur worden tien populairste films getoond
-// Uit die selectie van 10 wordt 1 film random als suggestie gegeven
-
-// created header with bearer token variable
-// implemented token var in endpoint
-
-// TODO delete random movie part >> random choice will come from LocalStorage list
-// TODO get 5 random movies out of total pages
-// TODO get best acclaimed movie by actor
-// TODO get worst acclaimed movie by actor
 
 // TODO create shortlist
 
@@ -20,7 +11,7 @@ function Home() {
   const [actorName, setActorName] = useState('');
   const [actorId, setActorId] = useState(null);
   const [movies, setMovies] = useState([]);
-  const [randomMovie, setRandomMovie] = useState(null);
+  const [shortList, setShortList] = useState([]);
 
   const options = {
     method: "GET",
@@ -30,7 +21,24 @@ function Home() {
     }
   };
 
+  // SHORTLIST FUNCTIONS
+  function addToShortList( movie) {
+    setShortList(prevShortList => [...prevShortList, {...movie, disabled: true}]);
+    setMovies(prevMovies =>
+      prevMovies.map(prevMovie =>
+        prevMovie.id === movie.id ? { ...prevMovie, isAdded: true } : prevMovie
+      )
+    )
+    console.log(movie)
+  }
 
+  function handleDeleteMovie(movie) {
+    setShortList(prevShortList =>
+      prevShortList.filter(item =>
+        item.id !== movie.id
+      )
+    )
+  }
 
   useEffect(() => {
     if (actorName) {
@@ -81,7 +89,6 @@ function Home() {
     }
   }
 
-
   function handleInputChange(e) {
     setActorName(e.target.value);
   };
@@ -102,9 +109,10 @@ function Home() {
     }
   };
 
+
+
   return (
-
-
+    <>
         <div>
           <h1>Home</h1>
           <form onSubmit={handleSubmit}>
@@ -118,19 +126,50 @@ function Home() {
             <button type="submit">Search</button>
           </form>
 
+          {/* TODO disable button when added to shortlist */}
           {actorId && (
             <div>
               <p>Actor ID: {actorId}</p>
               <h2>Movies:</h2>
-              <ul>
-                {movies.map(movie => (
-                  <li key={movie.id}>{movie.title}</li>
-                ))}
-              </ul>
+              {movies.map(movie => (
+                <div key={movie.id}>
+                  <button
+                    onClick={() => addToShortList(movie)}
+                    disabled={movie.isAdded}
+                  >
+                    +
+                  </button>
+                  <span>{movie.title}</span>
+                </div>
+              ))}
             </div>
           )}
         </div>
+
+
+          <div>
+            <h2>Shortlist</h2>
+            {shortList.length > 0 ? (
+            <ul>
+              {shortList.map(movie => (
+                <li key={movie.id}>
+                  <button
+                    onClick={() => handleDeleteMovie(movie)}
+
+                  >
+                    -
+                  </button>
+                  <span>{movie.title}</span>
+                </li>
+                ))}
+            </ul>
+            ) : <i>No movies selected</i>
+            }
+          </div>
+
+
+    </>
   );
-};
+}
 
 export default Home;
