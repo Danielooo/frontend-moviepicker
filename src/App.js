@@ -5,7 +5,8 @@ import About from './pages/about/About';
 import Profile from './pages/profile/Profile';
 import SignIn from './pages/signIn/SignIn';
 import SignUp from './pages/signUp/SignUp';
-import Wheel from './pages/wheel/Wheel';
+import WheelPage from './pages/wheelPage/WheelPage';
+import CarouselPage from './pages/carouselpage/CarouselPage';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -23,7 +24,9 @@ function App() {
           <Route path='/signin' element={<SignIn />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/signup' element={<SignUp />} />
-          <Route path='/wheel' element={<Wheel />} />
+          {/*<Route path='/wheelpage' element={<WheelPage />} />*/}
+          {/*<Route path='/carouselpage' element={<CarouselPage />} />*/}
+
         </Routes>
       </div>
     </>

@@ -1,21 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { findActorIdByName, findMoviesByActorId } from '../../helpers/ApiRequests';
 import MovieSelection from '../../components/movieselection/MovieSelection';
 import Shortlist from '../../components/shortlist/ShortList';
+import { Link } from "react-router-dom";
+import LoadingBar from "../../components/loadingbar/LoadingBar";
+
+import { ShortlistContext } from "../../context/ShortlistContext";
 
 
 function Home() {
   const [actorName, setActorName] = useState('');
   const [actorId, setActorId] = useState(null);
   const [movies, setMovies] = useState([]);
-  const [shortList, setShortList] = useState([]);
+
+  const { shortlist, setShortlist } = useContext( ShortlistContext )
+
+
 
   useEffect(() => {
     if (actorId) {
       findMoviesByActorId(actorId)
         .then(movieList => {
           const updatedMovies = movieList.map(movie => {
-            if (shortList.find(item => item.id === movie.id)) {
+            if (shortlist.find(item => item.id === movie.id)) {
               return { ...movie, isAdded: true };
             }
             return movie;
@@ -24,7 +31,7 @@ function Home() {
         })
         .catch(error => console.error(error.message));
     }
-  }, [actorId, shortList]);
+  }, [actorId, shortlist]);
 
   function handleInputChange(e) {
     setActorName(e.target.value);
@@ -40,7 +47,7 @@ function Home() {
         })
         .then(movieList => {
           const updatedMovies = movieList.map(movie => {
-            if (shortList.find(item => item.id === movie.id)) {
+            if (shortlist.find(item => item.id === movie.id)) {
               return { ...movie, isAdded: true };
             }
             return movie;
@@ -52,15 +59,19 @@ function Home() {
   }
 
   function addToShortList(movie) {
-    setShortList(prevShortList => [...prevShortList, { ...movie, disabled: true }]);
+    setShortlist(prevShortList => [...prevShortList, { ...movie, disabled: true }]);
     const updatedMovies = movies.map(m => (m.id === movie.id ? { ...m, isAdded: true } : m));
     setMovies(updatedMovies);
   }
 
   function handleDeleteMovie(movie) {
-    setShortList(prevShortList => prevShortList.filter(item => item.id !== movie.id));
+    setShortlist(prevShortList => prevShortList.filter(item => item.id !== movie.id));
     const updatedMovies = movies.map(m => (m.id === movie.id ? { ...m, isAdded: false } : m));
     setMovies(updatedMovies);
+  }
+
+  function handleComplete() {
+    console.log('Loading complete!'); // Executes once the loading bar has completed
   }
 
   return (
@@ -87,7 +98,22 @@ function Home() {
         )}
       </div>
 
-      <Shortlist shortList={shortList} handleDeleteMovie={handleDeleteMovie} />
+      <Shortlist shortlist={shortlist} handleDeleteMovie={handleDeleteMovie} />
+
+      {/*<Link to='/carouselpage'>Link to carouselpage</Link>*/}
+
+      <div>
+        <h1>Loading Bar Example</h1>
+        <LoadingBar
+          duration={2000}
+          color="blue"
+          height="20px"
+          borderRadius="20px"
+          onComplete={handleComplete}
+        />
+      </div>
+
+
     </>
   );
 }
