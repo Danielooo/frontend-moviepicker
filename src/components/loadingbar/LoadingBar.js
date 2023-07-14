@@ -14,7 +14,7 @@ function LoadingBar({ duration, color, height, borderRadius, onComplete }) {
           }
           clearInterval(interval);
           setIsLoading(false);
-          onComplete(); // Execute the callback function
+          onComplete(); // Calls getRandomMovie in Randomizer.js
           return prevProgress;
         });
       }, duration / 100);
@@ -40,10 +40,14 @@ function LoadingBar({ duration, color, height, borderRadius, onComplete }) {
   };
 
   return (
-    <div>
-      <div className="loading-bar" style={barStyles}></div>
-      <button onClick={handleButtonClick}>{isLoading ? 'Randomizing' : 'Pick movie'}</button>
-    </div>
+    <>
+      <div>
+        <div className="loading-bar" style={barStyles}></div>
+        <button onClick={handleButtonClick}>
+          {isLoading ? 'Randomizing' : 'Pick movie'}
+        </button>
+      </div>
+    </>
   );
 }
 

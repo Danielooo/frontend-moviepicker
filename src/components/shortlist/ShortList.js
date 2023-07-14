@@ -8,7 +8,9 @@ function Shortlist({ shortlist, handleDeleteMovie }) {
         <ul>
           {shortlist.map(movie => (
             <li key={movie.id}>
-              <button onClick={() => handleDeleteMovie(movie)}>-</button>
+              {handleDeleteMovie && (
+                <button onClick={() => handleDeleteMovie(movie)}>-</button>
+              )}
               <span>{movie.title}</span>
             </li>
           ))}
