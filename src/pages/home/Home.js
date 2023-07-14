@@ -2,16 +2,20 @@ import React, {useState, useEffect, useContext} from 'react';
 import { findActorIdByName, findMoviesByActorId } from '../../helpers/ApiRequests';
 import MovieSelection from '../../components/movieselection/MovieSelection';
 import Shortlist from '../../components/shortlist/ShortList';
-import { Link } from "react-router-dom";
 import LoadingBar from "../../components/loadingbar/LoadingBar";
+import PickedMovie from "../../components/pickedmovie/PickedMovie";
+// import { Link } from "react-router-dom";
+
 
 import { ShortlistContext } from "../../context/ShortlistContext";
 
+// TODO display random movie after load and show movie image
 
 function Home() {
-  const [actorName, setActorName] = useState('');
-  const [actorId, setActorId] = useState(null);
-  const [movies, setMovies] = useState([]);
+  const [ actorName, setActorName ] = useState('');
+  const [ actorId, setActorId ] = useState(null);
+  const [ movies, setMovies ] = useState([]);
+  const [ showPickedMovie, setShowPickedMovie ] = useState(false);
 
   const { shortlist, setShortlist } = useContext( ShortlistContext )
 
@@ -71,7 +75,7 @@ function Home() {
   }
 
   function handleComplete() {
-    console.log('Loading complete!'); // Executes once the loading bar has completed
+    setShowPickedMovie(true);
   }
 
   return (
@@ -100,20 +104,27 @@ function Home() {
 
       <Shortlist shortlist={shortlist} handleDeleteMovie={handleDeleteMovie} />
 
-      {/*<Link to='/carouselpage'>Link to carouselpage</Link>*/}
-
       <div>
-        <h1>Loading Bar Example</h1>
-        <LoadingBar
-          duration={2000}
-          color="blue"
-          height="20px"
-          borderRadius="20px"
-          onComplete={handleComplete}
-        />
+        {shortlist.length > 1 ? (
+          <>
+            <h1>Random movie generator</h1>
+              <LoadingBar
+                duration={4000}
+                color="blue"
+                height="20px"
+                borderRadius="20px"
+                onComplete={handleComplete}
+              />
+          </>
+          )
+          :
+          <i>First add two or more movies to the shortlist</i>
+        }
       </div>
 
-
+      {showPickedMovie && movies.length > 0 && (
+        <PickedMovie movies={movies} />
+      )}
     </>
   );
 }

@@ -42,7 +42,7 @@ function LoadingBar({ duration, color, height, borderRadius, onComplete }) {
   return (
     <div>
       <div className="loading-bar" style={barStyles}></div>
-      <button onClick={handleButtonClick}>{isLoading ? 'Loading...' : 'Start Loading'}</button>
+      <button onClick={handleButtonClick}>{isLoading ? 'Randomizing' : 'Pick movie'}</button>
     </div>
   );
 }
