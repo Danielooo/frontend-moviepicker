@@ -1,3 +1,5 @@
+// TODO delete this file if not used
+
 import React, { useState, useEffect } from 'react';
 
 function LoadingBar({ duration, color, height, borderRadius, onComplete }) {

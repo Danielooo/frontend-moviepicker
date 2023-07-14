@@ -20,13 +20,12 @@ function Randomizer() {
       <div>
         <ShortList shortlist={shortlist} />
 
-        <LoadingBar
-          duration={1000}
-          color="blue"
-          height="20px"
-          borderRadius="20px"
-          onComplete={getRandomMovie} // Pass the function reference
-        />
+        <button
+          type='button'
+          onClick={getRandomMovie}
+        >
+          Randomize
+        </button>
         {randomMovie && <p>{randomMovie.title}</p>}
       </div>
 
