@@ -1,101 +1,163 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { findActorIdByName, findMoviesByActorId } from '../../helpers/ApiRequests';
-import MovieSelection from '../../components/movieselection/MovieSelection';
-import Shortlist from '../../components/shortlist/ShortList';
-import LoadingBar from "../../components/loadingbar/LoadingBar";
-import PickedMovie from "../../components/pickedmovie/PickedMovie";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-import { ShortlistContext } from "../../context/ShortlistContext";
-import { Link } from "react-router-dom";
-
-function Home() {
+function MovieSearch() {
   const [actorName, setActorName] = useState('');
-  const [actorId, setActorId] = useState(null);
+  const [genre, setGenre] = useState('');
+  const [year, setYear] = useState('');
   const [movies, setMovies] = useState([]);
-  const { shortlist, setShortlist } = useContext(ShortlistContext);
+  const [shortlist, setShortlist] = useState([]);
+
+  const apiKey = process.env.REACT_APP_API_KEY;
+  const baseURL = 'https://api.themoviedb.org/3';
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
+    },
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    void fetchData();
+  };
 
   useEffect(() => {
-    if (actorId) {
-      findMoviesByActorId(actorId)
-        .then(movieList => {
-          const updatedMovies = movieList.map(movie => ({
-            ...movie,
-            isAdded: shortlist.some(item => item.id === movie.id)
-          }));
-          setMovies(updatedMovies);
-        })
-        .catch(error => console.error(error.message));
-    }
-  }, [actorId]);
+    void fetchData();
+  }, []);
 
-  const handleInputChange = (e) => {
-    setActorName(e.target.value);
-  };
+  const getActorIdByName = async (actorName) => {
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (actorName) {
-      findActorIdByName(actorName)
-        .then(id => {
-          setActorId(id);
-          return findMoviesByActorId(id);
-        })
-        .then(movieList => {
-          const updatedMovies = movieList.map(movie => ({
-            ...movie,
-            isAdded: shortlist.some(item => item.id === movie.id)
-          }));
-          setMovies(updatedMovies);
-        })
-        .catch(error => console.error(error.message));
+
+    try {
+      const response = await axios.get(`${baseURL}/search/person`, {
+        params: {
+          query: actorName,
+          options,
+        },
+      });
+
+      if (response.status === 200) {
+        const actorResults = response.data.results;
+        if (actorResults.length > 0) {
+          const actor = actorResults[0];
+          return actor.id;
+        }
+      }
+
+      throw new Error('Actor not found');
+    } catch (error) {
+      throw new Error(`Error retrieving actor ID: ${error.message}`);
     }
   };
 
-  const addToShortList = (movie) => {
-    setShortlist(prevShortlist => [...prevShortlist, { ...movie, disabled: true }]);
-    const updatedMovies = movies.map(m =>
-      m.id === movie.id ? { ...m, isAdded: true } : m
-    );
-    setMovies(updatedMovies);
+  const fetchData = async () => {
+    try {
+      let actorId = null;
+      if (actorName) {
+        actorId = await getActorIdByName(actorName);
+      }
+
+      const response = await axios.get(`${baseURL}/discover/movie`, {
+        params: {
+          with_cast: actorId,
+          with_genres: genre,
+          primary_release_year: year,
+          sort_by: 'popularity.desc',
+          language: 'en-US',
+          options,
+        },
+      });
+
+      if (response.status === 200) {
+        setMovies(response.data.results);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  function handleDeleteMovie(movie) {
-    setShortlist(prevShortlist => prevShortlist.filter(item => item.id !== movie.id));
-    const updatedMovies = movies.map(m =>
-      m.id === movie.id ? { ...m, isAdded: false } : m
+  const handleAddToShortlist = (movie) => {
+    setShortlist((prevShortlist) => [...prevShortlist, movie]);
+    setMovies((prevMovies) =>
+      prevMovies.map((prevMovie) =>
+        prevMovie.id === movie.id ? { ...prevMovie, isAdded: true } : prevMovie
+      )
     );
-    setMovies(updatedMovies);
-  }
+  };
+
+  const handleRemoveFromShortlist = (movie) => {
+    setShortlist((prevShortlist) =>
+      prevShortlist.filter((prevMovie) => prevMovie.id !== movie.id)
+    );
+    setMovies((prevMovies) =>
+      prevMovies.map((prevMovie) =>
+        prevMovie.id === movie.id ? { ...prevMovie, isAdded: false } : prevMovie
+      )
+    );
+  };
 
   return (
-    <>
-      <div>
-        <h1>Home</h1>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="actorNameInput">Actor Name:</label>
-          <input
-            type="text"
-            id="actorNameInput"
-            value={actorName}
-            onChange={handleInputChange}
-          />
-          <button type="submit">Search</button>
-        </form>
+    <div>
+      <h1>Movie Search</h1>
 
-        {actorId && (
-          <MovieSelection
-            actorId={actorId}
-            movies={movies}
-            addToShortList={addToShortList}
-          />
-        )}
+      <form onSubmit={handleFormSubmit}>
+        <label htmlFor="actorNameInput">Actor Name:</label>
+        <input
+          type="text"
+          id="actorNameInput"
+          value={actorName}
+          onChange={(e) => setActorName(e.target.value)}
+        />
+
+        <label htmlFor="genreInput">Genre:</label>
+        <input
+          type="text"
+          id="genreInput"
+          value={genre}
+          onChange={(e) => setGenre(e.target.value)}
+        />
+
+        <label htmlFor="yearInput">Year:</label>
+        <input
+          type="text"
+          id="yearInput"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+        />
+
+        <button type="submit">Search</button>
+      </form>
+
+      <div>
+        {movies.map((movie) => (
+          <div key={movie.id}>
+            <h3>{movie.title}</h3>
+            <p>Release Year: {movie.release_date}</p>
+            <button
+              onClick={() => handleAddToShortlist(movie)}
+              disabled={movie.isAdded}
+            >
+              {movie.isAdded ? 'Added' : 'Add to Shortlist'}
+            </button>
+          </div>
+        ))}
       </div>
 
-      <Shortlist shortlist={shortlist} handleDeleteMovie={handleDeleteMovie} />
-
-      <Link to={"/randomizer"}>Randomizer</Link>
-    </>
+      <h2>Shortlist</h2>
+      <ul>
+        {shortlist.map((movie) => (
+          <li key={movie.id}>
+            {movie.title}
+            <button onClick={() => handleRemoveFromShortlist(movie)}>
+              Remove
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
-export default Home;
+export default MovieSearch;

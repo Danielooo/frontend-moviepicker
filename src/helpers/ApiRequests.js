@@ -44,3 +44,14 @@ export async function findMoviesByActorId(id) {
     throw new Error(`Error finding movies: ${error.message}`);
   }
 }
+
+// TODO search best 10 per genre
+
+
+
+
+
+
+
+
+
