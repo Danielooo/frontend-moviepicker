@@ -2,11 +2,15 @@
 
 import './WheelPage.css'
 import WheelComponent from "react-wheel-of-prizes";
-import { useState } from "react";
-import {NavLink} from "react-router-dom";
+import { useState, useContext } from "react";
+import {ShortlistContext} from "../../context/ShortlistContext";
+
+
 
 function WheelPage() {
-  const [points, setPoints] = useState(false);
+  const { shortlist } = useContext(ShortlistContext);
+
+  const [ points, setPoints ] = useState(false);
   const segments = [
     "better luck next time",
     "won 70",

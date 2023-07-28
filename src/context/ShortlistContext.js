@@ -6,8 +6,14 @@ export const ShortlistContext = createContext(null);
 function ShortlistContextProvider({ children }) {
   const [ shortlist, setShortlist ] = useState([]);
 
+  const shortlistActions = {
+    shortlist,
+    setShortlist,
+  }
+
+
   return (
-    <ShortlistContext.Provider value={{shortlist, setShortlist}}>
+    <ShortlistContext.Provider value={ shortlistActions }>
       {children}
     </ShortlistContext.Provider>
   )

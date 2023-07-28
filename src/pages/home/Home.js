@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
-import Select from 'react-select';
+import { ShortlistContext } from "../../context/ShortlistContext";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 
 function MovieSearch() {
@@ -27,7 +29,9 @@ function MovieSearch() {
 
 
   const [ movies, setMovies ] = useState([]);
-  const [ shortlist, setShortlist ] = useState([]);
+  const { shortlist, setShortlist } = useContext(ShortlistContext);
+
+  console.log('shortlist: ', shortlist);
 
   const options = {
     method: 'GET',
@@ -313,18 +317,22 @@ function MovieSearch() {
           ))}
         </div>
 
-        <h2>Shortlist</h2>
-        <ul>
-          {shortlist.map((movie) => (
-            <li key={movie.id}>
-              {movie.title}
-              <button onClick={() => handleRemoveFromShortlist(movie)}>
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
-        <NavLink to='/wheelpage'>Wheel of Fortune</NavLink>
+        { shortlist.length > 0 &&
+          <>
+          <h2>Shortlist</h2>
+          <ul>
+            {shortlist.map((movie) => (
+              <li key={movie.id}>
+                {movie.title}
+                <button onClick={() => handleRemoveFromShortlist(movie)}>
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+          </>
+        }
+        <NavLink to='/wheel'>Wheel</NavLink>
       </div>
 
 
