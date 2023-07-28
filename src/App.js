@@ -5,14 +5,12 @@ import About from './pages/about/About';
 import Profile from './pages/profile/Profile';
 import SignIn from './pages/signIn/SignIn';
 import SignUp from './pages/signUp/SignUp';
+import Randomizer from "./pages/randomizer/Randomizer";
+import NewPage from "./pages/newPage/NewPage";
+import WheelPage from './pages/wheelPage/WheelPage';
 
 import { Routes, Route } from 'react-router-dom';
 
-
-// Create pages:
-// TODO: Create NavBar page
-// TODO: Create Routes on Home page
-// TODO: create Routes, import Router, Routes
 
 function App() {
   return (
@@ -27,6 +25,10 @@ function App() {
           <Route path='/signin' element={<SignIn />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/signup' element={<SignUp />} />
+          <Route path='/randomizer' element={<Randomizer />} />
+          <Route path={'/newPage'} element={<NewPage />} />
+          <Route path='/wheelpage' element={<WheelPage />} />
+
         </Routes>
       </div>
     </>

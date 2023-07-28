@@ -5,13 +5,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AuthContextProvider from "./context/AuthContext";
+import ShortlistContextProvider from "./context/ShortlistContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
       <AuthContextProvider>
+        <ShortlistContextProvider>
         <App />
+        </ShortlistContextProvider>
       </AuthContextProvider>
     </Router>
   </React.StrictMode>

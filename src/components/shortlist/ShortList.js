@@ -1,14 +1,16 @@
 import React from 'react';
 
-function Shortlist({ shortList, handleDeleteMovie }) {
+function Shortlist({ shortlist, handleDeleteMovie }) {
   return (
     <div className="shortlist">
       <h2>Shortlist</h2>
-      {shortList.length > 0 ? (
+      {shortlist.length > 0 ? (
         <ul>
-          {shortList.map(movie => (
+          {shortlist.map(movie => (
             <li key={movie.id}>
-              <button onClick={() => handleDeleteMovie(movie)}>-</button>
+              {handleDeleteMovie && (
+                <button onClick={() => handleDeleteMovie(movie)}>-</button>
+              )}
               <span>{movie.title}</span>
             </li>
           ))}
