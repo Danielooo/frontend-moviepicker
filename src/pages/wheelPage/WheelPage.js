@@ -21,6 +21,7 @@ function WheelPage() {
     "better luck next time",
     "won a voucher"
   ];
+
   const segColors = [
     "#EE4040",
     "#F0CF50",
