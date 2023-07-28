@@ -7,7 +7,7 @@ import SignIn from './pages/signIn/SignIn';
 import SignUp from './pages/signUp/SignUp';
 import Randomizer from "./pages/randomizer/Randomizer";
 import NewPage from "./pages/newPage/NewPage";
-// import WheelPage from './pages/wheelPage/WheelPage';
+import WheelPage from './pages/wheelPage/WheelPage';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ function App() {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/randomizer' element={<Randomizer />} />
           <Route path={'/newPage'} element={<NewPage />} />
-          {/*<Route path='/wheelpage' element={<WheelPage />} />*/}
+          <Route path='/wheelpage' element={<WheelPage />} />
 
         </Routes>
       </div>

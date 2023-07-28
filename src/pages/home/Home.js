@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import Select from 'react-select';
+import { NavLink } from "react-router-dom";
 
 
 function MovieSearch() {
@@ -323,7 +324,9 @@ function MovieSearch() {
             </li>
           ))}
         </ul>
+        <NavLink to='/wheelpage'>Wheel of Fortune</NavLink>
       </div>
+
 
     );
 }
