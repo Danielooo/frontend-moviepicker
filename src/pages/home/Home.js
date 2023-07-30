@@ -6,29 +6,27 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
-
 function MovieSearch() {
+  const navigate = useNavigate();
 
-  // Actor
+  // Actor search
   const [ actorName, setActorName ] = useState('');
   const [ actorId, setActorId ] = useState(0)
-  // const [ loading, toggleLoading ] = useState(false);
   const [ errorActor, toggleErrorActor ] = useState(false)
 
-  // Genre
+  // Genre search
   const [ genreAndIdListOfApi, setGenreAndIdListOfApi ] = useState([])
   const [ genreChoice, setGenreChoice ] = useState('');
   const [ genreChoiceId, setGenreChoiceId ] = useState(0)
-  // const [ loadingGenre, toggleLoadingGenre ] = useState(false)
   const [ errorGenre, toggleErrorGenre ] = useState(false)
 
-  // Decade
+  // Decade search
   const [selectedDecade, setSelectedDecade] = useState('2020s');
   const decades = [ '2020s', '2010s', '2000s', '1990s', '1980s', '1970s', '1960s',
                     '1950s', '1940s', '1930s', '1920s', '1910s', '1900s'];
-  // const [ loading, toggleLoading ] = useState(false)
   const [ errorDecade, toggleErrorDecade ] = useState(false)
 
+  // Misc
   const [ loading, toggleLoading ] = useState(false);
   const [ movies, setMovies ] = useState([]);
   const { shortlist, setShortlist } = useContext(ShortlistContext);
@@ -42,14 +40,9 @@ function MovieSearch() {
     },
   };
 
-  // TODO rewrite useEffect with toggleError and toggleLoading
-  // TODO toggleErrorActor geeft foutmelding
-
-  // TEST werkend endpoint met api key (ipv auth token)
-  // https://api.themoviedb.org/3/discover/movie?with_cast=206&sort_by=popularity.desc&language=en-US&page=1&api_key=460ee6d69d8ce03efd406954eb79c98e
-
-
+  //  =========================
   //  ===  FUNCTIES  ACTOR  ===
+  //  =========================
   async function getActorIdByName() {
     try {
       toggleErrorActor(false)
@@ -91,8 +84,9 @@ function MovieSearch() {
   }, [actorId])
 
 
-
-  // ===  FUNCTIES GENRE  ===
+  //  =========================
+  //  ===  FUNCTIES GENRE  ====
+  //  =========================
 
   // Mount only
   useEffect(() => {
@@ -110,7 +104,7 @@ function MovieSearch() {
   }, [])
 
 
-  // 1 Genre
+  // Step 1  // Genre
   function getGenreIdByInput() {
     toggleLoading(true)
 
@@ -128,7 +122,7 @@ function MovieSearch() {
     }
   }
 
-  // 2 Genre
+  // Step 2  // Genre
   useEffect(() => {
     async function getMoviesByGenreId() {
       try {
@@ -152,6 +146,7 @@ function MovieSearch() {
 
     toggleLoading(false)
   }, [genreChoiceId])
+
 
   // =========================
   // ===  FUNCTIES DECADE  ===
@@ -179,6 +174,7 @@ function MovieSearch() {
     toggleLoading(false);
   };
 
+  // >>>  helper  <<<
   const getStartYearForDecade = (selectedDecade, currentYear) => {
     switch (selectedDecade) {
       case '2020s':
@@ -213,8 +209,10 @@ function MovieSearch() {
     }
   };
 
+    //  ========================
+    //  ===  HANDLE SUBMITS  ===
+    //  ========================
 
-  // ===  HANDLE SUBMITS  ===
   function handleActorSubmit(e) {
     e.preventDefault();
     void getActorIdByName();
@@ -230,10 +228,16 @@ function MovieSearch() {
     void fetchMoviesByDecade();
   }
 
+  function handleClickWheel(e) {
+    e.preventDefault()
+    navigate('/wheel')
+  }
+
     // ===================
     // ===  SHORTLIST  ===
     // ===================
 
+  // >>>  helper  <<<
   function handleAddToShortlist(movie) {
     setShortlist((prevShortlist) => [...prevShortlist, movie]);
     setMovies((prevMovies) =>
@@ -242,6 +246,7 @@ function MovieSearch() {
       )
     );
   }
+
 
   function handleRemoveFromShortlist(movie) {
     setShortlist((prevShortlist) =>
@@ -254,23 +259,37 @@ function MovieSearch() {
     );
   }
 
-  // useEffect(() => {
-  //   console.log('shortlist: ', shortlist)
-  // }, [shortlist])
-
   function isMovieInShortlist(movieId) {
     return shortlist.some((item) => item.id === movieId);
   }
 
-    // ===  RETURN  ===
+      //  ================
+      //  ===  RETURN  ===
+      //  ================
 
     return (
       <div>
         <h1>Movie Search</h1>
 
+        {/*component*/}
         <NavLink to='/wheel'>Wheel</NavLink>
+        <button
+          style={{
+            padding: '10px 20px',
+            backgroundColor: 'blue',
+            color: 'white',
+            textDecoration: 'none',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            cursor: 'pointer',
+          }}
+          onClick={handleClickWheel}
+        >
+          Randomize
+        </button>
 
-
+        {/*component*/}
         <form onSubmit={handleActorSubmit}>
           <label htmlFor="actorNameInput">Actor Name:</label>
           <input
@@ -286,6 +305,7 @@ function MovieSearch() {
 
         { genreAndIdListOfApi.length > 0 &&
           <>
+            {/*component*/}
             <form onSubmit={handleGenreSubmit}>
               <label htmlFor="genreInput">Genre:</label>
               <select
@@ -307,6 +327,8 @@ function MovieSearch() {
         }
 
         {/*  DECADE  */}
+
+        {/*component*/}
         <div>
           <form onSubmit={handleDecadeSubmit}>
             <label htmlFor='DecadeInput'>Decade: </label>
@@ -329,6 +351,7 @@ function MovieSearch() {
         <div>
           { loading === true && <h3>Loading...</h3>}
           { movies.length > 0 &&  movies.map((movie) => (
+            // component
             <div key={movie.id}>
               <h3>{movie.title}</h3>
               <p>Release Year: {movie.release_date}</p>
@@ -344,23 +367,23 @@ function MovieSearch() {
 
         { shortlist.length > 0 &&
           <>
-          <h2>Shortlist</h2>
+            {/*component*/}
+            <h2>Shortlist</h2>
 
             {shortlist.map((movie) => (
               <>
                 {/*Only CSS can show the button and movie.title on one line*/}
-                <div>
+                <div key={movie.id} style={{ display: 'flex', alignItems: 'center' }}>
                   <button onClick={() => handleRemoveFromShortlist(movie)}>
                   -
                   </button>
-                  <p key={movie.id}>
+                  <p>
                     {movie.title}
                   </p>
                 </div>
 
               </>
             ))}
-
           </>
         }
       </div>
@@ -368,6 +391,5 @@ function MovieSearch() {
 
     );
 }
-
 
 export default MovieSearch;
