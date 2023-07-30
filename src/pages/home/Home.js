@@ -6,32 +6,31 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
-
 function MovieSearch() {
+  const navigate = useNavigate();
 
-  // Actor
+  // Actor search
   const [ actorName, setActorName ] = useState('');
   const [ actorId, setActorId ] = useState(0)
-  const [ loadingActor, toggleLoadingActor ] = useState(false);
   const [ errorActor, toggleErrorActor ] = useState(false)
 
-  // Genre
+  // Genre search
   const [ genreAndIdListOfApi, setGenreAndIdListOfApi ] = useState([])
   const [ genreChoice, setGenreChoice ] = useState('');
   const [ genreChoiceId, setGenreChoiceId ] = useState(0)
-  const [ loadingGenre, toggleLoadingGenre ] = useState(false)
   const [ errorGenre, toggleErrorGenre ] = useState(false)
 
-  // Decade
+  // Decade search
   const [selectedDecade, setSelectedDecade] = useState('2020s');
   const decades = [ '2020s', '2010s', '2000s', '1990s', '1980s', '1970s', '1960s',
                     '1950s', '1940s', '1930s', '1920s', '1910s', '1900s'];
+  const [ errorDecade, toggleErrorDecade ] = useState(false)
 
-
+  // Misc
+  const [ loading, toggleLoading ] = useState(false);
   const [ movies, setMovies ] = useState([]);
   const { shortlist, setShortlist } = useContext(ShortlistContext);
 
-  console.log('shortlist: ', shortlist);
 
   const options = {
     method: 'GET',
@@ -41,17 +40,13 @@ function MovieSearch() {
     },
   };
 
-  // TODO rewrite useEffect with toggleError and toggleLoading
-  // TODO toggleErrorActor geeft foutmelding
-
-  // TEST werkend endpoint met api key (ipv auth token)
-  // https://api.themoviedb.org/3/discover/movie?with_cast=206&sort_by=popularity.desc&language=en-US&page=1&api_key=460ee6d69d8ce03efd406954eb79c98e
-
-
+  //  =========================
   //  ===  FUNCTIES  ACTOR  ===
+  //  =========================
   async function getActorIdByName() {
     try {
       toggleErrorActor(false)
+      toggleLoading(true)
 
       const response = await axios.get(`https://api.themoviedb.org/3/search/person?query=${actorName}`, options)
       setActorId(response.data.results[0].id)
@@ -59,12 +54,13 @@ function MovieSearch() {
 
     } catch (e) {
       toggleErrorActor(true)
+      toggleLoading(false)
       console.error(e)
     }
   }
 
   useEffect(() => {
-    toggleLoadingActor(true)
+    toggleLoading(true)
 
     async function getMoviesByActorId(actorId) {
       try {
@@ -76,18 +72,21 @@ function MovieSearch() {
         // console.log('movies: ', movies)
       } catch (e) {
         toggleErrorActor(true)
+        toggleLoading(false)
         console.error(e)
       }
     }
     if (actorId) {
       void getMoviesByActorId(actorId)
     }
+    toggleLoading(false)
 
   }, [actorId])
 
 
-
-  // ===  FUNCTIES GENRE  ===
+  //  =========================
+  //  ===  FUNCTIES GENRE  ====
+  //  =========================
 
   // Mount only
   useEffect(() => {
@@ -105,9 +104,9 @@ function MovieSearch() {
   }, [])
 
 
-  // 1 Genre
+  // Step 1  // Genre
   function getGenreIdByInput() {
-    toggleLoadingGenre(true)
+    toggleLoading(true)
 
     if (genreAndIdListOfApi.length > 0 && genreChoice) {
       try {
@@ -116,15 +115,14 @@ function MovieSearch() {
         setGenreChoiceId(genre.id);
 
       } catch (e) {
-        toggleLoadingGenre(false)
+        toggleLoading(false)
         toggleErrorGenre(true)
         console.error(e)
       }
     }
   }
 
-
-  // 2 Genre
+  // Step 2  // Genre
   useEffect(() => {
     async function getMoviesByGenreId() {
       try {
@@ -134,7 +132,7 @@ function MovieSearch() {
 
         setMovies(response.data.results)
       } catch (e) {
-        toggleLoadingGenre(false)
+        toggleLoading(false)
         toggleErrorGenre(true)
         console.error(e)
       }
@@ -145,14 +143,20 @@ function MovieSearch() {
     } else {
       console.log('genreChoiceId is undefined: ', genreChoiceId)
     }
+
+    toggleLoading(false)
   }, [genreChoiceId])
+
 
   // =========================
   // ===  FUNCTIES DECADE  ===
   // =========================
 
-  const fetchMoviesByDecade = async () => {
+  async function fetchMoviesByDecade() {
     try {
+      toggleLoading(true);
+      toggleErrorDecade(false)
+
       const currentYear = new Date().getFullYear();
       const startYear = getStartYearForDecade(selectedDecade, currentYear);
       const endYear = startYear + 9;
@@ -164,9 +168,13 @@ function MovieSearch() {
       setMovies(response.data.results);
     } catch (error) {
       console.error('Error fetching movies:', error);
+      toggleErrorDecade(true)
     }
+
+    toggleLoading(false);
   };
 
+  // >>>  helper  <<<
   const getStartYearForDecade = (selectedDecade, currentYear) => {
     switch (selectedDecade) {
       case '2020s':
@@ -201,8 +209,10 @@ function MovieSearch() {
     }
   };
 
+    //  ========================
+    //  ===  HANDLE SUBMITS  ===
+    //  ========================
 
-  // ===  HANDLE SUBMITS  ===
   function handleActorSubmit(e) {
     e.preventDefault();
     void getActorIdByName();
@@ -218,8 +228,16 @@ function MovieSearch() {
     void fetchMoviesByDecade();
   }
 
-    // ===  FUNCTIONS  ===
+  function handleClickWheel(e) {
+    e.preventDefault()
+    navigate('/wheel')
+  }
 
+    // ===================
+    // ===  SHORTLIST  ===
+    // ===================
+
+  // >>>  helper  <<<
   function handleAddToShortlist(movie) {
     setShortlist((prevShortlist) => [...prevShortlist, movie]);
     setMovies((prevMovies) =>
@@ -228,6 +246,7 @@ function MovieSearch() {
       )
     );
   }
+
 
   function handleRemoveFromShortlist(movie) {
     setShortlist((prevShortlist) =>
@@ -240,14 +259,37 @@ function MovieSearch() {
     );
   }
 
+  function isMovieInShortlist(movieId) {
+    return shortlist.some((item) => item.id === movieId);
+  }
 
-
-    // ===  RETURN  ===
+      //  ================
+      //  ===  RETURN  ===
+      //  ================
 
     return (
       <div>
         <h1>Movie Search</h1>
 
+        {/*component*/}
+        <NavLink to='/wheel'>Wheel</NavLink>
+        <button
+          style={{
+            padding: '10px 20px',
+            backgroundColor: 'blue',
+            color: 'white',
+            textDecoration: 'none',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            cursor: 'pointer',
+          }}
+          onClick={handleClickWheel}
+        >
+          Randomize
+        </button>
+
+        {/*component*/}
         <form onSubmit={handleActorSubmit}>
           <label htmlFor="actorNameInput">Actor Name:</label>
           <input
@@ -263,6 +305,7 @@ function MovieSearch() {
 
         { genreAndIdListOfApi.length > 0 &&
           <>
+            {/*component*/}
             <form onSubmit={handleGenreSubmit}>
               <label htmlFor="genreInput">Genre:</label>
               <select
@@ -284,6 +327,8 @@ function MovieSearch() {
         }
 
         {/*  DECADE  */}
+
+        {/*component*/}
         <div>
           <form onSubmit={handleDecadeSubmit}>
             <label htmlFor='DecadeInput'>Decade: </label>
@@ -300,18 +345,21 @@ function MovieSearch() {
             </select>
             <button type='submit'>Search Decade</button>
           </form>
+          { errorDecade && <p>Fout bij het kiezen van een decennium. Probeer opnieuw</p> }
         </div>
 
         <div>
+          { loading === true && <h3>Loading...</h3>}
           { movies.length > 0 &&  movies.map((movie) => (
+            // component
             <div key={movie.id}>
               <h3>{movie.title}</h3>
               <p>Release Year: {movie.release_date}</p>
               <button
                 onClick={() => handleAddToShortlist(movie)}
-                disabled={movie.isAdded}
+                disabled={isMovieInShortlist(movie.id)}
               >
-                {movie.isAdded ? 'Added' : 'Add to Shortlist'}
+                {isMovieInShortlist(movie.id) ? 'Added' : 'Add to Shortlist'}
               </button>
             </div>
           ))}
@@ -319,25 +367,29 @@ function MovieSearch() {
 
         { shortlist.length > 0 &&
           <>
-          <h2>Shortlist</h2>
-          <ul>
+            {/*component*/}
+            <h2>Shortlist</h2>
+
             {shortlist.map((movie) => (
-              <li key={movie.id}>
-                {movie.title}
-                <button onClick={() => handleRemoveFromShortlist(movie)}>
-                  Remove
-                </button>
-              </li>
+              <>
+                {/*Only CSS can show the button and movie.title on one line*/}
+                <div key={movie.id} style={{ display: 'flex', alignItems: 'center' }}>
+                  <button onClick={() => handleRemoveFromShortlist(movie)}>
+                  -
+                  </button>
+                  <p>
+                    {movie.title}
+                  </p>
+                </div>
+
+              </>
             ))}
-          </ul>
           </>
         }
-        <NavLink to='/wheel'>Wheel</NavLink>
       </div>
 
 
     );
 }
-
 
 export default MovieSearch;

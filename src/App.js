@@ -27,7 +27,7 @@ function App() {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/randomizer' element={<Randomizer />} />
           <Route path={'/newPage'} element={<NewPage />} />
-          <Route path='/wheelpage' element={<WheelPage />} />
+          <Route path='/wheel' element={<WheelPage />} />
 
         </Routes>
       </div>
