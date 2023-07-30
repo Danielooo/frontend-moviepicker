@@ -1,9 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate, NavLink } from "react-router-dom";
 import axios from 'axios';
 
+// helper imports
+import { getActorIdByName, getMoviesByActorId } from "../../helpers/actorsearch/ActorSearch";
+import {getGenresAndIdsOfApi, getGenreIdByInput, getMoviesByGenreId} from "../../helpers/genresearch/GenreSearch";
+
+// misc imports
 import { ShortlistContext } from "../../context/ShortlistContext";
-import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import {getMoviesByDecade} from "../../helpers/decadesearch/DecadeSearch";
+import ShortList from "../../components/shortlist/ShortList";
 
 
 function MovieSearch() {
@@ -18,20 +24,21 @@ function MovieSearch() {
   const [ genreAndIdListOfApi, setGenreAndIdListOfApi ] = useState([])
   const [ genreChoice, setGenreChoice ] = useState('');
   const [ genreChoiceId, setGenreChoiceId ] = useState(0)
+  const [ errorGenreList, toggleErrorGenreList ] = useState(false)
   const [ errorGenre, toggleErrorGenre ] = useState(false)
 
   // Decade search
+  const [ errorDecade, toggleErrorDecade ] = useState(false)
   const [selectedDecade, setSelectedDecade] = useState('2020s');
   const decades = [ '2020s', '2010s', '2000s', '1990s', '1980s', '1970s', '1960s',
                     '1950s', '1940s', '1930s', '1920s', '1910s', '1900s'];
-  const [ errorDecade, toggleErrorDecade ] = useState(false)
 
   // Misc
   const [ loading, toggleLoading ] = useState(false);
   const [ movies, setMovies ] = useState([]);
   const { shortlist, setShortlist } = useContext(ShortlistContext);
 
-
+  // Api endpoint header
   const options = {
     method: 'GET',
     headers: {
@@ -43,41 +50,13 @@ function MovieSearch() {
   //  =========================
   //  ===  FUNCTIES  ACTOR  ===
   //  =========================
-  async function getActorIdByName() {
-    try {
-      toggleErrorActor(false)
-      toggleLoading(true)
 
-      const response = await axios.get(`https://api.themoviedb.org/3/search/person?query=${actorName}`, options)
-      setActorId(response.data.results[0].id)
-
-
-    } catch (e) {
-      toggleErrorActor(true)
-      toggleLoading(false)
-      console.error(e)
-    }
-  }
 
   useEffect(() => {
     toggleLoading(true)
 
-    async function getMoviesByActorId(actorId) {
-      try {
-        toggleErrorActor(false)
-
-        const response = await axios.get(`https://api.themoviedb.org/3/discover/movie?with_cast=${actorId}&sort_by=popularity.desc&page=1?include_adult=false`, options)
-
-        setMovies(response.data.results) // array met movies
-        // console.log('movies: ', movies)
-      } catch (e) {
-        toggleErrorActor(true)
-        toggleLoading(false)
-        console.error(e)
-      }
-    }
     if (actorId) {
-      void getMoviesByActorId(actorId)
+      void getMoviesByActorId(toggleErrorActor, toggleLoading, setMovies, options, actorId)
     }
     toggleLoading(false)
 
@@ -90,56 +69,15 @@ function MovieSearch() {
 
   // Mount only
   useEffect(() => {
-    async function getGenresAndIdsOfApi() {
-      try {
-        const response = await axios.get('https://api.themoviedb.org/3/genre/movie/list', options)
+    void getGenresAndIdsOfApi(setGenreAndIdListOfApi, toggleErrorGenreList, options)
 
-        setGenreAndIdListOfApi(response.data.genres)
-      } catch (e) {
-        console.error(e)
-      }
-    }
-
-    void getGenresAndIdsOfApi()
   }, [])
 
 
-  // Step 1  // Genre
-  function getGenreIdByInput() {
-    toggleLoading(true)
-
-    if (genreAndIdListOfApi.length > 0 && genreChoice) {
-      try {
-
-        const genre = genreAndIdListOfApi.find(genre => genre.name.toLowerCase() === genreChoice.toLowerCase());
-        setGenreChoiceId(genre.id);
-
-      } catch (e) {
-        toggleLoading(false)
-        toggleErrorGenre(true)
-        console.error(e)
-      }
-    }
-  }
-
-  // Step 2  // Genre
   useEffect(() => {
-    async function getMoviesByGenreId() {
-      try {
-        const response = await axios.get(`https://api.themoviedb.org/3/discover/movie?with_genres=${genreChoiceId}&sort_by=popularity.desc&page=1?include_adult=false`, options)
-
-        // console.log('getMoviesByGenreId: ', response.data, genreChoiceId)
-
-        setMovies(response.data.results)
-      } catch (e) {
-        toggleLoading(false)
-        toggleErrorGenre(true)
-        console.error(e)
-      }
-    }
 
     if (genreChoiceId !== undefined) {
-      void getMoviesByGenreId()
+      void getMoviesByGenreId(setMovies, toggleLoading, toggleErrorGenre, genreChoiceId, options)
     } else {
       console.log('genreChoiceId is undefined: ', genreChoiceId)
     }
@@ -152,80 +90,26 @@ function MovieSearch() {
   // ===  FUNCTIES DECADE  ===
   // =========================
 
-  async function fetchMoviesByDecade() {
-    try {
-      toggleLoading(true);
-      toggleErrorDecade(false)
+      // In helper DecadeSearch.js
 
-      const currentYear = new Date().getFullYear();
-      const startYear = getStartYearForDecade(selectedDecade, currentYear);
-      const endYear = startYear + 9;
 
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=${startYear}&primary_release_date.lte=${endYear}&sort_by=popularity.desc&page=1?include_adult=false`, options
-      );
-
-      setMovies(response.data.results);
-    } catch (error) {
-      console.error('Error fetching movies:', error);
-      toggleErrorDecade(true)
-    }
-
-    toggleLoading(false);
-  };
-
-  // >>>  helper  <<<
-  const getStartYearForDecade = (selectedDecade, currentYear) => {
-    switch (selectedDecade) {
-      case '2020s':
-        return 2020;
-      case '2010s':
-        return 2010;
-      case '2000s':
-        return 2000;
-      case '1990s':
-        return 1990;
-      case '1980s':
-        return 1980;
-      case '1970s':
-        return 1970;
-      case '1960s':
-        return 1960;
-      case '1950s':
-        return 1950;
-      case '1940s':
-        return 1940;
-      case '1930s':
-        return 1930;
-      case '1920s':
-        return 1920;
-      case '1910s':
-        return 1910;
-      case '1900s':
-        return 1900;
-      // Add more cases if needed
-      default:
-        return currentYear;
-    }
-  };
-
-    //  ========================
-    //  ===  HANDLE SUBMITS  ===
-    //  ========================
+  //  ========================
+  //  ===  HANDLE SUBMITS  ===
+  //  ========================
 
   function handleActorSubmit(e) {
     e.preventDefault();
-    void getActorIdByName();
+    void getActorIdByName(toggleErrorActor, toggleLoading, setActorId, options, actorName)
   }
 
   function handleGenreSubmit(e) {
       e.preventDefault();
-      void getGenreIdByInput();
+      void getGenreIdByInput(toggleLoading, toggleErrorGenre, setGenreChoiceId, genreAndIdListOfApi, genreChoice);
   }
 
   function handleDecadeSubmit(e) {
     e.preventDefault()
-    void fetchMoviesByDecade();
+    void getMoviesByDecade(setMovies, selectedDecade, toggleLoading, toggleErrorDecade, options);
   }
 
   function handleClickWheel(e) {
@@ -233,9 +117,10 @@ function MovieSearch() {
     navigate('/wheel')
   }
 
-    // ===================
-    // ===  SHORTLIST  ===
-    // ===================
+
+  // ===================
+  // ===  SHORTLIST  ===
+  // ===================
 
   // >>>  helper  <<<
   function handleAddToShortlist(movie) {
@@ -303,7 +188,7 @@ function MovieSearch() {
         {errorActor && <p>Acteur fout gespeld of technische fout. Voer opnieuw in</p>}
 
 
-        { genreAndIdListOfApi.length > 0 &&
+        { genreAndIdListOfApi.length > 0 && !errorGenreList && (
           <>
             {/*component*/}
             <form onSubmit={handleGenreSubmit}>
@@ -323,7 +208,12 @@ function MovieSearch() {
               <button type='submit'>Search Genre</button>
             </form>
             { errorGenre && <p>Fout bij het kiezen van een genre. Probeer opnieuw</p> }
+
           </>
+          )
+        }
+        { errorGenreList &&
+          <p>There was an error fetching the genre options. Please try again.</p>
         }
 
         {/*  DECADE  */}
@@ -365,27 +255,8 @@ function MovieSearch() {
           ))}
         </div>
 
-        { shortlist.length > 0 &&
-          <>
-            {/*component*/}
-            <h2>Shortlist</h2>
+          <ShortList shortlist={shortlist} handleRemoveFromShortlist={handleRemoveFromShortlist} />
 
-            {shortlist.map((movie) => (
-              <>
-                {/*Only CSS can show the button and movie.title on one line*/}
-                <div key={movie.id} style={{ display: 'flex', alignItems: 'center' }}>
-                  <button onClick={() => handleRemoveFromShortlist(movie)}>
-                  -
-                  </button>
-                  <p>
-                    {movie.title}
-                  </p>
-                </div>
-
-              </>
-            ))}
-          </>
-        }
       </div>
 
 
