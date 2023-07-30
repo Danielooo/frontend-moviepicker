@@ -1,6 +1,6 @@
 .wheel-box {
-    border: 1px solid green;
+    /*border: 1px solid green;*/
     display: flex;
-    width: 300px;
+    width: 600px;
     height: 300px;
 }

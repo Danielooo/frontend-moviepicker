@@ -12,26 +12,27 @@ function MovieSearch() {
   // Actor
   const [ actorName, setActorName ] = useState('');
   const [ actorId, setActorId ] = useState(0)
-  const [ loadingActor, toggleLoadingActor ] = useState(false);
+  // const [ loading, toggleLoading ] = useState(false);
   const [ errorActor, toggleErrorActor ] = useState(false)
 
   // Genre
   const [ genreAndIdListOfApi, setGenreAndIdListOfApi ] = useState([])
   const [ genreChoice, setGenreChoice ] = useState('');
   const [ genreChoiceId, setGenreChoiceId ] = useState(0)
-  const [ loadingGenre, toggleLoadingGenre ] = useState(false)
+  // const [ loadingGenre, toggleLoadingGenre ] = useState(false)
   const [ errorGenre, toggleErrorGenre ] = useState(false)
 
   // Decade
   const [selectedDecade, setSelectedDecade] = useState('2020s');
   const decades = [ '2020s', '2010s', '2000s', '1990s', '1980s', '1970s', '1960s',
                     '1950s', '1940s', '1930s', '1920s', '1910s', '1900s'];
+  // const [ loading, toggleLoading ] = useState(false)
+  const [ errorDecade, toggleErrorDecade ] = useState(false)
 
-
+  const [ loading, toggleLoading ] = useState(false);
   const [ movies, setMovies ] = useState([]);
   const { shortlist, setShortlist } = useContext(ShortlistContext);
 
-  console.log('shortlist: ', shortlist);
 
   const options = {
     method: 'GET',
@@ -52,6 +53,7 @@ function MovieSearch() {
   async function getActorIdByName() {
     try {
       toggleErrorActor(false)
+      toggleLoading(true)
 
       const response = await axios.get(`https://api.themoviedb.org/3/search/person?query=${actorName}`, options)
       setActorId(response.data.results[0].id)
@@ -59,12 +61,13 @@ function MovieSearch() {
 
     } catch (e) {
       toggleErrorActor(true)
+      toggleLoading(false)
       console.error(e)
     }
   }
 
   useEffect(() => {
-    toggleLoadingActor(true)
+    toggleLoading(true)
 
     async function getMoviesByActorId(actorId) {
       try {
@@ -76,12 +79,14 @@ function MovieSearch() {
         // console.log('movies: ', movies)
       } catch (e) {
         toggleErrorActor(true)
+        toggleLoading(false)
         console.error(e)
       }
     }
     if (actorId) {
       void getMoviesByActorId(actorId)
     }
+    toggleLoading(false)
 
   }, [actorId])
 
@@ -107,7 +112,7 @@ function MovieSearch() {
 
   // 1 Genre
   function getGenreIdByInput() {
-    toggleLoadingGenre(true)
+    toggleLoading(true)
 
     if (genreAndIdListOfApi.length > 0 && genreChoice) {
       try {
@@ -116,13 +121,12 @@ function MovieSearch() {
         setGenreChoiceId(genre.id);
 
       } catch (e) {
-        toggleLoadingGenre(false)
+        toggleLoading(false)
         toggleErrorGenre(true)
         console.error(e)
       }
     }
   }
-
 
   // 2 Genre
   useEffect(() => {
@@ -134,7 +138,7 @@ function MovieSearch() {
 
         setMovies(response.data.results)
       } catch (e) {
-        toggleLoadingGenre(false)
+        toggleLoading(false)
         toggleErrorGenre(true)
         console.error(e)
       }
@@ -145,14 +149,19 @@ function MovieSearch() {
     } else {
       console.log('genreChoiceId is undefined: ', genreChoiceId)
     }
+
+    toggleLoading(false)
   }, [genreChoiceId])
 
   // =========================
   // ===  FUNCTIES DECADE  ===
   // =========================
 
-  const fetchMoviesByDecade = async () => {
+  async function fetchMoviesByDecade() {
     try {
+      toggleLoading(true);
+      toggleErrorDecade(false)
+
       const currentYear = new Date().getFullYear();
       const startYear = getStartYearForDecade(selectedDecade, currentYear);
       const endYear = startYear + 9;
@@ -164,7 +173,10 @@ function MovieSearch() {
       setMovies(response.data.results);
     } catch (error) {
       console.error('Error fetching movies:', error);
+      toggleErrorDecade(true)
     }
+
+    toggleLoading(false);
   };
 
   const getStartYearForDecade = (selectedDecade, currentYear) => {
@@ -218,7 +230,9 @@ function MovieSearch() {
     void fetchMoviesByDecade();
   }
 
-    // ===  FUNCTIONS  ===
+    // ===================
+    // ===  SHORTLIST  ===
+    // ===================
 
   function handleAddToShortlist(movie) {
     setShortlist((prevShortlist) => [...prevShortlist, movie]);
@@ -240,13 +254,22 @@ function MovieSearch() {
     );
   }
 
+  // useEffect(() => {
+  //   console.log('shortlist: ', shortlist)
+  // }, [shortlist])
 
+  function isMovieInShortlist(movieId) {
+    return shortlist.some((item) => item.id === movieId);
+  }
 
     // ===  RETURN  ===
 
     return (
       <div>
         <h1>Movie Search</h1>
+
+        <NavLink to='/wheel'>Wheel</NavLink>
+
 
         <form onSubmit={handleActorSubmit}>
           <label htmlFor="actorNameInput">Actor Name:</label>
@@ -300,18 +323,20 @@ function MovieSearch() {
             </select>
             <button type='submit'>Search Decade</button>
           </form>
+          { errorDecade && <p>Fout bij het kiezen van een decennium. Probeer opnieuw</p> }
         </div>
 
         <div>
+          { loading === true && <h3>Loading...</h3>}
           { movies.length > 0 &&  movies.map((movie) => (
             <div key={movie.id}>
               <h3>{movie.title}</h3>
               <p>Release Year: {movie.release_date}</p>
               <button
                 onClick={() => handleAddToShortlist(movie)}
-                disabled={movie.isAdded}
+                disabled={isMovieInShortlist(movie.id)}
               >
-                {movie.isAdded ? 'Added' : 'Add to Shortlist'}
+                {isMovieInShortlist(movie.id) ? 'Added' : 'Add to Shortlist'}
               </button>
             </div>
           ))}
@@ -320,19 +345,24 @@ function MovieSearch() {
         { shortlist.length > 0 &&
           <>
           <h2>Shortlist</h2>
-          <ul>
+
             {shortlist.map((movie) => (
-              <li key={movie.id}>
-                {movie.title}
-                <button onClick={() => handleRemoveFromShortlist(movie)}>
-                  Remove
-                </button>
-              </li>
+              <>
+                {/*Only CSS can show the button and movie.title on one line*/}
+                <div>
+                  <button onClick={() => handleRemoveFromShortlist(movie)}>
+                  -
+                  </button>
+                  <p key={movie.id}>
+                    {movie.title}
+                  </p>
+                </div>
+
+              </>
             ))}
-          </ul>
+
           </>
         }
-        <NavLink to='/wheel'>Wheel</NavLink>
       </div>
 
 
