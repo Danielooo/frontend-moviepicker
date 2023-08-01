@@ -5,7 +5,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import IsTokenValid from "../helpers/IsTokenValid";
+import isTokenValid from "../helpers/IsTokenValid";
 
 // zorgt ervoor dat andere pages kunnen abonneren op de context
 export const AuthContext = createContext(null);
@@ -22,7 +22,7 @@ function AuthContextProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem('token');
 
-    if (token && IsTokenValid(token)) {
+    if (token && isTokenValid(token)) {
       const decodedToken = jwt_decode(token);
       void fetchUserData(decodedToken.sub, token,);
     } else {
