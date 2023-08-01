@@ -238,6 +238,7 @@ function MovieSearch() {
           { errorDecade && <p>Fout bij het kiezen van een decennium. Probeer opnieuw</p> }
         </div>
 
+        {/*Movie Selection*/}
         <div>
           { loading === true && <h3>Loading...</h3>}
           { movies.length > 0 &&  movies.map((movie) => (
@@ -255,7 +256,9 @@ function MovieSearch() {
           ))}
         </div>
 
+        <div>
           <ShortList shortlist={shortlist} handleRemoveFromShortlist={handleRemoveFromShortlist} />
+        </div>
 
       </div>
 

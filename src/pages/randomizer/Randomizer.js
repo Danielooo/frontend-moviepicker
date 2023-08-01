@@ -1,5 +1,4 @@
 import React, {useState, useContext, useEffect} from 'react';
-import LoadingBar from "../../components/loadingbar/LoadingBar";
 import { Link } from "react-router-dom";
 
 import { ShortlistContext } from "../../context/ShortlistContext";
