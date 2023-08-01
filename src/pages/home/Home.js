@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, NavLink } from "react-router-dom";
-import axios from 'axios';
 
 // helper imports
 import { getActorIdByName, getMoviesByActorId } from "../../helpers/actorsearch/ActorSearch";
-import {getGenresAndIdsOfApi, getGenreIdByInput, getMoviesByGenreId} from "../../helpers/genresearch/GenreSearch";
+import { getGenresAndIdsOfApi, getGenreIdByInput, getMoviesByGenreId } from "../../helpers/genresearch/GenreSearch";
+
+// component imports
+import ShortList from "../../components/shortlist/ShortList";
+import SearchOnActor from "../../components/searchonactor/SearchOnActor";
+import SearchOnGenre from "../../components/searchongenre/SearchOnGenre";
+import SearchOnDecade from "../../components/searchondecade/SearchOnDecade";
+import MovieSelection from "../../components/movieselection/MovieSelection";
 
 // misc imports
 import { ShortlistContext } from "../../context/ShortlistContext";
-import {getMoviesByDecade} from "../../helpers/decadesearch/DecadeSearch";
-import ShortList from "../../components/shortlist/ShortList";
-
+import { getMoviesByDecade } from "../../helpers/decadesearch/DecadeSearch";
 
 function MovieSearch() {
   const navigate = useNavigate();
@@ -152,6 +156,12 @@ function MovieSearch() {
       //  ===  RETURN  ===
       //  ================
 
+    // // check function
+    // useEffect(() => {
+    //   console.log('movies: ', movies)
+    //
+    // }, [movies])
+
     return (
       <div>
         <h1>Movie Search</h1>
@@ -159,110 +169,53 @@ function MovieSearch() {
         {/*component*/}
         <NavLink to='/wheel'>Wheel</NavLink>
         <button
-          style={{
-            padding: '10px 20px',
-            backgroundColor: 'blue',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '5px',
-            fontWeight: 'bold',
-            textAlign: 'center',
-            cursor: 'pointer',
-          }}
           onClick={handleClickWheel}
         >
-          Randomize
+          Wheel
         </button>
 
-        {/*component*/}
-        <form onSubmit={handleActorSubmit}>
-          <label htmlFor="actorNameInput">Actor Name:</label>
-          <input
-            type="text"
-            id="actorNameInput"
-            value={actorName}
-            onChange={(e) => setActorName(e.target.value)}
-          />
-          <button type="submit">Search Actor</button>
-        </form>
-        {errorActor && <p>Acteur fout gespeld of technische fout. Voer opnieuw in</p>}
+
+        <SearchOnActor
+          handleActorSubmit={handleActorSubmit}
+          actorName={actorName}
+          setActorName={setActorName}
+          errorActor={errorActor}
+        />
 
 
-        { genreAndIdListOfApi.length > 0 && !errorGenreList && (
-          <>
-            {/*component*/}
-            <form onSubmit={handleGenreSubmit}>
-              <label htmlFor="genreInput">Genre:</label>
-              <select
-                id="genreInput"
-                value={ genreChoice }
-                onChange={(e) => setGenreChoice(e.target.value)}
-              >
-                <option value=''>Select a genre</option>
-                  {genreAndIdListOfApi.map((genre) => (
-                    <option key={genre.id} value={genre.name}>
-                      {genre.name}
-                    </option>
-                ))}
-              </select>
-              <button type='submit'>Search Genre</button>
-            </form>
-            { errorGenre && <p>Fout bij het kiezen van een genre. Probeer opnieuw</p> }
+        {/*  GENRE  */}
 
-          </>
-          )
-        }
-        { errorGenreList &&
-          <p>There was an error fetching the genre options. Please try again.</p>
-        }
+        <SearchOnGenre
+          genreAndIdListOfApi={genreAndIdListOfApi}
+          errorGenreList={errorGenreList}
+          errorGenre={errorGenre}
+          handleGenreSubmit={handleGenreSubmit}
+          genreChoice={genreChoice}
+          setGenreChoice={setGenreChoice}
+        />
 
-        {/*  DECADE  */}
+          {/*  DECADE  */}
 
-        {/*component*/}
-        <div>
-          <form onSubmit={handleDecadeSubmit}>
-            <label htmlFor='DecadeInput'>Decade: </label>
-            <select
-              id='DecadeInput'
-              value={selectedDecade}
-              onChange={(e) => setSelectedDecade(e.target.value)}
-            >
-              {decades.map((decade) => (
-                <option key={decade} value={decade}>
-                  {decade}
-                </option>
-              ))}
-            </select>
-            <button type='submit'>Search Decade</button>
-          </form>
-          { errorDecade && <p>Fout bij het kiezen van een decennium. Probeer opnieuw</p> }
-        </div>
+        <SearchOnDecade
+          handleDecadeSubmit={handleDecadeSubmit}
+          selectedDecade={selectedDecade}
+          setSelectedDecade={setSelectedDecade}
+          decades={decades}
+          errorDecade={errorDecade}
+        />
 
-        {/*Movie Selection*/}
-        <div>
-          { loading === true && <h3>Loading...</h3>}
-          { movies.length > 0 &&  movies.map((movie) => (
-            // component
-            <div key={movie.id}>
-              <h3>{movie.title}</h3>
-              <p>Release Year: {movie.release_date}</p>
-              <button
-                onClick={() => handleAddToShortlist(movie)}
-                disabled={isMovieInShortlist(movie.id)}
-              >
-                {isMovieInShortlist(movie.id) ? 'Added' : 'Add to Shortlist'}
-              </button>
-            </div>
-          ))}
-        </div>
+
+        <MovieSelection
+          loading={loading}
+          movies={movies}
+          handleAddToShortlist={handleAddToShortlist}
+          isMovieInShortlist={isMovieInShortlist} />
 
         <div>
           <ShortList shortlist={shortlist} handleRemoveFromShortlist={handleRemoveFromShortlist} />
         </div>
 
       </div>
-
-
     );
 }
 
