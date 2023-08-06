@@ -1,18 +1,94 @@
+* {
+  box-sizing: border-box;
+}
+
 
 nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
+  /*border: 1px solid yellow;*/
+  background-color: var(--dark-black);
+  display: flex;
+  height: 6em;
+  justify-content: space-between
 }
 
 .logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 150px;
+  /*border: 1px solid var(--med-yellow);*/
+
+  display: flex;
+  width: 11em;
+}
+
+.home-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ICONS */
+
+.home-icon-camera {
+  display: flex;
+  padding: 1em;
+}
+
+
+.home-icon-title {
+  display: flex;
+  align-self: center;
+}
+
+/* RIGHT */
+
+.nav-links {
+  /*border: 1px solid var(--med-yellow);*/
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 2em;
 }
 
 .nav-links > .nav-link {
-    padding-left: 10px;
+  display: flex;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+/* PROFILE */
+.profile-container {
+  /*border: 1px solid var(--med-yellow);*/
+
+  justify-content: stretch;
+  display: flex;
+  align-items: center;
+  margin-left: 2em;
+}
+
+.profile-avatar {
+  display: flex;
+  height: 2em;
+  width: 2em;
+  margin-right: 0.5em;
+}
+
+/* LOGOUT */
+.logout-container {
+  /*border: 1px solid var(--med-yellow);*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2em;
+  margin-right: 1em;
+}
+
+.logout-button {
+  display: flex;
+  justify-self: center;
+  border: none;
+  background-color: var(--dark-purple);
+  color: white;
+  border-radius: 2em;
+  padding: 1.5em;
+
+
 }

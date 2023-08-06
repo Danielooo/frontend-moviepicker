@@ -1,0 +1,56 @@
+
+
+.main-outer-container-home {
+  /*border: 1px solid red;*/
+
+  display: flex;
+  flex-direction: column;
+  margin: 3em;
+}
+
+.sections-container {
+  /*border: 1px solid red;*/
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 3em;
+}
+
+.sections-container:last-child {
+  margin-bottom: 0;
+}
+
+/*Movie search*/
+
+.movie-search {
+   height: max-content;
+}
+
+/*Shortlist*/
+
+.shortlist-outer-container {
+  /*border: 3px solid green;*/
+
+  width: 30%;
+}
+
+.shortlist-movies-container {
+  /*border: 1px solid var(--med-yellow);*/
+  border-radius: 0.5em;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 300px;
+  overflow: auto;
+}
+
+/*Movie Selection*/
+.movie-selection {
+  display: flex;
+  width: 100%;
+}
+
+
+
