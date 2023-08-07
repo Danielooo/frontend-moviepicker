@@ -1,22 +1,25 @@
 import React from 'react';
+import './ShortList.css'
 
 function Shortlist({ shortlist, handleRemoveFromShortlist }) {
   return (
     <>
-      { shortlist.length > 0 ? (
-        shortlist.map((movie) => (
-          <div key={movie.id} style={{ display: 'flex', alignItems: 'center' }} >
-            <button onClick={() => handleRemoveFromShortlist(movie)}>
-              -
-            </button>
-            <p>
-              {movie.title}
-            </p>
-          </div>
-        )))
-      :
-        <i> - empty - </i>
-      }
+      <div className='shortlist-movies'>
+        { shortlist.length > 0 ? (
+          shortlist.map((movie) => (
+            <div key={movie.id} className='shortlist-movie' >
+              <button onClick={() => handleRemoveFromShortlist(movie)}>
+                -
+              </button>
+              <p>
+                {movie.title}
+              </p>
+            </div>
+          )))
+        :
+          <i className='shortlist-empty-text'> - Empty - </i>
+        }
+      </div>
     </>
   );
 }

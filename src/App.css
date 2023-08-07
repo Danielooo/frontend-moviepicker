@@ -112,4 +112,12 @@ a {
     margin: 1em;
 
     box-shadow: 3px 3px 5px hsl(327, 50%, 30%); /* Adjust the HSL values */
+
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.regular-button:active {
+    background-color: #99A7BF;
+    transform: scale(0.95);
 }

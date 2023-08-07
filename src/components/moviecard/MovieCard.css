@@ -53,3 +53,7 @@
   padding: 0;
 }
 
+.movie-card-button:disabled {
+  background-color: #99A7BF;
+  color: lightgrey;
+}

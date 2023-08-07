@@ -1,0 +1,21 @@
+.shortlist-movies {
+  /*background-color: var(--med-blue);*/
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.shortlist-movie {
+  /*border: 1px solid var(--med-yellow);*/
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.shortlist-empty-text {
+  display: flex;
+  align-self: center;
+  padding: 1em;
+}

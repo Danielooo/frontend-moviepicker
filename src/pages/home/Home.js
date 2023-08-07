@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, NavLink } from "react-router-dom";
+import InfoButton from "../../components/infobutton/InfoButton";
 
 import './Home.css';
 import './../../App.css';
@@ -18,6 +19,8 @@ import MovieSelection from "../../components/movieselection/MovieSelection";
 // misc imports
 import { ShortlistContext } from "../../context/ShortlistContext";
 import { getMoviesByDecade } from "../../helpers/decadesearch/DecadeSearch";
+
+
 
 function Home() {
   const navigate = useNavigate();
@@ -53,6 +56,7 @@ function Home() {
       Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN_ACTOR}`,
     },
   };
+
 
   //  =========================
   //  ===  FUNCTIES  ACTOR  ===
@@ -174,7 +178,15 @@ function Home() {
 
         <section className='section-outer-container'>
           <div className='movie-search section-inner-container'>
-            <h2 className='section-title'>Movie Search</h2>
+            <div className='title-and-infobutton-line'>
+                          <h2 className='section-title'>Movie Search</h2>
+              <InfoButton
+                text='
+                You can search on Actor, Genre and Decade.
+                Combining search queries is not possible.
+                The results in Movie Selection are the 20 best rated movies that have a minimum of 200 votes'
+              />
+            </div>
 
             {/*component*/}
             {/*<NavLink to='/wheel'>Wheel</NavLink>*/}
@@ -246,6 +258,7 @@ function Home() {
             </div>
           </section>
         </div>
+
 
       </div>
     );

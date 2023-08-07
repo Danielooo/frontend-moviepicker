@@ -18,12 +18,6 @@ function SearchOnGenre(
                 id="genreInput"
                 value={ genreChoice }
                 onChange={(e) => setGenreChoice(e.target.value)}
-                // onKeyDown={(e) => {
-                //   if (e.key === 'Enter') {
-                //     handleGenreSubmit(); // Call your submit function
-                //   }
-                // }}
-
               >
                 <option value=''>Select a genre</option>
                 {genreAndIdListOfApi.map((genre) => (

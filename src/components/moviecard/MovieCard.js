@@ -5,7 +5,7 @@ import './MovieCard.css';
 function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
 
 
-  console.log('movie', movie)
+  // console.log('movie', movie)
 
   const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
 
@@ -19,7 +19,7 @@ function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
       <div className='movie-card-bottom'>
         <p className='movie-year'>{movie.release_date.substring(0, 4)}</p>
         <p className='movie-rating'>Rating: {movie.vote_average}</p>
-        <button className='regular-button'
+        <button className='movie-card-button regular-button'
           onClick={() => handleAddToShortlist(movie)}
           disabled={isMovieInShortlist(movie.id)}
         >
