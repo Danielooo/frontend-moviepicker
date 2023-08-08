@@ -15,10 +15,6 @@ function NavBar() {
   const navigate = useNavigate()
 
 
-  console.log('user: ', user)
-
-
-
   return (
     <>
       <nav>

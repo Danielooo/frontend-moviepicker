@@ -19,6 +19,7 @@ import MovieSelection from "../../components/movieselection/MovieSelection";
 // misc imports
 import { ShortlistContext } from "../../context/ShortlistContext";
 import { getMoviesByDecade } from "../../helpers/decadesearch/DecadeSearch";
+import Button from "../../components/button/Button";
 
 
 
@@ -90,7 +91,7 @@ function Home() {
     if (genreChoiceId !== undefined) {
       void getMoviesByGenreId(setMovies, toggleLoading, toggleErrorGenre, genreChoiceId, options)
     } else {
-      console.log('genreChoiceId is undefined: ', genreChoiceId)
+      // TODO uitzondering bedenken of else verwijderen
     }
 
     toggleLoading(false)
@@ -123,10 +124,11 @@ function Home() {
     void getMoviesByDecade(setMovies, selectedDecade, toggleLoading, toggleErrorDecade, options);
   }
 
-  function handleClickWheel(e) {
+  function handleClickRandomize(e) {
     e.preventDefault()
     navigate('/wheel')
   }
+
 
 
   // ===================
@@ -163,11 +165,7 @@ function Home() {
       //  ===  RETURN  ===
       //  ================
 
-    // // check function
-    // useEffect(() => {
-    //   console.log('movies: ', movies)
-    //
-    // }, [movies])
+
 
     return (
       <div className='main-outer-container-home'>
@@ -181,12 +179,11 @@ function Home() {
             <div className='title-and-infobutton-line'>
                           <h2 className='section-title'>Movie Search</h2>
               <InfoButton
-                text='
-                You can search on Actor, Genre and Decade.
-                Combining search queries is not possible.
-                The results in Movie Selection are the 20 best rated movies that have a minimum of 200 votes'
+                text={`You can search on Actor, Genre and Decade.\nCombining search queries is not possible.\nThe results in Movie Selection are the 20 best rated movies that have a minimum of 200 votes`}
               />
-            </div>
+              </div>
+
+
 
             {/*component*/}
             {/*<NavLink to='/wheel'>Wheel</NavLink>*/}
@@ -238,7 +235,8 @@ function Home() {
                 shortlist={shortlist}
                 handleRemoveFromShortlist={handleRemoveFromShortlist}
               />
-            </div>
+              </div>
+              <Button text='Randomize' handleClick={handleClickRandomize} disabled={false} />
             </div>
           </section>
 
