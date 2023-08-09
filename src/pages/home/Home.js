@@ -178,6 +178,7 @@ function Home() {
           <div className='movie-search section-inner-container'>
             <div className='title-and-infobutton-line'>
                           <h2 className='section-title'>Movie Search</h2>
+
               <InfoButton
                 text={`You can search on Actor, Genre and Decade.\nCombining search queries is not possible.\nThe results in Movie Selection are the 20 best rated movies that have a minimum of 200 votes`}
               />

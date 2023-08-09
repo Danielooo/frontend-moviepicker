@@ -9,7 +9,7 @@ function MovieCard({movieKey, movie, handleAddToShortlist, isMovieInShortlist}) 
   const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
 
   return (
-    <div key={movieKey} id={movieKey} className='movie-card'>
+    <div key={movieKey} className='movie-card'>
       <div className='movie-card-top'>
 
         <div className='movie-poster-container'>
