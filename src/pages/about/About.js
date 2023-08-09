@@ -5,7 +5,9 @@ function About() {
   return (
 
     <>
-      <h1>About page</h1>
+      <div className='main-outer-container'>
+        <h1>About page</h1>
+      </div>
     </>
 
   )

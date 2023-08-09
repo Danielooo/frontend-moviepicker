@@ -15,7 +15,7 @@
 }
 
 body {
-  background-color: var(--dark-blue);
+  background-color: black;
   color: var(--white);
 
   font-family: 'Verdana', 'Tahoma', sans-serif;
@@ -28,9 +28,12 @@ a {
 /*  SECTIONS  */
 .main-outer-container {
   /*border: 1px solid red;*/
+  background-color: var(--dark-blue);
 
   display: flex;
-  justify-content: center ;
+  justify-content: center;
+
+  min-height: 100vh;
 }
 
 .section-outer-container {

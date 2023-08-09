@@ -5,8 +5,8 @@ import About from './pages/about/About';
 import Profile from './pages/profile/Profile';
 import LogIn from './pages/logIn/logIn';
 import SignUp from './pages/signUp/SignUp';
-// import Randomizer from "./pages/randomizer/Randomizer";  // Keep in case Wheel doesn't work out
 import WheelPage from './pages/wheelPage/WheelPage';
+import Footer from './components/footer/Footer';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -29,6 +29,8 @@ function App() {
 
         </Routes>
       </div>
+
+      <Footer />
     </>
   );
 }

@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+
+.footer {
+  /*border: 1px solid yellow;*/
+  background-color: var(--dark-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4em;
+  width: 100%;
+}

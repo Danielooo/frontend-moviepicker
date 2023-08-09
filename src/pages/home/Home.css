@@ -1,11 +1,13 @@
 
 
-.main-outer-container-home {
+.main-inner-container {
   /*border: 1px solid red;*/
 
   display: flex;
   flex-direction: column;
   margin: 3em;
+
+  width: 100%
 }
 
 .sections-container {
@@ -30,6 +32,8 @@
 .title-and-infobutton-line {
   display: flex;
   justify-content: center;
+
+  overflow: hidden;
 }
 
 /*Shortlist*/
