@@ -7,6 +7,9 @@ import reportWebVitals from './reportWebVitals';
 import AuthContextProvider from "./context/AuthContext";
 import ShortlistContextProvider from "./context/ShortlistContext";
 
+// styles
+import './styles/global.css';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

@@ -1,4 +1,5 @@
 import React from 'react';
+import './../../App.css';
 
 function SearchOnGenre(
   {genreAndIdListOfApi, errorGenreList, errorGenre, handleGenreSubmit, genreChoice, setGenreChoice})
@@ -9,9 +10,11 @@ function SearchOnGenre(
       { genreAndIdListOfApi.length > 0 && !errorGenreList && (
           <>
             {/*component*/}
-            <form onSubmit={handleGenreSubmit}>
+            <form className='section-form' onSubmit={handleGenreSubmit}>
+              <div className='section-input-line'>
               <label htmlFor="genreInput">Genre:</label>
               <select
+                className='section-input-field'
                 id="genreInput"
                 value={ genreChoice }
                 onChange={(e) => setGenreChoice(e.target.value)}
@@ -23,7 +26,8 @@ function SearchOnGenre(
                   </option>
                 ))}
               </select>
-              <button type='submit'>Search Genre</button>
+              </div>
+              <button className='regular-button' type='submit'>Search Genre</button>
             </form>
             { errorGenre && <p>Fout bij het kiezen van een genre. Probeer opnieuw</p> }
 

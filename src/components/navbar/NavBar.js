@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
-import camera from '../../assets/camera-icon.jpg';
-import avatar from '../../assets/avatar-icon.jpg';
-import {Link, NavLink, useNavigate} from "react-router-dom";
+
+// images
+import camera from '../../assets/icons/icon-camera.svg';
+import avatar from '../../assets/icons/icon-avatar.svg';
+
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import './NavBar.css';
 import axios from "axios";
@@ -11,14 +14,14 @@ function NavBar() {
   const { isAuth, user, login, logout } = useContext(AuthContext);
   const navigate = useNavigate()
 
+
   return (
     <>
       <nav>
-        <Link to='/'>
-          <span className='logo-container'>
-            <img src={camera} alt='camera-icon' />
-            <h3>Moo-V Picker</h3>
-          </span>
+        <Link to='/' className='logo-container'>
+            <img className='home-icon-camera' src={camera} alt='camera-icon' />
+              <h3 className='home-icon-title'>Movie Picker</h3>
+
         </Link>
 
         <div className='nav-links'>
@@ -30,7 +33,7 @@ function NavBar() {
             About
           </NavLink>
 
-          <NavLink className='nav-link' to='/signin'>
+          <NavLink className='nav-link' to='/login'>
             Log in
           </NavLink>
 
@@ -38,18 +41,26 @@ function NavBar() {
             Sign up
           </NavLink>
 
-          <Link className='nav-link' to={'/profile'}>
-            <img src={avatar} alt='camera-icon' />
+          <Link className='profile-container' to={'/profile'}>
+            <img className='profile-avatar' src={avatar} alt='camera-icon' />
           </Link>
 
           {/* Conditionally rendered when the user is logged in */}
-          <button
-            className='nav-link'
-            type="button"
-            onClick={logout}
-            >
-            Log out
-          </button>
+          { isAuth &&
+            <>
+              <p>Welcome {user.username }!</p>
+              <div className='logout-container'>
+                <button
+                  className='logout-button'
+                  type="button"
+                  onClick={logout}
+                >
+                  Log out
+                </button>
+              </div>
+            </>
+
+          }
         </div>
       </nav>
     </>

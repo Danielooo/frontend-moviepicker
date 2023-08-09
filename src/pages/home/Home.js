@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, NavLink } from "react-router-dom";
+import InfoButton from "../../components/infobutton/InfoButton";
+
+import './Home.css';
+import './../../App.css';
 
 // helper imports
 import { getActorIdByName, getMoviesByActorId } from "../../helpers/actorsearch/ActorSearch";
@@ -15,8 +19,11 @@ import MovieSelection from "../../components/movieselection/MovieSelection";
 // misc imports
 import { ShortlistContext } from "../../context/ShortlistContext";
 import { getMoviesByDecade } from "../../helpers/decadesearch/DecadeSearch";
+import Button from "../../components/button/Button";
 
-function MovieSearch() {
+
+
+function Home() {
   const navigate = useNavigate();
 
   // Actor search
@@ -51,6 +58,7 @@ function MovieSearch() {
     },
   };
 
+
   //  =========================
   //  ===  FUNCTIES  ACTOR  ===
   //  =========================
@@ -83,7 +91,7 @@ function MovieSearch() {
     if (genreChoiceId !== undefined) {
       void getMoviesByGenreId(setMovies, toggleLoading, toggleErrorGenre, genreChoiceId, options)
     } else {
-      console.log('genreChoiceId is undefined: ', genreChoiceId)
+      // TODO uitzondering bedenken of else verwijderen
     }
 
     toggleLoading(false)
@@ -116,10 +124,11 @@ function MovieSearch() {
     void getMoviesByDecade(setMovies, selectedDecade, toggleLoading, toggleErrorDecade, options);
   }
 
-  function handleClickWheel(e) {
+  function handleClickRandomize(e) {
     e.preventDefault()
     navigate('/wheel')
   }
+
 
 
   // ===================
@@ -156,67 +165,102 @@ function MovieSearch() {
       //  ===  RETURN  ===
       //  ================
 
-    // // check function
-    // useEffect(() => {
-    //   console.log('movies: ', movies)
-    //
-    // }, [movies])
+
 
     return (
-      <div>
-        <h1>Movie Search</h1>
+      <div className='main-outer-container-home'>
 
-        {/*component*/}
-        <NavLink to='/wheel'>Wheel</NavLink>
-        <button
-          onClick={handleClickWheel}
-        >
-          Wheel
-        </button>
+        <div className='sections-container'>
 
+        {/*Movie Search  */}
 
-        <SearchOnActor
-          handleActorSubmit={handleActorSubmit}
-          actorName={actorName}
-          setActorName={setActorName}
-          errorActor={errorActor}
-        />
+        <section className='section-outer-container'>
+          <div className='movie-search section-inner-container'>
+            <div className='title-and-infobutton-line'>
+                          <h2 className='section-title'>Movie Search</h2>
+
+              <InfoButton
+                text={`You can search on Actor, Genre and Decade.\nCombining search queries is not possible.\nThe results in Movie Selection are the 20 best rated movies that have a minimum of 200 votes`}
+              />
+              </div>
 
 
-        {/*  GENRE  */}
 
-        <SearchOnGenre
-          genreAndIdListOfApi={genreAndIdListOfApi}
-          errorGenreList={errorGenreList}
-          errorGenre={errorGenre}
-          handleGenreSubmit={handleGenreSubmit}
-          genreChoice={genreChoice}
-          setGenreChoice={setGenreChoice}
-        />
-
-          {/*  DECADE  */}
-
-        <SearchOnDecade
-          handleDecadeSubmit={handleDecadeSubmit}
-          selectedDecade={selectedDecade}
-          setSelectedDecade={setSelectedDecade}
-          decades={decades}
-          errorDecade={errorDecade}
-        />
+            {/*component*/}
+            {/*<NavLink to='/wheel'>Wheel</NavLink>*/}
+            {/*<button*/}
+            {/*  onClick={handleClickWheel}*/}
+            {/*>*/}
+            {/*  Wheel*/}
+            {/*</button>*/}
 
 
-        <MovieSelection
-          loading={loading}
-          movies={movies}
-          handleAddToShortlist={handleAddToShortlist}
-          isMovieInShortlist={isMovieInShortlist} />
+            <SearchOnActor
+              handleActorSubmit={handleActorSubmit}
+              actorName={actorName}
+              setActorName={setActorName}
+              errorActor={errorActor}
+            />
 
-        <div>
-          <ShortList shortlist={shortlist} handleRemoveFromShortlist={handleRemoveFromShortlist} />
+
+            {/*  GENRE  */}
+
+            <SearchOnGenre
+              genreAndIdListOfApi={genreAndIdListOfApi}
+              errorGenreList={errorGenreList}
+              errorGenre={errorGenre}
+              handleGenreSubmit={handleGenreSubmit}
+              genreChoice={genreChoice}
+              setGenreChoice={setGenreChoice}
+            />
+
+            {/*  DECADE  */}
+
+            <SearchOnDecade
+              handleDecadeSubmit={handleDecadeSubmit}
+              selectedDecade={selectedDecade}
+              setSelectedDecade={setSelectedDecade}
+              decades={decades}
+              errorDecade={errorDecade}
+            />
+          </div>
+        </section>
+
+          {/*Shortlist*/}
+
+          <section className='shortlist-outer-container section-outer-container'>
+            <div className='shortlist-inner-container section-inner-container'>
+              <h2 className='section-title'>Shortlist</h2>
+              <div className='shortlist-movies-container'>
+              <ShortList
+                shortlist={shortlist}
+                handleRemoveFromShortlist={handleRemoveFromShortlist}
+              />
+              </div>
+              <Button text='Randomize' handleClick={handleClickRandomize} disabled={false} />
+            </div>
+          </section>
+
         </div>
+        {/*end sections-container*/}
+
+
+        <div className='sections-container'>
+          <section className='movie-selection section-outer-container'>
+            <div className='section-inner-container'>
+              <h1 className='section-title'>Movie Selection</h1>
+              <MovieSelection
+                loading={loading}
+                movies={movies}
+                handleAddToShortlist={handleAddToShortlist}
+                isMovieInShortlist={isMovieInShortlist} />
+            </div>
+          </section>
+        </div>
+
 
       </div>
     );
 }
 
-export default MovieSearch;
+export default Home;

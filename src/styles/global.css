@@ -1,0 +1,124 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --dark-blue: #0C1B33;
+  --dark-purple: #8F2D56;
+  --med-blue: #778DA9;
+  --med-yellow: #F4D58D;
+  --light-yellow: #FDF0D5;
+
+  --dark-black: #000000;
+  --white: #FFFFFF;
+
+}
+
+body {
+  background-color: var(--dark-blue);
+  color: var(--white);
+
+  font-family: 'Verdana', 'Tahoma', sans-serif;
+}
+
+a {
+  color: var(--white)
+}
+
+/*  SECTIONS  */
+.main-outer-container {
+  /*border: 1px solid red;*/
+
+  display: flex;
+  justify-content: center ;
+}
+
+.section-outer-container {
+  /*border: 2px solid var(--med-yellow);*/
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 2em;
+  border-radius: 3em;
+
+  background-color: var(--dark-purple);
+  box-shadow: 0 0 2em hsl(214, 53%, 2%);
+}
+
+.section-inner-container {
+  /*border: 1px solid black;*/
+
+  display: flex;
+  flex-direction: column;
+  /*justify-content: space-between;*/
+  flex-grow: 0;
+  align-items: center;
+}
+
+/*section elements*/
+.section-title {
+  /*border: 1px solid blue;*/
+
+  display: flex;
+  margin: 0 0 1em 0;
+}
+
+.section-form {
+  /*border: 1px solid var(--med-yellow);*/
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  margin-bottom: 1.5em;
+}
+
+.section-input-line {
+  /*border: 1px solid var(--med-yellow);*/
+
+  display: flex;
+  flex-direction: row;
+  width: 25em;
+  justify-content: space-between;
+
+  caret-color: white;
+  /*margin-bottom: 2em;*/
+}
+
+.section-input-field {
+  /*border: 1px solid var(--med-yellow);*/
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 1px solid white;
+  width: 13em;
+  color: white;
+
+}
+
+/*  BUTTON  */
+
+.regular-button {
+  /*border: 2px solid var(--med-yellow);*/
+
+  border: none;
+  display: flex;
+  align-self: center;
+
+  color: white;
+  background-color: var(--med-blue);
+  border-radius: 2em;
+  padding: 1em;
+  margin: 1em;
+
+  box-shadow: 3px 3px 5px hsl(327, 50%, 30%); /* Adjust the HSL values */
+
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.regular-button:active {
+  background-color: #99A7BF;
+  transform: scale(0.95);
+}

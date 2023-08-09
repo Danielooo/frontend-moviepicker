@@ -40,7 +40,6 @@ function AuthContextProvider({ children }) {
     const decodedToken = jwt_decode(JWT);
 
     void fetchUserData(decodedToken.sub, JWT, '/profile');
-    console.log('login invoked')
   }
 
   function logout() {
@@ -53,7 +52,6 @@ function AuthContextProvider({ children }) {
       status: 'done',
     });
     navigate('/');
-    console.log('logout invoked')
   }
 
 
