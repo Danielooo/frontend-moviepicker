@@ -26,7 +26,7 @@ export async function getMoviesByDecade(
 };
 
 
-// Options for dropdown in Home
+// Options for dropdown in MovieSearch
 function getStartYearForDecade(selectedDecade, currentYear) {
   switch (selectedDecade) {
     case '2020s':

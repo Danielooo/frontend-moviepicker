@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import {useForm} from "react-hook-form";
+import {useNavigate} from "react-router-dom";
 import './SignUp.css'
 
 function SignUp() {
 
-  const [ error, toggleError ] = useState(false);
-  const [ loading, toggleLoading ] = useState(false);
+  const [error, toggleError] = useState(false);
+  const [loading, toggleLoading] = useState(false);
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {register, handleSubmit, formState: {errors}} = useForm();
 
-  async function onFormSubmit({ username, email, password }) {
+  async function onFormSubmit({username, email, password}) {
     toggleError(false);
     toggleLoading(true);
 
     try {
       await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup', {
-        'username': username ,
+        'username': username,
         'email': email,
         'password': password,
       });
@@ -33,90 +33,108 @@ function SignUp() {
 
   return (
     <>
-      <h1>Signup page</h1>
+      <main className='main-outer-container'>
+        <main className='main-inner-container'>
+          <section className='section-outer-container'>
+            <div className='section-inner-container'>
 
-      {/* TODO: error handing > username moet minimaal 6 tekens zijn */}
-      <form onSubmit={ handleSubmit(onFormSubmit) }>
-        <label htmlFor="username-field">
-          Username:
-          <input
-            type="text"
-            id="username-field"
-            {...register('username', {
-              required: {
-                value: true,
-                message: 'Dit veld is verplicht'
-              },
-            })}
-          />
-          {errors.username && <p>{errors.username.message}</p>}
-        </label>
+              <h1>Sign Up</h1>
 
-        {/* TODO: error handing > email moet een @ bevatten */}
-        <label htmlFor="email-field">
-          Email:
-          <input
-            type="text"
-            id="email-field"
-            {...register('email', {
-              required: {
-                value: true,
-                message: 'Dit veld is verplicht'
-              },
-            })}
-          />
-          {errors.email && <p>{errors.email.message}</p>}
-        </label>
+              {/* TODO: error handling > username moet minimaal 6 tekens zijn */}
+              <form onSubmit={handleSubmit(onFormSubmit)}>
 
-        {/* TODO: error handing > password moet minimaal 6 tekens zijn */}
-        <label htmlFor="password-field">
-          Wachtwoord:
-          <input
-            type="text"
-            id="password-field"
-            {...register('password', {
-              required: true,
-              // validate: (value) => value.includes('@', '!')
-            })}
+                <div className='section-input-line'>
+                  <label htmlFor="username-field">Username:</label>
+                    <input
+                      className='section-input-field'
+                      type="text"
+                      id="username-field"
+                      {...register('username', {
+                        required: {
+                          value: true,
+                          message: 'Dit veld is verplicht'
+                        },
+                      })}
+                    />
+                    {errors.username && <p>{errors.username.message}</p>}
+                </div>
 
-          />
-        </label>
-        {errors.password && <p>{errors.password.message}</p>}
 
-        <label htmlFor="info-field">
-          Persoonlijke info:
-          <input
-            type="text"
-            id="info-field"
-            {...register('info', {
-              required: true,
-            })}
-          />
-        </label>
-        {errors.info && <p>{errors.info.message}</p>}
+                {/* TODO: error handing > email moet een @ bevatten */}
+                <div className='section-input-line'>
+                <label htmlFor="email-field">Email:</label>
+                  <input
+                    className='section-input-field'
+                    type="text"
+                    id="email-field"
+                    {...register('email', {
+                      required: {
+                        value: true,
+                        message: 'Dit veld is verplicht'
+                      },
+                    })}
+                  />
+                </div>
+                  {errors.email && <p>{errors.email.message}</p>}
 
-        {/* TODO dropdown menu met opties 'user' en 'admin' */}
-        <label htmlFor="role-field">
-          Admin of User:
-          <input
-            type="text"
-            id="admin-field"
-            {...register('admin', {
-              required: true,
-            })}
-          />
-        </label>
-        {errors.role && <p>{errors.role.message}</p>}
 
-        <button
-          type='submit'
-          className='form-button'
-          disabled={loading}
-        >
-          Registreer
-        </button>
+                {/* TODO: error handing > password moet minimaal 6 tekens zijn */}
+                <div className='section-input-line'>
+                <label htmlFor="password-field">Wachtwoord:</label>
+                  <input
+                    className='section-input-field'
+                    type="text"
+                    id="password-field"
+                    {...register('password', {
+                      required: true,
+                      // validate: (value) => value.includes('@', '!')
+                    })}
 
-      </form>
+                  />
+                </div>
+                {errors.password && <p>{errors.password.message}</p>}
+
+                <div className='section-input-line'>
+                <label htmlFor="info-field">Persoonlijke info:</label>
+                  <input
+                    className='section-input-field'
+                    type="text"
+                    id="info-field"
+                    {...register('info', {
+                      required: true,
+                    })}
+                  />
+                </div>
+                {errors.info && <p>{errors.info.message}</p>}
+
+                {/* TODO dropdown menu met opties 'user' en 'admin' */}
+                <div className='section-input-line'>
+                <label htmlFor="role-field">Admin or User:</label>
+
+                  <input
+                    className='section-input-field'
+                    type="text"
+                    id="admin-field"
+                    {...register('admin', {
+                      required: true,
+                    })}
+                  />
+                </div>
+                {errors.role && <p>{errors.role.message}</p>}
+
+                <button
+                  className='regular-button'
+                  type='submit'
+                  disabled={loading}
+                >
+                  Sign Up
+                </button>
+
+              </form>
+            </div>
+          </section>
+        </main>
+      </main>
 
     </>
   )

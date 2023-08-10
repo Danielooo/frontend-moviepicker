@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {useNavigate, NavLink} from "react-router-dom";
 
-import './Home.css';
+import './MovieSearch.css';
 import './../../App.css';
 
 // helper imports
@@ -22,7 +22,7 @@ import {getMoviesByDecade} from "../../helpers/decadesearch/DecadeSearch";
 import Button from "../../components/button/Button";
 
 
-function Home() {
+function MovieSearch() {
   const navigate = useNavigate();
 
   // Actor search
@@ -247,4 +247,4 @@ function Home() {
   )
 }
 
-export default Home;
+export default MovieSearch;

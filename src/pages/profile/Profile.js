@@ -32,6 +32,7 @@ function Profile() {
 
   return (
     <>
+      <div className='main-outer-container'>
       <h1>Profile page</h1>
 
       {isAuth ?
@@ -59,6 +60,7 @@ function Profile() {
         :
         <h2>Niet ingelogd</h2>
       }
+      </div>
     </>
   );
 }

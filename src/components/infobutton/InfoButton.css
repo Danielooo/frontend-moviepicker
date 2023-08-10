@@ -26,6 +26,7 @@
 }
 
 .movie-search-explain {
+
   visibility: hidden;
   background-color: var(--med-yellow);
   color: black;
@@ -42,10 +43,12 @@
   width: 400px;
   font-size: smaller;
 
-
 }
 
 .movie-search-explain-container:hover .movie-search-explain {
+  border: 1px solid red;
+
+
   visibility: visible;
   opacity: 1;
 }

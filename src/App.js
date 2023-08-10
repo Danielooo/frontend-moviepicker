@@ -1,6 +1,6 @@
 import './App.css';
 import NavBar from './components/navbar/NavBar';
-import Home from './pages/home/Home';
+import MovieSearch from './pages/moviesearch/MovieSearch';
 import About from './pages/about/About';
 import Profile from './pages/profile/Profile';
 import LogIn from './pages/logIn/logIn';
@@ -18,7 +18,7 @@ function App() {
 
       <div className='content'>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<MovieSearch />} />
           <Route path='/about' element={<About />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/login' element={<LogIn />} />

@@ -18,6 +18,7 @@
   transition: opacity 0.2s;
 
   width: 200px;
+  height: auto;
   font-size: smaller;
 }
 

@@ -1,21 +1,10 @@
-
-
-.main-inner-container {
-  /*border: 1px solid red;*/
-
-  display: flex;
-  flex-direction: column;
-  margin: 3em;
-
-  width: 100%
-}
-
 .sections-container {
-  /*border: 1px solid red;*/
+  border: 1px solid red;
 
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  width: 100%;
   margin-bottom: 3em;
 }
 
@@ -33,7 +22,6 @@
   display: flex;
   justify-content: center;
 
-  overflow: hidden;
 }
 
 /*Shortlist*/

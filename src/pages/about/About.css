@@ -1,0 +1,9 @@
+.about-container {
+  width: 50%;
+  min-width: 20em;
+}
+
+p {
+  text-align: center;
+}
+

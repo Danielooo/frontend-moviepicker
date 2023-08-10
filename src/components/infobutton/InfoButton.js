@@ -7,14 +7,15 @@ function InfoButton({text}) {
     <p key={index}>{sentence}</p>
   ))
 
+  console.log('sentences: ', sentences)
 
   return (
     <>
       <div className="movie-search-explain-container">
         <span className='circle'>i</span>
-        <div className="movie-search-explain">
+        <p className="movie-search-explain">
           {sentences}
-        </div>
+        </p>
       </div>
     </>
   )

@@ -36,6 +36,18 @@ a {
   min-height: 100vh;
 }
 
+.main-inner-container {
+  /*border: 1px solid red;*/
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 3em;
+
+  width: 100%
+}
+
 .section-outer-container {
   /*border: 2px solid var(--med-yellow);*/
 
@@ -86,18 +98,18 @@ a {
   justify-content: space-between;
 
   caret-color: white;
-  /*margin-bottom: 2em;*/
+  margin-bottom: 1em;
 }
 
 .section-input-field {
   /*border: 1px solid var(--med-yellow);*/
+
   border: none;
   outline: none;
   background-color: transparent;
   border-bottom: 1px solid white;
   width: 13em;
   color: white;
-
 }
 
 /*  BUTTON  */
