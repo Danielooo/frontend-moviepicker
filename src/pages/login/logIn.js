@@ -6,22 +6,22 @@ import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 import './../../App.css';
 
-// import './logIn.css';
+// import './login.css';
 
 
 function LogIn() {
   // const [ email, setEmail ] = useState('');
   // const [ password, setPassword ] = useState('');
-  const [error, toggleError] = useState(false);
+  const [ errorMessage, setErrorMessage ] = useState('');
 
   const navigate = useNavigate();
 
-  const {login} = useContext(AuthContext);
-  const {register, handleSubmit, formState: {errors}} = useForm();
+  const { login } = useContext(AuthContext);
+  const { register, handleSubmit, formState: { errors}} = useForm();
 
 
   async function handleFormSubmit({username, password}) {
-    toggleError(false);
+    setErrorMessage('');
 
     try {
       const response = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin', {
@@ -32,7 +32,7 @@ function LogIn() {
       login(response.data.accessToken);
     } catch (e) {
       console.error(e);
-      toggleError(true);
+      setErrorMessage(e.response.status);
     }
   }
 
@@ -46,7 +46,10 @@ function LogIn() {
 
               <h1 className='login-title'>LOG IN</h1>
 
+
               <form onSubmit={handleSubmit(handleFormSubmit)}>
+
+                {/*  Username  */}
                 <div className='section-input-line'>
                   <label htmlFor="username-field" className='login-label'>
                     Username:
@@ -59,42 +62,15 @@ function LogIn() {
                   />
                 </div>
 
-                <div className='section-input-line'>
-                  <label htmlFor="email-field">
-                    Email:
-                  </label>
-                  <input
-                    className='section-input-field'
-                    type="text"
-                    id="email-field"
-                    {...register('email', {
-                      required: {
-                        value: true,
-                        message: 'Dit veld is verplicht'
-                      },
-                      minLength: {
-                        value: 1,
-                        message: 'Input moet minstens 1 teken bevatten'
-                      },
-                      maxLength: {
-                        value: 50,
-                        message: 'Input mag maar max 50 tekens zijn',
-                      },
-                      validate: (value) => value.includes('@') || 'Email moet een @ bevatten',
-                    })}
-                  />
-                </div>
-                {errors.name && <p>{errors.name.message}</p>}
-
-
+                {/*  Password  */}
                 <div className='section-input-line'>
                   <label htmlFor="password-field">
-                    Wachtwoord:
+                    Password:
                   </label>
 
                   <input
                     className='section-input-field'
-                    type="text"
+                    type="password"
                     id="password-field"
                     {...register('password')}
                   />
@@ -106,6 +82,8 @@ function LogIn() {
 
                 {errors && <p>{errors.response}</p>}
               </form>
+              { errorMessage && <p className='error-message'>
+                Log in failed. Please check username an password an try again  (error code: {errorMessage})</p> }
 
               <p className='signup-line'>No account yet? <Link to="/signup">Sign up here</Link></p>
             </div>

@@ -51,7 +51,7 @@ function NavBar() {
               <p>Welcome {user.username }!</p>
               <div className='logout-container'>
                 <button
-                  className='logout-button'
+                  className='regular-button'
                   type="button"
                   onClick={logout}
                 >

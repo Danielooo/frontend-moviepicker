@@ -12,11 +12,11 @@ function MovieSelection({loading, movies, handleAddToShortlist, isMovieInShortli
 
   useEffect(() => {
     createKeyMovieSelection();
-    console.log('keyMovieSelection: ', keyMovieSelection)
+
   }, [])
 
   useEffect(() => {
-    console.log('movies: ', movies)
+
   }, [movies]);
 
   return (

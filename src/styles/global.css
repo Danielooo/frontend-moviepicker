@@ -34,6 +34,8 @@ a {
   justify-content: center;
 
   min-height: 100vh;
+
+  padding: 3em;
 }
 
 .main-inner-container {
@@ -43,7 +45,6 @@ a {
   flex-direction: column;
   align-items: center;
 
-  margin: 3em;
 
   width: 100%
 }
@@ -98,7 +99,7 @@ a {
   justify-content: space-between;
 
   caret-color: white;
-  margin-bottom: 1em;
+  margin-top: 1em;
 }
 
 .section-input-field {
@@ -136,4 +137,31 @@ a {
 .regular-button:active {
   background-color: #99A7BF;
   transform: scale(0.95);
+}
+
+.regular-button:disabled {
+  background-color: #99A7BF;
+  color: lightgrey;
+}
+
+/*  ERRORS  */
+
+.error-message {
+  font-style: italic;
+  font-size: smaller;
+}
+
+/*  Tablets  */
+
+@media screen and (min-width: 768px) {
+  p {
+    font-size: 14px
+  }
+}
+
+
+@media screen and (min-width: 992px) {
+  p {
+    font-size: 16px;
+  }
 }

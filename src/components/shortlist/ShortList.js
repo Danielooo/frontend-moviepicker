@@ -8,7 +8,6 @@ function Shortlist({ shortlist, handleRemoveFromShortlist }) {
 
   function handleClick() {
     navigate('/wheel');
-    console.log('navigate to wheel invoked')
   }
 
   return (

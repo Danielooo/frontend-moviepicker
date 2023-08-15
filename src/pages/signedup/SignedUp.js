@@ -1,8 +1,8 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-import './About.css';
+import { Link } from "react-router-dom";
+import './SignedUp.css';
 
-function About() {
+function SignedUp() {
 
   return (
 
@@ -12,12 +12,11 @@ function About() {
           <section className='about-container section-outer-container'>
             <div className='section-inner-container'>
 
-              <h2 className='login-title'>About</h2>
+              <h2 className='login-title'>Sign up succesful!</h2>
 
-              <p>Movie Picker is a product of Movie Picker Limited<br />
-              When you want to watch a movie but don't know which one...<br />
+              <p>You have succefully signed up for Movie Picker<br />
+                Click <Link to={{ pathname: '/login' }}>here</Link> to log in<br />
               </p>
-              <b>Try Movie Picker!</b>
 
             </div>
           </section>
@@ -27,4 +26,4 @@ function About() {
   )
 }
 
-export default About;
+export default SignedUp;

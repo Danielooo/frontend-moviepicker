@@ -27,7 +27,7 @@ function MovieCard({movieKey, movie, handleAddToShortlist, isMovieInShortlist}) 
       <div className='movie-card-bottom'>
         <p className='movie-year'>{movie.release_date.substring(0, 4)}</p>
         <p className='movie-rating'>Rating: {movie.vote_average}</p>
-        <button className='movie-card-button regular-button'
+        <button className='regular-button'
           onClick={() => handleAddToShortlist(movie)}
           disabled={isMovieInShortlist(movie.id)}
         >
