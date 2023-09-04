@@ -130,6 +130,10 @@ function MovieSearch() {
     navigate('/wheel')
   }
 
+  function handleClearShortlist(e) {
+    e.preventDefault()
+    setShortlist([])
+  }
 
   // ===================
   // ===  SHORTLIST  ===
@@ -225,6 +229,7 @@ function MovieSearch() {
                 />
               </div>
               <Button text='Randomize' handleClick={handleClickRandomize} disabled={false}/>
+              <Button text='Clear Shortlist' handleClick={handleClearShortlist} disabled={false} />
             </div>
           </section>
 
