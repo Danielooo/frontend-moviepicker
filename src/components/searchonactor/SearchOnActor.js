@@ -8,7 +8,7 @@ function SearchOnActor({handleActorSubmit, actorName, setActorName, errorActor})
       <form className='section-form' onSubmit={handleActorSubmit}>
 
         <div className='section-input-line'>
-          <label htmlFor="actorNameInput">Actor Name:</label>
+          <label htmlFor='actorNameInput'>Actor Name:</label>
           <input
             className='section-input-field'
             type="text"
@@ -20,9 +20,9 @@ function SearchOnActor({handleActorSubmit, actorName, setActorName, errorActor})
         <button className='regular-button' type="submit">Search Actor
         </button>
       </form>
-      {errorActor && <p>Acteur fout gespeld of technische fout. Voer opnieuw in</p>}
+      {errorActor && <p className='error-message'>Actor is misspelled or not in database. Please check your entry. </p>}
     </>
-)
+  )
 }
 
 export default SearchOnActor;

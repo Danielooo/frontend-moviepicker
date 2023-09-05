@@ -85,14 +85,3 @@ nav {
   margin-right: 1em;
 }
 
-.logout-button {
-  display: flex;
-  justify-self: center;
-  border: none;
-  background-color: var(--dark-purple);
-  color: white;
-  border-radius: 2em;
-  padding: 1.5em;
-
-
-}

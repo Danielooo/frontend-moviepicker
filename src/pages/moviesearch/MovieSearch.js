@@ -40,8 +40,10 @@ function MovieSearch() {
   // Decade search
   const [errorDecade, toggleErrorDecade] = useState(false)
   const [selectedDecade, setSelectedDecade] = useState('2020s');
-  const decades = ['2020s', '2010s', '2000s', '1990s', '1980s', '1970s', '1960s',
-    '1950s', '1940s', '1930s', '1920s', '1910s', '1900s'];
+  const decades = [
+    '2020s', '2010s', '2000s', '1990s', '1980s', '1970s', '1960s',
+    '1950s', '1940s', '1930s', '1920s', '1910s', '1900s'
+  ];
 
   // Misc
   const [loading, toggleLoading] = useState(false);
@@ -128,6 +130,10 @@ function MovieSearch() {
     navigate('/wheel')
   }
 
+  function handleClearShortlist(e) {
+    e.preventDefault()
+    setShortlist([])
+  }
 
   // ===================
   // ===  SHORTLIST  ===
@@ -223,6 +229,7 @@ function MovieSearch() {
                 />
               </div>
               <Button text='Randomize' handleClick={handleClickRandomize} disabled={false}/>
+              <Button text='Clear Shortlist' handleClick={handleClearShortlist} disabled={false} />
             </div>
           </section>
 

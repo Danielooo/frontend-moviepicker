@@ -1,13 +1,13 @@
-import './WheelPage.css'
+import './Wheel.css'
 import WheelComponent from "react-wheel-of-prizes";
 import { useContext } from "react";
 import {ShortlistContext} from "../../context/ShortlistContext";
 import './../../App.css'
 import Button from "../../components/button/Button";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 
-function WheelPage() {
+function Wheel() {
   const navigate = useNavigate();
   const { shortlist } = useContext(ShortlistContext);
 
@@ -55,6 +55,7 @@ function WheelPage() {
         ) : (
           <>
             <h2>Random Movie</h2>
+            <h3>Go back to <Link to={{pathname: '/'}}>Movie Search</Link> to update your shortlist</h3>
             <h3>Hit the Spin button to get a movie chosen for you</h3>
             <p>pssst... If you don't like it. You can spin it again</p>
 
@@ -83,6 +84,6 @@ function WheelPage() {
   );
 }
 
-export default WheelPage;
+export default Wheel;
 
 

@@ -10,7 +10,7 @@ function isTokenValid(token) {
   if (expirationUnix >= nowInUnix) {
     return true;
   } else {
-    console.log('token not valid anymore')
+
     return false;
   }
 }

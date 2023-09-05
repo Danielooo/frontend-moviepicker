@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
-import { Link, Navigate } from 'react-router-dom';
-import AuthContextProvider, { AuthContext } from "../../context/AuthContext";
+import {Link} from 'react-router-dom';
+import AuthContextProvider, {AuthContext} from "../../context/AuthContext";
 import axios from 'axios';
 
 // TODO toon ook userid, info, role
@@ -8,8 +8,7 @@ import axios from 'axios';
 // TODO wachtwoord veranderen
 
 function Profile() {
-  const { isAuth, user } = useContext(AuthContext);
-  const [ profileData, setProfileData ] = useState({});
+  const {isAuth, user} = useContext(AuthContext);
 
   useEffect(() => {
     async function fetchProfileData() {
@@ -22,47 +21,47 @@ function Profile() {
             Authorization: `Bearer ${token}`,
           }
         })
-        setProfileData(response.data);
       } catch (e) {
         console.error(e)
       }
     }
+
     void fetchProfileData();
   }, [])
 
   return (
     <>
-      <div className='main-outer-container'>
-      <h1>Profile page</h1>
+      <main className='main-outer-container'>
+        <main className='main-inner-container'>
+          <section className='about-container section-outer-container'>
+            <div className='section-inner-container'>
+              <h1>Profile</h1>
 
-      {isAuth ?
-        <>
-          <section>
-            <h2>Welkom!</h2>
-            <p><strong>Gebruikersnaam:</strong> {user.username}</p>
-            <p><strong>Email:</strong> {user.email}</p>
+              {isAuth ?
+                <>
+                  <section>
+                    <p><strong>Username:</strong> {user.username}</p>
+                    <p><strong>Email:</strong> {user.email}</p>
+                  </section>
+
+
+                  <p>Go back to <Link to="/">Movie Search</Link></p>
+                </>
+                :
+                (
+                  <>
+                    <p>You're currently not logged in</p>
+                    <p>Click <Link to={{pathname: '/login'}}>here</Link> to go to the log in page</p>
+                  </>
+                )
+              }
+            </div>
           </section>
-
-          <section>
-            <h2>Strikt geheime profiel-content</h2>
-
-            {/*ZORGEN DAT PROFILEDATA TITLE EN CONTENT HIER WORDEN GETOOND*/}
-            {Object.keys(profileData).length > 0 &&
-              <>
-                <h3>{profileData.title}</h3>
-                <p>{profileData.content}</p>
-              </>
-            }
-
-          </section>
-          <p>Terug naar de <Link to="/">Homepagina</Link></p>
-        </>
-        :
-        <h2>Niet ingelogd</h2>
-      }
-      </div>
+        </main>
+      </main>
     </>
-  );
+  )
+    ;
 }
 
 export default Profile;

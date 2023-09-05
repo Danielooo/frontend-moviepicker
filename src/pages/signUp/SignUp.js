@@ -1,17 +1,20 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
-import {useForm} from "react-hook-form";
-import {useNavigate} from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import './SignUp.css'
 
 function SignUp() {
 
   const [error, toggleError] = useState(false);
+  const [ errorMessage, setErrorMessage ] = useState('')
   const [loading, toggleLoading] = useState(false);
   const navigate = useNavigate();
-  const {register, handleSubmit, formState: {errors}} = useForm();
+  const { register, handleSubmit, formState: {errors}} = useForm();
 
-  async function onFormSubmit({username, email, password}) {
+  async function onFormSubmit({username, email, password, role}) {
+
+
     toggleError(false);
     toggleLoading(true);
 
@@ -20,11 +23,21 @@ function SignUp() {
         'username': username,
         'email': email,
         'password': password,
+        'role': role,
       });
 
-      navigate('/signin')
+      navigate('/signedup')
+
     } catch (e) {
       console.error(e);
+
+      if (e.response.data.message) {
+        setErrorMessage(e.response.data.message)
+      } else {
+        setErrorMessage(
+          `An unknown error occurred. Please check your input and try again. Error code: ${e.response.status}`)
+      }
+
       toggleError(true);
     }
 
@@ -40,29 +53,36 @@ function SignUp() {
 
               <h1>Sign Up</h1>
 
-              {/* TODO: error handling > username moet minimaal 6 tekens zijn */}
               <form onSubmit={handleSubmit(onFormSubmit)}>
 
+                {/*  Username  */}
                 <div className='section-input-line'>
                   <label htmlFor="username-field">Username:</label>
-                    <input
-                      className='section-input-field'
-                      type="text"
-                      id="username-field"
-                      {...register('username', {
-                        required: {
-                          value: true,
-                          message: 'Dit veld is verplicht'
-                        },
-                      })}
-                    />
-                    {errors.username && <p>{errors.username.message}</p>}
+                  <input
+                    className='section-input-field'
+                    type="text"
+                    id="username-field"
+                    {...register('username', {
+                      required: {
+                        value: true,
+                        message: 'Username is required'
+                      },
+                      minLength: {
+                        value: 6,
+                        message: 'Username must contain at least 6 characters',
+                      },
+                      maxLength: {
+                        value: 15,
+                        message: 'Username must not exceed the maximum of 15 characters',
+                      },
+                    })}
+                  />
                 </div>
+                  {errors.username && <p className='error-message'>{errors.username.message}</p>}
 
-
-                {/* TODO: error handing > email moet een @ bevatten */}
+                {/*  Email  */}
                 <div className='section-input-line'>
-                <label htmlFor="email-field">Email:</label>
+                  <label htmlFor="email-field">Email:</label>
                   <input
                     className='section-input-field'
                     type="text"
@@ -70,57 +90,68 @@ function SignUp() {
                     {...register('email', {
                       required: {
                         value: true,
-                        message: 'Dit veld is verplicht'
+                        message: 'Email address is required'
                       },
+                      minLength: 6,
+                      message: 'Email address must contain at least 6 characters',
+                      validate: (value) => value.includes('@') || 'Email address must contain @',
                     })}
                   />
                 </div>
-                  {errors.email && <p>{errors.email.message}</p>}
+                {errors.email && <p className='error-message'>{errors.email.message}</p>}
 
-
-                {/* TODO: error handing > password moet minimaal 6 tekens zijn */}
+                {/*  Password  */}
                 <div className='section-input-line'>
-                <label htmlFor="password-field">Wachtwoord:</label>
+                  <label htmlFor="password-field">Password:</label>
                   <input
                     className='section-input-field'
-                    type="text"
+                    type="password"
                     id="password-field"
                     {...register('password', {
-                      required: true,
-                      // validate: (value) => value.includes('@', '!')
+                      required: {
+                        value: true,
+                        message: 'Password is required'
+                      },
+                      minLength: 6,
+                      message: 'Password must contain at least 6 characters',
+                      validate: (value) => value.includes('@', '!', '#') || 'Password must contain characters \'@\', \'!\', \'#\'',
                     })}
 
                   />
                 </div>
-                {errors.password && <p>{errors.password.message}</p>}
+                {errors.password && <p className='error-message'>{errors.password.message}</p>}
 
+                {/*/!*  Personal info  *!/*/}
+                {/*<div className='section-input-line'>*/}
+                {/*  <label htmlFor="info-field">Personal info:</label>*/}
+                {/*  <input*/}
+                {/*    className='section-input-field'*/}
+                {/*    type="text"*/}
+                {/*    id="info-field"*/}
+                {/*    {...register('info', {*/}
+
+                {/*    })}*/}
+                {/*  />*/}
+                {/*</div>*/}
+                {/*{errors.info && <p className='error-message'>{errors.info.message}</p>}*/}
+
+                {/*  Role  */}
                 <div className='section-input-line'>
-                <label htmlFor="info-field">Persoonlijke info:</label>
-                  <input
-                    className='section-input-field'
-                    type="text"
-                    id="info-field"
-                    {...register('info', {
-                      required: true,
-                    })}
-                  />
-                </div>
-                {errors.info && <p>{errors.info.message}</p>}
+                  <label htmlFor="role-field">Admin or User:</label>
 
-                {/* TODO dropdown menu met opties 'user' en 'admin' */}
-                <div className='section-input-line'>
-                <label htmlFor="role-field">Admin or User:</label>
-
-                  <input
+                  <select
                     className='section-input-field'
-                    type="text"
                     id="admin-field"
-                    {...register('admin', {
+                    {...register('role', {
                       required: true,
+                      message: 'This field is required'
                     })}
-                  />
+                  >
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                  </select>
                 </div>
-                {errors.role && <p>{errors.role.message}</p>}
+                {errors.role && <p className='error-message'>{errors.role.message}</p>}
 
                 <button
                   className='regular-button'
@@ -129,6 +160,7 @@ function SignUp() {
                 >
                   Sign Up
                 </button>
+                { errorMessage && <p className='error-message'>{ errorMessage }</p> }
 
               </form>
             </div>

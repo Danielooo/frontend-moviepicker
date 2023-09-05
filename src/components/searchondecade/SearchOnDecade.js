@@ -24,7 +24,7 @@ function SearchOnDecade({handleDecadeSubmit, selectedDecade, setSelectedDecade, 
           </div>
         <button className='regular-button' type='submit'>Search Decade</button>
       </form>
-      { errorDecade && <p>Fout bij het kiezen van een decennium. Probeer opnieuw</p> }
+      { errorDecade && <p className='error-message'>An error occurred. Please try again</p> }
     </div>
 
   )

@@ -13,7 +13,7 @@ function Randomizer() {
   const getRandomMovie = () => {
     const randomIndex = Math.floor(Math.random() * shortlist.length);
     setRandomMovie(shortlist[randomIndex]);
-    console.log('RandomMovie() invoked')
+
   };
 
   return (
