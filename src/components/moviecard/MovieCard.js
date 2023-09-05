@@ -21,7 +21,6 @@ function MovieCard({movieKey, movie, handleAddToShortlist, isMovieInShortlist}) 
 
         if (response.status === 200) {
           setPosterImage(<img className='movie-poster' src={posterUrl} alt='poster not found'/>)
-          console.log('response data when 200: ', response)
         } else {
           setPosterImage(<img className='movie-poster' src={posterNotFound}  alt='poster not found'/>)
           console.log('response data when else: ', response)
@@ -29,8 +28,6 @@ function MovieCard({movieKey, movie, handleAddToShortlist, isMovieInShortlist}) 
         }
       } catch (e) {
         setPosterImage(<img className='movie-poster' src={posterNotFound}  alt='poster not found'/>)
-        console.log('error when catch: ')
-        console.error(e)
       }
     }
 
