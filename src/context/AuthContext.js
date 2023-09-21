@@ -43,6 +43,7 @@ function AuthContextProvider({ children }) {
   }
 
   function logout() {
+    // TODO: test localstorage.removeItem('token') so shortlist won't be cleared
     localStorage.clear();
 
     setAuth({

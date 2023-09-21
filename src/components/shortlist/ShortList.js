@@ -1,35 +1,49 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './ShortList.css'
 import Button from './../button/Button';
 import { useNavigate } from 'react-router-dom';
 
-function Shortlist({ shortlist, handleRemoveFromShortlist }) {
-  const navigate = useNavigate();
+import {ShortlistContext} from "../../context/ShortlistContext";
 
-  function handleClick() {
-    navigate('/wheel');
-  }
-
-  return (
+function Shortlist({handleRemoveFromShortlist}) {
+    const { shortlist, clearShortlistAndLocalStorageShortlist } = useContext(ShortlistContext);
+    
+    const navigate = useNavigate();
+    
+    function handleClick() {
+        navigate('/wheel');
+    }
+    
+    function handleClickRandomize(e) {
+        e.preventDefault()
+        navigate('/wheel')
+    }
+    
+    
+    
+    return (
     <>
-      <div className='shortlist-movies'>
-        { shortlist.length > 0 ? (
-          shortlist.map((movie) => (
-            <div key={movie.id} className='shortlist-movie' >
-              <button onClick={() => handleRemoveFromShortlist(movie)}>
-                -
-              </button>
-              <p>
-                {movie.title}
-              </p>
+        <section className='shortlist-movies'>
+            {shortlist.length > 0 ? (
+            shortlist.map((movie) => (
+            <div key={movie.id} className='shortlist-movie'>
+                <button onClick={() => handleRemoveFromShortlist(movie)}>
+                    -
+                </button>
+                <p>
+                    {movie.title}
+                </p>
             </div>
-          )))
-        :
-          <i className='shortlist-empty-text'> - Empty - </i>
-        }
-      </div>
+            )))
+            :
+            <i className='shortlist-empty-text'> - Empty - </i>
+            }
+        </section>
+        <Button text="Randomize" handleClick={handleClickRandomize} disabled={false}/>
+        <Button text="Clear Shortlist" handleClick={clearShortlistAndLocalStorageShortlist} disabled={false} />
+        
     </>
-  );
+    );
 }
 
 export default Shortlist;
