@@ -17,7 +17,7 @@
 /*  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;*/
 /*}*/
 
-.regular-button:active {
-  background-color: #99A7BF;
-  transform: scale(0.95);
-}
+/*.regular-button:active {*/
+/*  background-color: #99A7BF;*/
+/*  transform: scale(0.95);*/
+/*}*/
