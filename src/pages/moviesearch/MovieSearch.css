@@ -1,22 +1,23 @@
+/*/*TODO: deze css wegcommenten en alleen met global.css proberen op te lossen*/
+
+
 .sections-container {
-  /*border: 1px solid red;*/
+  border: 1px solid red;
 
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  width: 100%;
-  margin-bottom: 3em;
+  max-width: 1400px;
+  flex-grow: 1;
+
+  justify-content: space-between;
+
+  /*column-gap: 30px;*/
 }
 
-.sections-container:last-child {
-  margin-bottom: 0;
-}
+
 
 /*Movie search*/
 
-.movie-search {
-   height: max-content;
-}
 
 .title-and-infobutton-line {
   display: flex;
@@ -27,13 +28,16 @@
 /*Shortlist*/
 
 .shortlist-outer-container {
-  /*border: 3px solid green;*/
-
-  width: 30%;
+  border: 3px solid green;
+  display: flex;
+  width: 464px;
+  flex-shrink: 0;
 }
 
 .shortlist-movies-container {
   /*border: 1px solid var(--med-yellow);*/
+  padding: 10px;
+
   background-color: var(--med-blue);
 
   border-radius: 0.5em;
@@ -48,8 +52,8 @@
 
 /*Movie Selection*/
 .movie-selection {
-  display: flex;
-  width: 100%;
+  margin-top: 30px;
+  text-align: center
 }
 
 
