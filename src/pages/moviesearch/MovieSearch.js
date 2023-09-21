@@ -32,7 +32,7 @@ function MovieSearch() {
     
     // Genre search
     const [genreAndIdListOfApi, setGenreAndIdListOfApi] = useState([])
-    const [genreChoice, setGenreChoice] = useState('Action');
+    const [genreChoice, setGenreChoice] = useState('');
     const [genreChoiceId, setGenreChoiceId] = useState(0)
     const [errorGenreList, toggleErrorGenreList] = useState(false)
     const [errorGenre, toggleErrorGenre] = useState(false)
