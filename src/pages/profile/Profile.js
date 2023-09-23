@@ -32,33 +32,6 @@ function Profile() {
   }, [])
   
   return (
-<<<<<<< HEAD
-    <>
-     <section className='section-container profile-set-width'>
-              <h1>Profile</h1>
-
-              {isAuth ?
-                <>
-                  <section>
-                    <p><strong>Username:</strong> {user.username}</p>
-                    <p><strong>Email:</strong> {user.email}</p>
-                  </section>
-
-
-                  <p>Go to <Link to="/">Movie Search</Link></p>
-                </>
-                :
-                (
-                  <>
-                    <p>You're currently not logged in</p>
-                    <p>Click <Link to={{pathname: '/login'}}>here</Link> to go to the log in page</p>
-                  </>
-                )
-              }
-            
-</section>
-    </>
-=======
   <>
     <section className='section-container profile-set-width'>
       <h1>Profile</h1>
@@ -83,7 +56,6 @@ function Profile() {
       }
     </section>
   </>
->>>>>>> 83d7959 (fixed searchongenre bug)
   )
   ;
 }
