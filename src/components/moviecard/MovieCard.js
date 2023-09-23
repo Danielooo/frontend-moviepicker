@@ -4,6 +4,7 @@ import './MovieCard.css';
 import './../popup/PopUp.css';
 import './../infobutton/InfoButton.css';
 import posterNotFound from './../../assets/images/404-poster-not-found.svg'
+import textEllipsis from "../../helpers/textEllipsis";
 
 function MovieCard({movieKey, movie, handleAddToShortlist, isMovieInShortlist}) {
 
@@ -33,6 +34,7 @@ function MovieCard({movieKey, movie, handleAddToShortlist, isMovieInShortlist}) 
 
   }, [posterUrl, posterNotFound]);
 
+  
 
   return (
     <div key={movieKey} className='movie-card'>
@@ -47,7 +49,7 @@ function MovieCard({movieKey, movie, handleAddToShortlist, isMovieInShortlist}) 
           </div>
         </div>
 
-        <p className='movie-title'>{movie.title}</p>
+        <p className='movie-title'>{textEllipsis(movie.title, 35) }</p>
       </div>
 
       <div className='movie-card-bottom'>

@@ -32,6 +32,7 @@ function ShortlistContextProvider({children}) {
     }, [])
     
     // Every time shortlist state is updated >> localStorageShortlist is updated as well
+    // if (afterMount) prevents infinite loop on shortlist on mount
     useEffect(() => {
         if (afterMount) {
             shortlistToLocalStorageShortlist()
@@ -50,7 +51,7 @@ function ShortlistContextProvider({children}) {
     }
     
     function localStorageShortlistToEmptyArray() {
-        localStorage.setItem('localStorageShortlist', [])
+        localStorage.setItem('localStorageShortlist', JSON.stringify([]))
     }
     
     function clearShortlistAndLocalStorageShortlist() {

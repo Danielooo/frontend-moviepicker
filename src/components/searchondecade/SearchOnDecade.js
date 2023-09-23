@@ -4,11 +4,10 @@ import './../../App.css';
 function SearchOnDecade({handleDecadeSubmit, selectedDecade, setSelectedDecade, decades, errorDecade}) {
 
   return (
-
-    <div>
+    <>
       <form className='section-form' onSubmit={handleDecadeSubmit}>
         <div className='section-input-line'>
-          <label htmlFor='DecadeInput'>Decade: </label>
+          <label className='decadeInput'>Decade: </label>
           <select
             className='section-input-field'
             id='DecadeInput'
@@ -25,7 +24,7 @@ function SearchOnDecade({handleDecadeSubmit, selectedDecade, setSelectedDecade, 
         <button className='regular-button' type='submit'>Search Decade</button>
       </form>
       { errorDecade && <p className='error-message'>An error occurred. Please try again</p> }
-    </div>
+    </>
 
   )
 }

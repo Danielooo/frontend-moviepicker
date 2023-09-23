@@ -5,26 +5,20 @@ import './About.css';
 function About() {
 
   return (
-
     <>
-      <main className='main-outer-container'>
-        <main className='main-inner-container'>
-          <section className='about-container section-outer-container'>
-            <div className='section-inner-container'>
+        <div className='section-container'>
 
-              <h2 className='login-title'>About</h2>
+          <h1 className='login-title'>About</h1>
 
-              <p>Movie Picker is a product of Movie Picker Limited<br />
-              When you want to watch a movie but don't know which one...<br />
-              </p>
-              <b>Try Movie Picker!</b>
+          <p>Movie Picker is a product of Movie Picker Limited<br />
+          When you want to watch a movie but don't know which one...<br />
+          </p>
+          <a className='link-to-moviesearch' href='/'>Try Movie Picker!</a>
 
-            </div>
-          </section>
-        </main>
-      </main>
+        </div>
     </>
   )
 }
 
 export default About;
+

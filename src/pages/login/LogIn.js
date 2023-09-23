@@ -4,10 +4,10 @@ import AuthContextProvider, {AuthContext} from "../../context/AuthContext";
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import axios from "axios";
-import './../../App.css';
 
-// import './login.css';
+import Button from "../../components/button/Button"
 
+import './LogIn.css';
 
 function LogIn() {
   // const [ email, setEmail ] = useState('');
@@ -39,18 +39,15 @@ function LogIn() {
 
   return (
     <>
-      <main className='main-outer-container'>
-        <main className='main-inner-container'>
-          <section className='section-outer-container'>
-            <div className='section-inner-container'>
+      <div className='section-container login-set-width'>
 
-              <h1 className='login-title'>LOG IN</h1>
+              <h1 className='login-title'>Log In</h1>
 
 
               <form onSubmit={handleSubmit(handleFormSubmit)}>
 
                 {/*  Username  */}
-                <div className='section-input-line'>
+                <div className='login-section-input-line'>
                   <label htmlFor="username-field" className='login-label'>
                     Username:
                   </label>
@@ -76,9 +73,12 @@ function LogIn() {
                   />
                 </div>
 
-                <button type='submit' className='regular-button'>
-                  Log in
-                </button>
+                <Button
+                  type='submit'
+                  className='regular-button login-button'
+                  text='Log In'
+                />
+             
 
                 {errors && <p>{errors.response}</p>}
               </form>
@@ -86,10 +86,7 @@ function LogIn() {
                 Log in failed. Please check username an password an try again  (error code: {errorMessage})</p> }
 
               <p className='signup-line'>No account yet? <Link to="/signup">Sign up here</Link></p>
-            </div>
-          </section>
-        </main>
-      </main>
+      </div>
     </>
   )
     ;

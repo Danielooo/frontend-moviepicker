@@ -1,21 +1,58 @@
-/*.shortlist-movies {*/
-/*  !*background-color: var(--med-blue);*!*/
+.shortlist-counter {
+    margin: 0.5em;
+}
 
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  align-items: flex-start;*/
-/*}*/
+.shortlist-movies {
+  background-color: var(--med-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
 
-/*.shortlist-movie {*/
-/*  !*border: 1px solid var(--med-yellow);*!*/
+  border-radius: 0.5em;
 
-/*  display: flex;*/
-/*  justify-content: flex-start;*/
-/*  align-items: center;*/
-/*}*/
+  height: 310px;
+  width: 100%;
+  overflow: auto;
 
-/*.shortlist-empty-text {*/
-/*  display: flex;*/
-/*  align-self: center;*/
-/*  padding: 1em;*/
-/*}*/
+}
+
+.shortlist-movie {
+  /*border: 1px solid var(--med-yellow);*/
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.shortlist-empty-text {
+  display: flex;
+  align-self: center;
+  padding: 1em;
+}
+
+.button-remove-movie {
+  background-color: #576A82;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px hsla(210, 24%, 48%, 0.4);
+
+}
+
+.button-remove-movie:hover {
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  transform: scale(1.08);
+}
+
+.shortlist-randomize-and-clear-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 20px;
+  margin-top: 20px;
+}
+
