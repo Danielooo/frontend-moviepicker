@@ -26,7 +26,7 @@ function NavBar() {
 
         <div className='nav-links'>
           <NavLink className='nav-link' to='/'>
-            Home
+            Movie Search
           </NavLink>
 
           <NavLink className='nav-link' to='/about'>

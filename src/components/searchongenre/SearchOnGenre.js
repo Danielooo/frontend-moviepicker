@@ -15,7 +15,6 @@ function SearchOnGenre(
               <label htmlFor="genreInput">Genre:</label>
               <select
                 className='section-input-field'
-                // placeholder='Select a genre'
                 id='genreInput'
                 value={ genreChoice }
                 onChange={(e) => setGenreChoice(e.target.value)}
