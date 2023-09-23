@@ -8,9 +8,10 @@ function SearchOnActor({handleActorSubmit, actorName, setActorName, errorActor})
       <form className='section-form' onSubmit={handleActorSubmit}>
 
         <div className='section-input-line'>
-          <label htmlFor='actorNameInput'>Actor Name:</label>
+          <label htmlFor='actorNameInput'>Actor/Actress:</label>
           <input
             className='section-input-field'
+            placeholder="name of actor/actress"
             type="text"
             id="actorNameInput"
             value={actorName}

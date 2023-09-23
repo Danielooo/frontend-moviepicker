@@ -1,7 +1,7 @@
 import React from 'react';
 import './Button.css';
 import { useNavigate } from 'react-router-dom';
-import logIn from "../../pages/login/logIn";
+import logIn from "../../pages/login/LogIn";
 
 function Button({text, handleClick, disabled}) {
   // const navigate = useNavigate();
