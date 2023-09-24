@@ -7,12 +7,10 @@ import avatar from '../../assets/icons/icon-avatar.svg';
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import './NavBar.css';
-import axios from "axios";
 
 
 function NavBar() {
-  const { isAuth, user, login, logout } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const { isAuth, user, logout } = useContext(AuthContext);
 
 
   return (
