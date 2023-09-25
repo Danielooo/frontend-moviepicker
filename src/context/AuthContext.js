@@ -28,8 +28,11 @@ function AuthContextProvider({ children }) {
     } else {
       setAuth({
         ...auth,
+        isAuth: false,
+        user: null,
         status: 'done'
       })
+      // navigate('/')
     }
   }, []);
 
@@ -44,7 +47,7 @@ function AuthContextProvider({ children }) {
 
   function logout() {
     // TODO: test localstorage.removeItem('token') so shortlist won't be cleared
-    localStorage.clear();
+    localStorage.removeItem('token');
 
     setAuth({
       ...auth,
@@ -52,7 +55,6 @@ function AuthContextProvider({ children }) {
       user: null,
       status: 'done',
     });
-    navigate('/');
   }
 
 

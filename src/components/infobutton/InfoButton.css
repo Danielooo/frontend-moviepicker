@@ -1,16 +1,16 @@
 
 
-.movie-search-explain-container {
+.infobutton-container {
   vertical-align: super;
   border-radius: 50%;
   font-style: italic;
   font-size: larger;
+
   position: relative;
-  display: inline-block;
-  cursor: pointer;
 }
 
-.circle {
+.infobutton-circle {
+  cursor: pointer;
   vertical-align: top;
   display: inline-flex;
   justify-content: center;
@@ -21,13 +21,13 @@
   color: white;
   border-radius: 50%;
   font-weight: bold;
+  font-style: italic;
   font-size: medium;
-  /*margin-left: 0.5em;*/
   box-shadow: 3px 3px 5px hsl(327, 50%, 30%);
   transform: translateY(45%);
 }
 
-.movie-search-explain {
+.explain-popup {
   visibility: hidden;
   background-color: var(--med-yellow);
   color: black;
@@ -43,13 +43,10 @@
 
   width: 400px;
   font-size: smaller;
-
 }
 
-.movie-search-explain-container:hover .movie-search-explain {
-  border: 1px solid red;
-
-
+.infobutton-container:hover .explain-popup {
+  cursor: pointer;
   visibility: visible;
   opacity: 1;
 }

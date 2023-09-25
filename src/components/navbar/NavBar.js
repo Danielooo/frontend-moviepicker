@@ -30,35 +30,33 @@ function NavBar() {
           <NavLink className='nav-link' to='/about'>
             About
           </NavLink>
-
-          <NavLink className='nav-link' to='/login'>
-            Log in
-          </NavLink>
+          
+          
+          {isAuth ?
+            <NavLink className='nav-link' to='/logout'>
+              Log out
+            </NavLink>
+            :
+            <NavLink className='nav-link' to='/login'>
+              Log in
+            </NavLink>
+          }
+          
 
           <NavLink className='nav-link' to='/signup'>
             Sign up
           </NavLink>
 
-          <Link className='profile-container' to={'/profile'}>
+          <NavLink className='profile-container welcome-user' to={'/profile'}>
             <img className='profile-avatar' src={avatar} alt='camera-icon' />
-          </Link>
-
-          {/* Conditionally rendered when the user is logged in */}
-          { isAuth &&
+            { isAuth &&
             <>
-              <p>Welcome {user.username }!</p>
-              <div className='logout-container'>
-                <button
-                  className='regular-button'
-                  type="button"
-                  onClick={logout}
-                >
-                  Log out
-                </button>
-              </div>
+              <p className='welcome-user'>Welcome {user.username }!</p>
             </>
-
-          }
+            
+            }
+          </NavLink>
+          
         </div>
       </nav>
     </>
