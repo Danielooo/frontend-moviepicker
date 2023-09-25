@@ -6,7 +6,7 @@ import posterNotFound from './../../assets/images/404-poster-not-found.svg'
 import textEllipsis from "../../helpers/TextEllipsis";
 
 
-function MovieCard({movieKey, movie, handleAddToShortlist, isMovieInShortlist}) {
+function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
 
   const posterUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
 
@@ -22,22 +22,20 @@ function MovieCard({movieKey, movie, handleAddToShortlist, isMovieInShortlist}) 
           setPosterImage(<img className='movie-poster' src={posterUrl} alt='poster not found'/>)
         } else {
           setPosterImage(<img className='movie-poster' src={posterNotFound} alt='poster not found'/>)
-          console.log('response data when else: ', response)
-
         }
       } catch (e) {
         setPosterImage(<img className='movie-poster' src={posterNotFound} alt='poster not found'/>)
+        
       }
     }
 
     void checkPosterUrl()
 
   }, [posterUrl, posterNotFound]);
-
   
 
   return (
-    <div key={movieKey} className='movie-card'>
+    <div className='movie-card'>
       <div className='movie-card-top'>
       
         <div className='movie-poster-container'>
