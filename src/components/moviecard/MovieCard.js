@@ -1,12 +1,27 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from "axios";
 import './MovieCard.css';
 import './../popup/PopUp.css';
 import posterNotFound from './../../assets/images/404-poster-not-found.svg'
+import heartStraight from "../../assets/icons/favorites/heart-straight.svg";
+import heartStraightFilled from "../../assets/icons/favorites/heart-straight-fill.svg";
 // import textEllipsis from "../../helpers/TextEllipsis";
+
+// import context
+import {ShortlistContext} from '../../context/ShortlistContext';
+import {FavoritesContext} from '../../context/FavoritesContext';
+
+// TODO: import shortlist context
+// TODO: import favorites context
+
+// TODO: Add shortlist and favorites icon to MovieCard
 
 
 function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
+  
+  const {shortlist, setShortlist} = useContext(ShortlistContext);
+  const {favorites, setFavorites} = useContext(FavoritesContext);
+  
 
   const posterUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
 
@@ -53,6 +68,9 @@ function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
       <div className='movie-card-bottom'>
         <p className='movie-year'>{movie.release_date.substring(0, 4)}</p>
         <p className='movie-rating'>Rating: {movie.vote_average}</p>
+        <img src={heartStraight} alt='heart straight icon' />
+        <img src={heartStraightFilled} alt='heart straight filled icon' />
+        
         <button className='regular-button'
                 onClick={() => handleAddToShortlist(movie)}
                 disabled={isMovieInShortlist(movie.id)}
