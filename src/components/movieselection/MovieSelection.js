@@ -7,7 +7,8 @@ function MovieSelection({loading, movies, handleAddToShortlist, isMovieInShortli
   // const [ keyMovieSelection, setKeyMovieSelection ] = useState(0)
 
   
-
+  
+  
   return (
         <div className='movie-cards'>
           { loading === true && <h3>Loading...</h3>}
