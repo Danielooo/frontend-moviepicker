@@ -1,28 +1,27 @@
-/*.movie-poster-container {*/
-/*  position: relative;*/
-/*  display: inline-block;*/
-/*}*/
+.movie-poster-container {
+  position: relative;
+}
 
-/*.popup-container {*/
-/*  visibility: hidden;*/
-/*  background-color: var(--med-yellow);*/
-/*  color: black;*/
-/*  text-align: center;*/
-/*  padding: 10px;*/
-/*  border-radius: 5px;*/
-/*  position: absolute;*/
-/*  z-index: 1;*/
-/*  left: 50%;*/
-/*  transform: translateX(-50%);*/
-/*  opacity: 0;*/
-/*  transition: opacity 0.2s;*/
+.popup-container {
+  visibility: hidden;
+  background-color: var(--med-yellow);
+  color: black;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.2s;
 
-/*  width: 200px;*/
-/*  height: auto;*/
-/*  font-size: smaller;*/
-/*}*/
+  width: 200px;
+  height: auto;
+  font-size: smaller;
+}
 
-/*.movie-poster-container:hover .popup-container {*/
-/*  visibility: visible;*/
-/*  opacity: 1;*/
-/*}*/
+.movie-poster-container:hover .popup-container {
+  visibility: visible;
+  opacity: 1;
+}

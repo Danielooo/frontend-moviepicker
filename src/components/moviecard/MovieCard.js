@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import './MovieCard.css';
 import './../popup/PopUp.css';
-import './../infobutton/InfoButton.css';
 import posterNotFound from './../../assets/images/404-poster-not-found.svg'
+import textEllipsis from "../../helpers/TextEllipsis";
+
 
 function MovieCard({movieKey, movie, handleAddToShortlist, isMovieInShortlist}) {
 
@@ -33,11 +34,12 @@ function MovieCard({movieKey, movie, handleAddToShortlist, isMovieInShortlist}) 
 
   }, [posterUrl, posterNotFound]);
 
+  
 
   return (
     <div key={movieKey} className='movie-card'>
       <div className='movie-card-top'>
-
+      
         <div className='movie-poster-container'>
           {posterImage}
           <div className='popup-container'>
@@ -46,10 +48,10 @@ function MovieCard({movieKey, movie, handleAddToShortlist, isMovieInShortlist}) 
             </div>
           </div>
         </div>
-
-        <p className='movie-title'>{movie.title}</p>
+      
+        <p className='movie-title'>{textEllipsis(movie.title, 35) }</p>
       </div>
-
+      
       <div className='movie-card-bottom'>
         <p className='movie-year'>{movie.release_date.substring(0, 4)}</p>
         <p className='movie-rating'>Rating: {movie.vote_average}</p>

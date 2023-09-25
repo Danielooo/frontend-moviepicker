@@ -15,7 +15,6 @@ function ShortlistContextProvider({children}) {
                 const arrayAsString = localStorage.getItem('localStorageShortlist')
                 const parsedShortlist = JSON.parse(arrayAsString);
                 
-                console.log('parsedShortlist : ', parsedShortlist)
                 setShortlist(parsedShortlist)
                 setAfterMount(true);
                 
@@ -23,7 +22,6 @@ function ShortlistContextProvider({children}) {
                 const emptyArray = [];
                 localStorage.setItem('localStorageShortlist', JSON.stringify(emptyArray))
                 setShortlist(emptyArray)
-                console.log('localStorageShortlist: ', shortlist)
             }
         } catch (e) {
             console.error('error retrieving shortlist from localStorage: ', e);
@@ -56,7 +54,6 @@ function ShortlistContextProvider({children}) {
     function clearShortlistAndLocalStorageShortlist() {
         setShortlist([])
         localStorageShortlistToEmptyArray()
-        console.log('clear shortlist invoked')
     }
     
     
