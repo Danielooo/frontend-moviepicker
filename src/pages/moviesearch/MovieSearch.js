@@ -18,6 +18,8 @@ import MovieSelection from "../../components/movieselection/MovieSelection";
 import InfoButton from "../../components/infobutton/InfoButton";
 import SearchOnTitle from "../../components/searchontitle/SearchOnTitle";
 
+
+
 // misc imports
 import {ShortlistContext} from "../../context/ShortlistContext";
 
@@ -139,17 +141,6 @@ function MovieSearch() {
         e.preventDefault()
         void getMoviesByTitle(toggleErrorTitle, toggleLoading, setMovies, options, title)
     }
-    
-    // TODO: delete if shortlist functions work without
-    // function handleClickRandomize(e) {
-    //     e.preventDefault()
-    //     navigate('/wheel')
-    // }
-    //
-    // function handleClearShortlist(e) {
-    //     e.preventDefault()
-    //     setShortlist([])
-    // }
     
     // ===================
     // ===  SHORTLIST  ===
