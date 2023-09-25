@@ -28,6 +28,9 @@ function MovieSearch() {
     
     // Actor search
     const [actorName, setActorName] = useState('');
+
+    const [actorName, setActorName] = useState('Meryl Streep');
+
     const [actorId, setActorId] = useState(0)
     const [errorActor, toggleErrorActor] = useState(false)
     
@@ -151,6 +154,16 @@ function MovieSearch() {
     //     e.preventDefault()
     //     setShortlist([])
     // }
+  
+    function handleClickRandomize(e) {
+        e.preventDefault()
+        navigate('/wheel')
+    }
+    
+    function handleClearShortlist(e) {
+        e.preventDefault()
+        setShortlist([])
+    }
     
     // ===================
     // ===  SHORTLIST  ===
@@ -192,7 +205,7 @@ function MovieSearch() {
     
     
     return (
-    
+  
     <>
         <div className='max-width-container'>
             <div className="sections-container">
@@ -202,7 +215,7 @@ function MovieSearch() {
                 <section className='section-container section-set-width'>
                     <div className='title-and-infobutton-line'>
                         <h1 className='section-title' id='movie-search' >Movie Search</h1>
-                        
+                    
                         <InfoButton
                         text={`You can search on Actor, Genre and Decade.\nCombining search queries is not possible.\nThe results in Movie Selection are the 20 best rated movies that have a minimum of 200 votes`}
                         />
@@ -213,6 +226,7 @@ function MovieSearch() {
                         actorName={actorName}
                         setActorName={setActorName}
                         errorActor={errorActor}
+
                     />
                     
                     
@@ -248,8 +262,7 @@ function MovieSearch() {
                     
                 </section>
                 
-                
-                
+
                 {/*Shortlist*/}
                 
                 <section className='section-container section-set-width'>
@@ -260,6 +273,7 @@ function MovieSearch() {
             
             
             {/* end sections-container */}
+
             
             {/* Movie selection */}
             
@@ -272,6 +286,7 @@ function MovieSearch() {
                         handleAddToShortlist={handleAddToShortlist}
                         isMovieInShortlist={isMovieInShortlist}
                     />
+
                 </div>
             </section>
         </div>

@@ -6,9 +6,11 @@ import posterNotFound from './../../assets/images/404-poster-not-found.svg'
 import textEllipsis from "../../helpers/TextEllipsis";
 
 
+
 function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
 
   const posterUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+
 
   const [posterImage, setPosterImage] = useState(null);
 
@@ -26,6 +28,10 @@ function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
       } catch (e) {
         setPosterImage(<img className='movie-poster' src={posterNotFound} alt='poster not found'/>)
         
+
+        }
+      } catch (e) {
+        setPosterImage(<img className='movie-poster' src={posterNotFound} alt='poster not found'/>)
       }
     }
 
@@ -46,7 +52,7 @@ function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
             </div>
           </div>
         </div>
-      
+
         <p className='movie-title'>{textEllipsis(movie.title, 35) }</p>
       </div>
       

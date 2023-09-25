@@ -10,12 +10,17 @@ import Wheel from './pages/wheel/Wheel';
 import Footer from './components/footer/Footer';
 import SignedUp from "./pages/signedup/SignedUp";
 
+
 import { Routes, Route } from 'react-router-dom';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import PageNotFound from "./pages/pagenotfound/PageNotFound";
 
 
 
 function App() {
+
+    const navigate = useNavigate();
+
     
     return (
     <>

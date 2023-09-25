@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import {ShortlistContext} from "../../context/ShortlistContext";
 import textEllipsis from "../../helpers/TextEllipsis";
 
+
 function Shortlist({handleRemoveFromShortlist}) {
     const { shortlist, clearShortlistAndLocalStorageShortlist } = useContext(ShortlistContext);
     

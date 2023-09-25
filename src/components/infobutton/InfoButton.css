@@ -1,12 +1,16 @@
 
 
 .infobutton-container {
+  vertical-align: super;
+  border-radius: 50%;
+  font-style: italic;
+  font-size: larger;
+
   position: relative;
 }
 
 .infobutton-circle {
   cursor: pointer;
-
   vertical-align: top;
   display: inline-flex;
   justify-content: center;
@@ -18,6 +22,7 @@
   border-radius: 50%;
   font-weight: bold;
   font-style: italic;
+  font-size: medium;
   box-shadow: 3px 3px 5px hsl(327, 50%, 30%);
   transform: translateY(45%);
 }
