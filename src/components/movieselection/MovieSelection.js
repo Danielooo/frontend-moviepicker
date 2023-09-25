@@ -12,8 +12,7 @@ function MovieSelection({loading, movies, handleAddToShortlist, isMovieInShortli
           { movies.length > 0 ?   movies.map((movie) => (
 
             <MovieCard
-              movieKey={movie.title}
-              id={movie.id}
+              key={movie.id}
               movie={movie}
               handleAddToShortlist={handleAddToShortlist}
               isMovieInShortlist={isMovieInShortlist}
