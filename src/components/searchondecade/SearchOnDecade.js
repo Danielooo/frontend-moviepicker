@@ -1,5 +1,4 @@
 import React from 'react';
-import './../../App.css';
 
 function SearchOnDecade({handleDecadeSubmit, selectedDecade, setSelectedDecade, decades, errorDecade}) {
 

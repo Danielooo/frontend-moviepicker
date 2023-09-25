@@ -1,4 +1,3 @@
-import './App.css';
 import NavBar from './components/navbar/NavBar';
 import MovieSearch from './pages/moviesearch/MovieSearch';
 import About from './pages/about/About';

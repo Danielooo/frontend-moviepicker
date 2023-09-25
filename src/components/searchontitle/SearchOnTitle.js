@@ -1,5 +1,4 @@
 import React from 'react';
-import './../../App.css';
 
 function SearchOnTitle({handleTitleSubmit, title, setTitle, errorTitle}) {
 	

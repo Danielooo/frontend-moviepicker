@@ -1,5 +1,4 @@
 import React from 'react';
-import './../../App.css';
 
 function SearchOnGenre(
   {genreAndIdListOfApi, errorGenreList, errorGenre, handleGenreSubmit, genreChoice, setGenreChoice})

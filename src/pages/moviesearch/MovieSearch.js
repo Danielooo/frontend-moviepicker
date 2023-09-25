@@ -2,7 +2,6 @@ import React, {useState, useEffect, useContext} from 'react';
 import {useNavigate} from "react-router-dom";
 
 import './MovieSearch.css';
-import './../../App.css';
 
 // helper imports
 import {getActorIdByName, getMoviesByActorId} from "../../helpers/actorsearch/ActorSearch";
