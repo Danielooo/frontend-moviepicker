@@ -7,7 +7,6 @@ function Footer() {
   return (
     <footer className='footer'>
       <p>&copy; {currentYear} Movie Picker Limited. All Rights Reserved</p>
-      {}
     </footer>
   )
 }

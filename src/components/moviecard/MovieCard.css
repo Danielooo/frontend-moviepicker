@@ -13,10 +13,6 @@
 
 .movie-card p {
   margin-bottom: 0.5em;
-  /*white-space: nowrap;*/
-  overflow: hidden;
-  text-overflow: ellipsis;
-
 }
 
 /*movie card poster and title*/

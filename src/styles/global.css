@@ -83,7 +83,7 @@ a {
 }
 
 .section-container {
-  border: 2px solid var(--med-yellow);
+  /*border: 2px solid var(--med-yellow);*/
   background-color: var(--dark-purple);
 
   display: flex;

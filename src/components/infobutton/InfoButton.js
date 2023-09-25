@@ -1,7 +1,7 @@
 import React from 'react';
 import './InfoButton.css'
 
-function InfoButton({text}) {
+function InfoButton({text, id}) {
 
   const sentences = text.split('\n').map((sentence, index) => (
     <p key={index}>{sentence}</p>
@@ -10,12 +10,12 @@ function InfoButton({text}) {
 
   return (
     <>
-      <div className="movie-search-explain-container">
-        <span className='circle'>i</span>
-        <div className="movie-search-explain">
-          {sentences}
+        <div className='infobutton-container'>
+            <span className='infobutton-circle'>i</span>
+            <div className="explain-popup">
+              {sentences}
+            </div>
         </div>
-      </div>
     </>
   )
 }

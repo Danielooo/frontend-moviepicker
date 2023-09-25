@@ -50,29 +50,11 @@ nav {
   justify-content: flex-end;
   align-items: center;
   margin-right: 2em;
+  column-gap: 30px;
 }
 
 .nav-links > .nav-link {
   display: flex;
-  margin-left: 2em;
-  margin-right: 2em;
-}
-
-/* PROFILE */
-.profile-container {
-  /*border: 1px solid var(--med-yellow);*/
-
-  justify-content: stretch;
-  display: flex;
-  align-items: center;
-  margin-left: 2em;
-}
-
-.profile-avatar {
-  display: flex;
-  height: 2em;
-  width: 2em;
-  margin-right: 0.5em;
 }
 
 /* LOGOUT */
@@ -85,3 +67,23 @@ nav {
   margin-right: 1em;
 }
 
+/* PROFILE */
+.profile-container {
+  /*border: 1px solid var(--med-yellow);*/
+
+  /*justify-content: stretch;*/
+  display: flex;
+  align-items: center;
+  margin-left: 2em;
+}
+
+.profile-avatar {
+  height: 2em;
+  width: 2em;
+  margin-right: 1em;
+}
+
+.welcome-user {
+  text-decoration: none;
+  font-weight: bold;
+}

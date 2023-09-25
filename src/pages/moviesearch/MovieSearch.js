@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {useNavigate, NavLink} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import './MovieSearch.css';
 import './../../App.css';
@@ -7,6 +7,8 @@ import './../../App.css';
 // helper imports
 import {getActorIdByName, getMoviesByActorId} from "../../helpers/actorsearch/ActorSearch";
 import {getGenresAndIdsOfApi, getGenreIdByInput, getMoviesByGenreId} from "../../helpers/genresearch/GenreSearch";
+import {getMoviesByDecade} from "../../helpers/decadesearch/DecadeSearch";
+import {getMoviesByTitle} from "../../helpers/titlesearch/TitleSearch";
 
 // component imports
 import ShortList from "../../components/shortlist/ShortList";
@@ -15,18 +17,17 @@ import SearchOnGenre from "../../components/searchongenre/SearchOnGenre";
 import SearchOnDecade from "../../components/searchondecade/SearchOnDecade";
 import MovieSelection from "../../components/movieselection/MovieSelection";
 import InfoButton from "../../components/infobutton/InfoButton";
+import SearchOnTitle from "../../components/searchontitle/SearchOnTitle";
 
 // misc imports
 import {ShortlistContext} from "../../context/ShortlistContext";
-import {getMoviesByDecade} from "../../helpers/decadesearch/DecadeSearch";
-import Button from "../../components/button/Button";
 
 
 function MovieSearch() {
     const navigate = useNavigate();
     
     // Actor search
-    const [actorName, setActorName] = useState('Meryl Streep');
+    const [actorName, setActorName] = useState('');
     const [actorId, setActorId] = useState(0)
     const [errorActor, toggleErrorActor] = useState(false)
     
@@ -44,6 +45,10 @@ function MovieSearch() {
         '2020s', '2010s', '2000s', '1990s', '1980s', '1970s', '1960s',
         '1950s', '1940s', '1930s', '1920s', '1910s', '1900s'
     ];
+    
+    // Title search
+    const [title, setTitle] = useState('')
+    const [errorTitle, toggleErrorTitle] = useState(false)
     
     // Misc
     const [loading, toggleLoading] = useState(false);
@@ -74,6 +79,12 @@ function MovieSearch() {
         toggleLoading(false)
         
     }, [actorId])
+    
+    
+    //  =========================
+    //  ===  FUNCTIES  TITEL  ===
+    //  =========================
+    
     
     
     //  =========================
@@ -125,15 +136,21 @@ function MovieSearch() {
         void getMoviesByDecade(setMovies, selectedDecade, toggleLoading, toggleErrorDecade, options);
     }
     
-    function handleClickRandomize(e) {
+    function handleTitleSubmit(e) {
         e.preventDefault()
-        navigate('/wheel')
+        void getMoviesByTitle(toggleErrorTitle, toggleLoading, setMovies, options, title)
     }
     
-    function handleClearShortlist(e) {
-        e.preventDefault()
-        setShortlist([])
-    }
+    // TODO: delete if shortlist functions work without
+    // function handleClickRandomize(e) {
+    //     e.preventDefault()
+    //     navigate('/wheel')
+    // }
+    //
+    // function handleClearShortlist(e) {
+    //     e.preventDefault()
+    //     setShortlist([])
+    // }
     
     // ===================
     // ===  SHORTLIST  ===
@@ -176,7 +193,6 @@ function MovieSearch() {
     
     return (
     
-    // TODO: build css from the ground up. Only Nav, Footer and part global.css is uncommented
     <>
         <div className='max-width-container'>
             <div className="sections-container">
@@ -185,7 +201,7 @@ function MovieSearch() {
                 
                 <section className='section-container section-set-width'>
                     <div className='title-and-infobutton-line'>
-                        <h2 className='section-title'>Movie Search</h2>
+                        <h1 className='section-title' id='movie-search' >Movie Search</h1>
                         
                         <InfoButton
                         text={`You can search on Actor, Genre and Decade.\nCombining search queries is not possible.\nThe results in Movie Selection are the 20 best rated movies that have a minimum of 200 votes`}
@@ -193,34 +209,46 @@ function MovieSearch() {
                     </div>
                     
                     <SearchOnActor
-                    handleActorSubmit={handleActorSubmit}
-                    actorName={actorName}
-                    setActorName={setActorName}
-                    errorActor={errorActor}
+                        handleActorSubmit={handleActorSubmit}
+                        actorName={actorName}
+                        setActorName={setActorName}
+                        errorActor={errorActor}
                     />
                     
                     
                     {/*  GENRE  */}
                     
                     <SearchOnGenre
-                    genreAndIdListOfApi={genreAndIdListOfApi}
-                    errorGenreList={errorGenreList}
-                    errorGenre={errorGenre}
-                    handleGenreSubmit={handleGenreSubmit}
-                    genreChoice={genreChoice}
-                    setGenreChoice={setGenreChoice}
+                        genreAndIdListOfApi={genreAndIdListOfApi}
+                        errorGenreList={errorGenreList}
+                        errorGenre={errorGenre}
+                        handleGenreSubmit={handleGenreSubmit}
+                        genreChoice={genreChoice}
+                        setGenreChoice={setGenreChoice}
                     />
                     
                     {/*  DECADE  */}
                     
                     <SearchOnDecade
-                    handleDecadeSubmit={handleDecadeSubmit}
-                    selectedDecade={selectedDecade}
-                    setSelectedDecade={setSelectedDecade}
-                    decades={decades}
-                    errorDecade={errorDecade}
+                        handleDecadeSubmit={handleDecadeSubmit}
+                        selectedDecade={selectedDecade}
+                        setSelectedDecade={setSelectedDecade}
+                        decades={decades}
+                        errorDecade={errorDecade}
                     />
+                    
+                    {/*  TITLE  */}
+                    
+                    <SearchOnTitle
+                        handleTitleSubmit={handleTitleSubmit}
+                        title={title}
+                        setTitle={setTitle}
+                        errorTitle={errorTitle}
+                    />
+                    
                 </section>
+                
+                
                 
                 {/*Shortlist*/}
                 
@@ -231,7 +259,7 @@ function MovieSearch() {
             </div>
             
             
-            {/*end sections-container*/}
+            {/* end sections-container */}
             
             {/* Movie selection */}
             
@@ -239,10 +267,11 @@ function MovieSearch() {
                 <div className='section-inner-container'>
                     <h1 className='section-title'>Movie Selection</h1>
                     <MovieSelection
-                    loading={loading}
-                    movies={movies}
-                    handleAddToShortlist={handleAddToShortlist}
-                    isMovieInShortlist={isMovieInShortlist}/>
+                        loading={loading}
+                        movies={movies}
+                        handleAddToShortlist={handleAddToShortlist}
+                        isMovieInShortlist={isMovieInShortlist}
+                    />
                 </div>
             </section>
         </div>

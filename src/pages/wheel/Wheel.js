@@ -48,7 +48,7 @@ function Wheel() {
                 <div className='wheel-inner-container'>
                     {shortlist.length === 0 ? (
                     <>
-                        <p>Shortlist is leeg. Voeg films toe aan de shortlist</p>
+                        <p>Shortlist is empty. Add movies in order to spin the wheel</p>
                         <Button text='Back to Movie Search' disabled={false} handleClick={handleClickBackToSearch}/>
                     </>
                     

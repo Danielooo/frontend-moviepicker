@@ -125,7 +125,7 @@ function SignUp() {
 
                   <select
                     className='section-input-field'
-                    id="admin-field"
+                    id="role-field"
                     {...register('role', {
                       required: true,
                       message: 'This field is required'
