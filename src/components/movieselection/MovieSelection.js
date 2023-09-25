@@ -3,10 +3,7 @@ import MovieCard from "../moviecard/MovieCard";
 import './MovieSelection.css';
 
 function MovieSelection({loading, movies, handleAddToShortlist, isMovieInShortlist}) {
-  // to avoid 'unique key neccessary' error
-  // const [ keyMovieSelection, setKeyMovieSelection ] = useState(0)
-
-  
+  // TODO: fix 'unique key neccessary' error
   
   
   return (
