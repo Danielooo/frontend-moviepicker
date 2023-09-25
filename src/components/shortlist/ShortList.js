@@ -4,7 +4,7 @@ import Button from './../button/Button';
 import { useNavigate } from 'react-router-dom';
 
 import {ShortlistContext} from "../../context/ShortlistContext";
-import textEllipsis from "../../helpers/TextEllipsis";
+// import textEllipsis from "../../helpers/TextEllipsis";
 
 function Shortlist({handleRemoveFromShortlist}) {
     const { shortlist, clearShortlistAndLocalStorageShortlist } = useContext(ShortlistContext);
@@ -33,7 +33,7 @@ function Shortlist({handleRemoveFromShortlist}) {
                     -
                 </button>
                 <p>
-                    {textEllipsis(movie.title, 37) }
+                    {movie.title }
                 </p>
             </div>
             )))
