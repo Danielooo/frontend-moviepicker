@@ -29,8 +29,6 @@ function MovieSearch() {
     // Actor search
     const [actorName, setActorName] = useState('');
 
-    const [actorName, setActorName] = useState('Meryl Streep');
-
     const [actorId, setActorId] = useState(0)
     const [errorActor, toggleErrorActor] = useState(false)
     
@@ -144,30 +142,7 @@ function MovieSearch() {
         void getMoviesByTitle(toggleErrorTitle, toggleLoading, setMovies, options, title)
     }
     
-<<<<<<< HEAD
-    // TODO: delete if shortlist functions work without
-    // function handleClickRandomize(e) {
-    //     e.preventDefault()
-    //     navigate('/wheel')
-    // }
-    //
-    // function handleClearShortlist(e) {
-    //     e.preventDefault()
-    //     setShortlist([])
-    // }
-  
-    function handleClickRandomize(e) {
-        e.preventDefault()
-        navigate('/wheel')
-    }
-    
-    function handleClearShortlist(e) {
-        e.preventDefault()
-        setShortlist([])
-    }
-    
-=======
->>>>>>> feature/general-improvements
+
     // ===================
     // ===  SHORTLIST  ===
     // ===================

@@ -10,7 +10,6 @@ import Footer from './components/footer/Footer';
 import SignedUp from "./pages/signedup/SignedUp";
 
 
-import { Routes, Route } from 'react-router-dom';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import PageNotFound from "./pages/pagenotfound/PageNotFound";
 import Favorites from "./pages/favorites/Favorites";
