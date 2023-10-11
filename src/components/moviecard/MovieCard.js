@@ -60,9 +60,7 @@ function MovieCard({movie, setMovies}) {
         <div className='movie-poster-container'>
           {posterImage}
           <div className='popup-container'>
-            {/*<div className='popup-text'>*/}
               <p className='popup-container-text'>{movie.overview}</p>
-            {/*</div>*/}
           </div>
         </div>
       
