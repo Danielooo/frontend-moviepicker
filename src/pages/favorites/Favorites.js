@@ -3,16 +3,18 @@ import './Favorites.css';
 import MovieSelection from "../../components/movieselection/MovieSelection";
 
 import {FavoritesContext} from "../../context/FavoritesContext";
-
-
-
+import {MoviesContext} from '../../context/MoviesContext';
+import Button from "../../components/button/Button";
 
 
 function Favorites() {
 	const {favorites, setFavorites, clearFavoritesAndLocalStorageFavorites} = useContext(FavoritesContext);
+	const {movies, setMovies} = useContext(MoviesContext);
 	
 	const [loading, toggleLoading] = useState(false);
-
+	
+	// console.log(favorites)
+	console.log('Object.keys length: ', Object.keys(favorites))
 
 	return (
 	<>
@@ -20,14 +22,18 @@ function Favorites() {
 
 			<h1>Favorites</h1>
 
-			<p>Here's a list of all your favorite movies.</p>
-			<p>If you want you can add them to your shortlist</p>
+			<p>
+				Here's a list of all your favorite movies. <br />If you want you can add them to your shortlist
+			</p>
+			
+			{Object.keys(favorites).length > 0 &&
+				<Button handleClick={clearFavoritesAndLocalStorageFavorites} text='Clear Favorites' />
+			}
 
 			<MovieSelection
 				loading={loading}
 				movies={favorites}
-				// handleAddToShortlist={handleAddToShortlist}
-				// isMovieInShortlist={isMovieInShortlist}
+				setMovies={setMovies}
 			/>
 		</div>
 	</>

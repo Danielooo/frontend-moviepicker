@@ -4,16 +4,13 @@ import Button from './../button/Button';
 import { useNavigate } from 'react-router-dom';
 
 import {ShortlistContext} from "../../context/ShortlistContext";
-// import textEllipsis from "../../helpers/TextEllipsis";
 
-function Shortlist({handleRemoveFromShortlist}) {
-    const { shortlist, clearShortlistAndLocalStorageShortlist } = useContext(ShortlistContext);
+function Shortlist({setMovies}) {
+    const {shortlist, clearShortlistAndLocalStorageShortlist, handleRemoveFromShortlist
+    } = useContext(ShortlistContext);
     
     const navigate = useNavigate();
     
-    function handleClick() {
-        navigate('/wheel');
-    }
     
     function handleClickRandomize(e) {
         e.preventDefault()
@@ -29,7 +26,7 @@ function Shortlist({handleRemoveFromShortlist}) {
             {shortlist.length > 0 ? (
             shortlist.map((movie) => (
             <div key={movie.id} className='shortlist-movie'>
-                <button className='button-remove-movie' onClick={() => handleRemoveFromShortlist(movie)}>
+                <button className='button-remove-movie' onClick={() => handleRemoveFromShortlist(movie, setMovies)}>
                     -
                 </button>
                 <p>

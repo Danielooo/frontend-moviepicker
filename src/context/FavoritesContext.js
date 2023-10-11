@@ -36,7 +36,10 @@ function FavoritesContextProvider({children}) {
 			favoritesToLocalStorageFavorites()
 		}
 	}, [favorites]);
-
+	
+	function isMovieInFavorites(movieId) {
+		return favorites.some((item) => item.id === movieId);
+	}
 
 	function getLocalStorageFavorites() {
 		return localStorage.getItem('localStorageFavorites')
@@ -56,12 +59,44 @@ function FavoritesContextProvider({children}) {
 		setFavorites([])
 		localStorageFavoritesToEmptyArray()
 	}
+	
+	function handleAddToFavorites(movie, setMovies) {
+		
+		// if (favorites.length < 10) {
+			setFavorites((prevFavorites) => [...prevFavorites, movie]);
+			setMovies((prevMovies) =>
+			prevMovies.map((prevMovie) =>
+			prevMovie.id === movie.id ? {...prevMovie, isAdded: true} : prevMovie
+			)
+			);
+		// } else {
+		// 	alert('you can only have 10 movies in your Shortlist')
+		// }
+		
+	}
+	
+	function handleRemoveFromFavorites(movie, setMovies) {
+		setFavorites((prevFavorites) =>
+		prevFavorites.filter((prevMovie) => prevMovie.id !== movie.id)
+		);
+		setMovies((prevMovies) =>
+		prevMovies.map((prevMovie) =>
+		prevMovie.id === movie.id ? {...prevMovie, isAdded: false} : prevMovie
+		)
+		);
+	}
 
 
 	const favoritesActions = {
 		favorites,
 		setFavorites,
+		isMovieInFavorites,
+		getLocalStorageFavorites,
+		favoritesToLocalStorageFavorites,
+		localStorageFavoritesToEmptyArray,
 		clearFavoritesAndLocalStorageFavorites,
+		handleAddToFavorites,
+		handleRemoveFromFavorites
 	}
 
 

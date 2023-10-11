@@ -4,6 +4,7 @@ import {AuthContext} from "../../context/AuthContext";
 import axios from 'axios';
 
 import './Profile.css'
+import MovieSelection from "../../components/movieselection/MovieSelection";
 
 // TODO toon ook userid, info, role
 // TODO aanpas knop voor elementen
@@ -45,6 +46,13 @@ function Profile() {
         
         
         <p>Go to <Link to="/">Movie Search</Link></p>
+        <p>Go to <Link to='/favorites'>Favorites</Link></p>
+        
+        {/* TODO: create field with favorites movie cards*/}
+        {/* TODO: make favorites page only accessible when logged in */}
+        {/*<MovieSelection*/}
+        {/*  movies={}*/}
+        {/*/>*/}
       </>
       :
       (

@@ -18,10 +18,13 @@
 
   width: 200px;
   height: auto;
-  font-size: smaller;
 }
 
 .movie-poster-container:hover .popup-container {
   visibility: visible;
   opacity: 1;
+}
+
+.popup-container-text {
+  font-size: 12px;
 }

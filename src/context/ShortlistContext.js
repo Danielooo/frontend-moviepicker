@@ -1,5 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react'
 
+import ShortlistIconNoFill from './../assets/icons/shortlist/bookmark-simple.svg'
+import ShortlistIconFill from './../assets/icons/shortlist/bookmark-simple-fill.svg'
 
 export const ShortlistContext = createContext(null);
 
@@ -58,12 +60,45 @@ function ShortlistContextProvider({children}) {
     }
     
     
+    function handleAddToShortlist(movie, setMovies) {
+        
+        
+        if (shortlist.length < 10) {
+            setShortlist((prevShortlist) => [...prevShortlist, movie]);
+            setMovies((prevMovies) =>
+            prevMovies.map((prevMovie) =>
+            prevMovie.id === movie.id ? {...prevMovie, isAdded: true} : prevMovie
+            )
+            );
+        } else {
+            alert('you can only have 10 movies in your Shortlist')
+        }
+        
+    }
+    
+    function handleRemoveFromShortlist(movie, setMovies) {
+        setShortlist((prevShortlist) =>
+        prevShortlist.filter((prevMovie) => prevMovie.id !== movie.id)
+        );
+        setMovies((prevMovies) =>
+        prevMovies.map((prevMovie) =>
+        prevMovie.id === movie.id ? {...prevMovie, isAdded: false} : prevMovie
+        )
+        );
+    }
+    
+    function isMovieInShortlist(movieId) {
+        return shortlist.some((item) => item.id === movieId);
+    }
+    
     const shortlistActions = {
         shortlist,
         setShortlist,
+        isMovieInShortlist,
+        handleAddToShortlist,
+        handleRemoveFromShortlist,
         clearShortlistAndLocalStorageShortlist,
     }
-    
     
     return (
     <ShortlistContext.Provider value={shortlistActions}>

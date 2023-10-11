@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {useNavigate} from "react-router-dom";
 
 import './MovieSearch.css';
 
@@ -20,12 +19,12 @@ import SearchOnTitle from "../../components/searchontitle/SearchOnTitle";
 
 
 
-// misc imports
+// context imports
 import {ShortlistContext} from "../../context/ShortlistContext";
+import {MoviesContext} from "../../context/MoviesContext";
 
 
 function MovieSearch() {
-    const navigate = useNavigate();
     
     // Actor search
     const [actorName, setActorName] = useState('');
@@ -53,8 +52,8 @@ function MovieSearch() {
     
     // Misc
     const [loading, toggleLoading] = useState(false);
-    const [movies, setMovies] = useState([]);
-    const {shortlist, setShortlist} = useContext(ShortlistContext);
+    const {movies, setMovies} = useContext(MoviesContext);
+    const  {handleRemoveFromShortlist, handleAddToShortlist, isMovieInShortlist } = useContext(ShortlistContext);
     
     // Api endpoint header
     const options = {
@@ -147,34 +146,7 @@ function MovieSearch() {
     // ===================
     
     // >>>  helper  <<<
-    function handleAddToShortlist(movie) {
-        if (shortlist.length < 10) {
-            setShortlist((prevShortlist) => [...prevShortlist, movie]);
-            setMovies((prevMovies) =>
-            prevMovies.map((prevMovie) =>
-            prevMovie.id === movie.id ? {...prevMovie, isAdded: true} : prevMovie
-            )
-            );
-        } else {
-            alert('you can only have 10 movies in your Shortlist')
-        }
-        
-    }
     
-    function handleRemoveFromShortlist(movie) {
-        setShortlist((prevShortlist) =>
-        prevShortlist.filter((prevMovie) => prevMovie.id !== movie.id)
-        );
-        setMovies((prevMovies) =>
-        prevMovies.map((prevMovie) =>
-        prevMovie.id === movie.id ? {...prevMovie, isAdded: false} : prevMovie
-        )
-        );
-    }
-    
-    function isMovieInShortlist(movieId) {
-        return shortlist.some((item) => item.id === movieId);
-    }
     
     //  ================
     //  ===  RETURN  ===
@@ -243,7 +215,7 @@ function MovieSearch() {
                 {/*Shortlist*/}
                 
                 <section className='section-container section-set-width'>
-                    <ShortList handleRemoveFromShortlist={handleRemoveFromShortlist}
+                    <ShortList setMovies={setMovies}
                     />
                 </section>
             </div>
@@ -259,8 +231,7 @@ function MovieSearch() {
                     <MovieSelection
                         loading={loading}
                         movies={movies}
-                        handleAddToShortlist={handleAddToShortlist}
-                        isMovieInShortlist={isMovieInShortlist}
+                        setMovies={setMovies}
                     />
                 </div>
             </section>

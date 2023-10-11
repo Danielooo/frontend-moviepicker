@@ -3,9 +3,13 @@ import axios from "axios";
 import './MovieCard.css';
 import './../popup/PopUp.css';
 import posterNotFound from './../../assets/images/404-poster-not-found.svg'
-import heartStraight from "../../assets/icons/favorites/heart-straight.svg";
-import heartStraightFilled from "../../assets/icons/favorites/heart-straight-fill.svg";
-// import textEllipsis from "../../helpers/TextEllipsis";
+import favoritesNoFill from "../../assets/icons/favorites/heart-straight.svg";
+import favoritesFill from "../../assets/icons/favorites/heart-straight-fill.svg";
+
+
+
+import shortlistNoFill from './../../assets/icons/shortlist/bookmark-simple.svg'
+import shortlistFill from './../../assets/icons/shortlist/bookmark-simple-fill.svg'
 
 // import context
 import {ShortlistContext} from '../../context/ShortlistContext';
@@ -17,10 +21,10 @@ import {FavoritesContext} from '../../context/FavoritesContext';
 // TODO: Add shortlist and favorites icon to MovieCard
 
 
-function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
+function MovieCard({movie, setMovies}) {
   
-  const {shortlist, setShortlist} = useContext(ShortlistContext);
-  const {favorites, setFavorites} = useContext(FavoritesContext);
+  const {isMovieInShortlist, handleAddToShortlist, handleRemoveFromShortlist} = useContext(ShortlistContext);
+  const {isMovieInFavorites, handleRemoveFromFavorites, handleAddToFavorites} = useContext(FavoritesContext);
   
 
   const posterUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
@@ -38,9 +42,9 @@ function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
         } else {
           setPosterImage(<img className='movie-poster' src={posterNotFound} alt='poster not found'/>)
         }
+        
       } catch (e) {
         setPosterImage(<img className='movie-poster' src={posterNotFound} alt='poster not found'/>)
-        
       }
     }
 
@@ -56,9 +60,9 @@ function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
         <div className='movie-poster-container'>
           {posterImage}
           <div className='popup-container'>
-            <div className='popup-text'>
-              <p>{movie.overview}</p>
-            </div>
+            {/*<div className='popup-text'>*/}
+              <p className='popup-container-text'>{movie.overview}</p>
+            {/*</div>*/}
           </div>
         </div>
       
@@ -68,15 +72,18 @@ function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
       <div className='movie-card-bottom'>
         <p className='movie-year'>{movie.release_date.substring(0, 4)}</p>
         <p className='movie-rating'>Rating: {movie.vote_average}</p>
-        <img src={heartStraight} alt='heart straight icon' />
-        <img src={heartStraightFilled} alt='heart straight filled icon' />
-        
-        <button className='regular-button'
-                onClick={() => handleAddToShortlist(movie)}
-                disabled={isMovieInShortlist(movie.id)}
-        >
-          {isMovieInShortlist(movie.id) ? 'Added' : 'Add to Shortlist'}
-        </button>
+        <div className='icon-line'>
+          {isMovieInShortlist(movie.id) ?
+            <img onClick={() => handleRemoveFromShortlist(movie, setMovies)} src={shortlistFill} alt='shortlist icon fill' />
+          :
+            <img onClick={() => handleAddToShortlist(movie, setMovies)} src={shortlistNoFill}  alt='shortlist icon no fill' />
+          }
+          {isMovieInFavorites(movie.id) ?
+            <img onClick={() => handleRemoveFromFavorites(movie, setMovies)} src={favoritesFill} alt='favorites icon fill'/>
+                 :
+            <img onClick={() => handleAddToFavorites(movie, setMovies)} src={favoritesNoFill} alt='favorites icon no fill'/>
+          }
+        </div>
       </div>
     </div>
   )

@@ -5,6 +5,7 @@ import App from './App';
 import AuthContextProvider from "./context/AuthContext";
 import ShortlistContextProvider from "./context/ShortlistContext";
 import FavoritesContextProvider from "./context/FavoritesContext";
+import MoviesContextProvider from "./context/MoviesContext";
 
 // styles
 import './styles/global.css';
@@ -16,7 +17,9 @@ root.render(
 		<AuthContextProvider>
 			<FavoritesContextProvider>
 				<ShortlistContextProvider>
-					<App/>
+					<MoviesContextProvider>
+						<App/>
+					</MoviesContextProvider>
 				</ShortlistContextProvider>
 			</FavoritesContextProvider>
 		</AuthContextProvider>
