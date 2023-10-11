@@ -55,7 +55,6 @@ function MovieCard({movie, setMovies}) {
 
   return (
     <div className='movie-card'>
-      <div className='movie-card-top'>
       
         <div className='movie-poster-container'>
           {posterImage}
@@ -65,24 +64,23 @@ function MovieCard({movie, setMovies}) {
         </div>
       
         <p className='movie-title'>{movie.title }</p>
-      </div>
       
-      <div className='movie-card-bottom'>
-        <p className='movie-year'>{movie.release_date.substring(0, 4)}</p>
-        <p className='movie-rating'>Rating: {movie.vote_average}</p>
-        <div className='icon-line'>
-          {isMovieInShortlist(movie.id) ?
-            <img onClick={() => handleRemoveFromShortlist(movie, setMovies)} src={shortlistFill} alt='shortlist icon fill' />
-          :
-            <img onClick={() => handleAddToShortlist(movie, setMovies)} src={shortlistNoFill}  alt='shortlist icon no fill' />
-          }
-          {isMovieInFavorites(movie.id) ?
-            <img onClick={() => handleRemoveFromFavorites(movie, setMovies)} src={favoritesFill} alt='favorites icon fill'/>
-                 :
-            <img onClick={() => handleAddToFavorites(movie, setMovies)} src={favoritesNoFill} alt='favorites icon no fill'/>
-          }
+        <div className='movie-card-bottom'>
+            <p className='movie-year'>{movie.release_date.substring(0, 4)}</p>
+            <p className='movie-rating'>Rating: {movie.vote_average}</p>
+            <div className='icon-line'>
+              {isMovieInShortlist(movie.id) ?
+                <img onClick={() => handleRemoveFromShortlist(movie, setMovies)} src={shortlistFill} alt='shortlist icon fill' />
+              :
+                <img onClick={() => handleAddToShortlist(movie, setMovies)} src={shortlistNoFill}  alt='shortlist icon no fill' />
+              }
+              {isMovieInFavorites(movie.id) ?
+                <img onClick={() => handleRemoveFromFavorites(movie, setMovies)} src={favoritesFill} alt='favorites icon fill'/>
+                     :
+                <img onClick={() => handleAddToFavorites(movie, setMovies)} src={favoritesNoFill} alt='favorites icon no fill'/>
+              }
+            </div>
         </div>
-      </div>
     </div>
   )
 }
