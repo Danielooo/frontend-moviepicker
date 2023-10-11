@@ -39,8 +39,10 @@
 
 /*movie card release year, rating, and add button*/
 .movie-card-bottom {
+  justify-self: flex-end;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .movie-year {
@@ -49,13 +51,17 @@
 }
 
 .movie-rating {
+  align-self: flex-start;
   font-style: italic;
   font-size: small;
   margin: 0;
   padding: 0;
 }
 
-.movie-card-button:disabled {
-  background-color: #99A7BF;
-  color: lightgrey;
+.icon-line {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-start;
+  column-gap: 5px;
 }

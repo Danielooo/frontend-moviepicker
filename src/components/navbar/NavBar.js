@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 
 // images
-import camera from '../../assets/icons/icon-camera.svg';
-import avatar from '../../assets/icons/icon-avatar.svg';
+import camera from '../../assets/icons/navbar/icon-camera.svg';
+import avatar from '../../assets/icons/navbar/icon-avatar.svg';
 
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -26,6 +26,12 @@ function NavBar() {
           <NavLink className='nav-link' to='/'>
             Movie Search
           </NavLink>
+          
+          {/*{isAuth &&*/}
+            <NavLink className='nav-link' to='/favorites'>
+              Favorites
+            </NavLink>
+          {/*}*/}
 
           <NavLink className='nav-link' to='/about'>
             About
@@ -41,6 +47,9 @@ function NavBar() {
               Log in
             </NavLink>
           }
+          
+          
+          
           
 
           <NavLink className='nav-link' to='/signup'>

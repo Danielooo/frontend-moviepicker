@@ -2,7 +2,6 @@ import './Wheel.css'
 import WheelComponent from "react-wheel-of-prizes";
 import {useContext} from "react";
 import {ShortlistContext} from "../../context/ShortlistContext";
-import './../../App.css'
 import Button from "../../components/button/Button";
 import {Link, useNavigate} from "react-router-dom";
 
