@@ -1,8 +1,8 @@
-.movie-poster-container {
+.popup-parent {
   position: relative;
 }
 
-.popup-container {
+.popup-container-movie-summary {
   visibility: hidden;
   background-color: var(--med-yellow);
   color: black;
@@ -20,7 +20,26 @@
   height: auto;
 }
 
-.movie-poster-container:hover .popup-container {
+.popup-container-icon-explain {
+  visibility: hidden;
+  background-color: var(--med-yellow);
+  color: black;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+
+  width: 200px;
+  height: auto;
+}
+
+.popup-parent:hover .popup-container-movie-summary,
+.popup-parent:hover .popup-container-icon-explain {
   visibility: visible;
   opacity: 1;
 }

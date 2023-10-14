@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 import {ShortlistContext} from "../../context/ShortlistContext";
 
+// import helpers
+import textEllipsis from "../../helpers/textellipsis/TextEllipsis";
 
 function Shortlist({setMovies}) {
     const {shortlist, clearShortlistAndLocalStorageShortlist, handleRemoveFromShortlist
@@ -31,7 +33,7 @@ function Shortlist({setMovies}) {
                     -
                 </button>
                 <p>
-                    {movie.title }
+                    {textEllipsis(movie.title, 30)  }
                 </p>
             </div>
             )))

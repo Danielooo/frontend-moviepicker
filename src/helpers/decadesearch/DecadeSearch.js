@@ -1,8 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 
+import { controller, options } from '../../pages/moviesearch/MovieSearch'
+
 export async function getMoviesByDecade(
-  setMovies, selectedDecade, toggleLoading, toggleErrorDecade, options) {
+  setMovies, selectedDecade, toggleLoading, toggleErrorDecade) {
+  
 
   try {
     toggleLoading(true);
@@ -17,12 +20,18 @@ export async function getMoviesByDecade(
     );
 
     setMovies(response.data.results);
+    
+    return function cleanup() {
+      controller.abort();
+    }
+    
   } catch (error) {
     console.error('Error fetching movies:', error);
     toggleErrorDecade(true)
+    
+  } finally {
+    toggleLoading(false);
   }
-
-  toggleLoading(false);
 };
 
 
