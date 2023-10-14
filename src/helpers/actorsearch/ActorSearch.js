@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { controller, options } from '../../pages/moviesearch/MovieSearch';
 
-export async function getActorIdByName(toggleErrorActor, toggleLoading, setActorId, options, actorName) {
+export async function getActorIdByName(toggleErrorActor, toggleLoading, setActorId, actorName) {
   try {
     toggleErrorActor(false)
     toggleLoading(true)

@@ -42,7 +42,7 @@ export function getGenreIdByInput(
 }
 
 export async function getMoviesByGenreId(
-  setMovies, toggleLoading, toggleErrorGenre, genreChoiceId, options) {
+  setMovies, toggleLoading, toggleErrorGenre, genreChoiceId) {
 
   try {
     const response = await axios.get(`https://api.themoviedb.org/3/discover/movie?with_genres=${genreChoiceId}&sort_by=vote_average.desc&vote_average.gte=7.0&vote_count.gte=200&page=1?include_adult=false`, options)
