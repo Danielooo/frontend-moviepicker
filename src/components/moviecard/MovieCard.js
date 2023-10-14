@@ -1,12 +1,14 @@
 import React, {useState, useEffect, useContext} from 'react';
 import axios from "axios";
 import './MovieCard.css';
+import PopUp from '../popup/PopUp';
 import './../popup/PopUp.css';
 import posterNotFound from './../../assets/images/404-poster-not-found.svg'
 import favoritesNoFill from "../../assets/icons/favorites/heart-straight.svg";
 import favoritesFill from "../../assets/icons/favorites/heart-straight-fill.svg";
 
-
+// import helpers
+import textEllipsis from "../../helpers/textellipsis/TextEllipsis";
 
 
 import shortlistNoFill from './../../assets/icons/shortlist/bookmark-simple.svg'
@@ -15,11 +17,6 @@ import shortlistFill from './../../assets/icons/shortlist/bookmark-simple-fill.s
 // import context
 import {ShortlistContext} from '../../context/ShortlistContext';
 import {FavoritesContext} from '../../context/FavoritesContext';
-
-// TODO: import shortlist context
-// TODO: import favorites context
-
-// TODO: Add shortlist and favorites icon to MovieCard
 
 
 function MovieCard({movie, setMovies}) {
@@ -59,29 +56,53 @@ function MovieCard({movie, setMovies}) {
   return (
     <div className='movie-card'>
       
-        <div className='movie-poster-container'>
+        <div className='popup-parent'>
           {posterImage}
-          <div className='popup-container'>
+          <div className='popup-container-movie-summary'>
               <p className='popup-container-text'>{movie.overview}</p>
           </div>
         </div>
 
       
-        <p className='movie-title'>{movie.title }</p>
+        <p className='movie-title'>{textEllipsis(movie.title, 30)}</p>
       
         <div className='movie-card-bottom'>
             <p className='movie-year'>{movie.release_date.substring(0, 4)}</p>
             <p className='movie-rating'>Rating: {movie.vote_average}</p>
             <div className='icon-line'>
               {isMovieInShortlist(movie.id) ?
-                <img onClick={() => handleRemoveFromShortlist(movie, setMovies)} src={shortlistFill} alt='shortlist icon fill' />
+                <div className='popup-parent'>
+                    <img onClick={() => handleRemoveFromShortlist(movie, setMovies)} src={shortlistFill} alt='shortlist icon fill' />
+                    <PopUp
+                        text='Remove from Shortlist'
+                        style='icon-explain'
+                    />
+                </div>
               :
+              <div className='popup-parent'>
                 <img onClick={() => handleAddToShortlist(movie, setMovies)} src={shortlistNoFill}  alt='shortlist icon no fill' />
+                  <PopUp
+                      text='Add to Shortlist'
+                      style='icon-explain'
+                  />
+              </div>
               }
               {isMovieInFavorites(movie.id) ?
-                <img onClick={() => handleRemoveFromFavorites(movie, setMovies)} src={favoritesFill} alt='favorites icon fill'/>
+                <div className='popup-parent'>
+                    <img onClick={() => handleRemoveFromFavorites(movie, setMovies)} src={favoritesFill} alt='favorites icon fill'/>
+                    <PopUp
+                        text='Remove from Favorites'
+                        style='icon-explain'
+                    />
+                </div>
                      :
+              <div className='popup-parent'>
                 <img onClick={() => handleAddToFavorites(movie, setMovies)} src={favoritesNoFill} alt='favorites icon no fill'/>
+                  <PopUp
+                      text='Add to Favorites'
+                      type='icon-explain'
+                  />
+              </div>
               }
             </div>
         </div>

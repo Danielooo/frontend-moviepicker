@@ -1,6 +1,3 @@
-.test {
-  font-size: 200px;
-}
 
 body {
   background-color: black;
@@ -135,7 +132,11 @@ a {
   color: lightgrey;
 }
 
+/* POPUP */
 
+.popup-parent {
+  position: relative;
+}
 
 /*  ERRORS  */
 

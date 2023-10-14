@@ -32,9 +32,13 @@
 }
 
 .movie-title {
-  font-size: 1em;
+  width: 100%;
+  font-size: 0.9em;
+  font-weight: bold;
   margin: 0.4em 0;
   padding: 0;
+
+  text-align: center;
 }
 
 /*movie card release year, rating, and add button*/
@@ -46,6 +50,7 @@
 }
 
 .movie-year {
+  font-size: 0.8em;
   margin: 0;
   padding: 0;
 }
