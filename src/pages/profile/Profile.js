@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-import AuthContextProvider, {AuthContext} from "../../context/AuthContext";
+import {AuthContext} from "../../context/AuthContext";
 import axios from 'axios';
 
 // TODO toon ook userid, info, role
@@ -8,12 +8,12 @@ import axios from 'axios';
 // TODO wachtwoord veranderen
 
 function Profile() {
-  const {isAuth, user} = useContext(AuthContext);
-
+    const {isAuth, user} = useContext(AuthContext);
+  
   useEffect(() => {
     async function fetchProfileData() {
       const token = localStorage.getItem('token');
-
+      
       try {
         const response = await axios.get('https://frontend-educational-backend.herokuapp.com/api/user', {
           headers: {
@@ -25,11 +25,12 @@ function Profile() {
         console.error(e)
       }
     }
-
+    
     void fetchProfileData();
   }, [])
-
+  
   return (
+<<<<<<< HEAD
     <>
       <main className='main-outer-container'>
         <main className='main-inner-container'>
@@ -60,8 +61,34 @@ function Profile() {
         </main>
       </main>
     </>
+=======
+  <>
+    <section className='section-container profile-set-width'>
+      <h1>Profile</h1>
+      
+      {isAuth ?
+      <>
+        <section>
+          <p><strong>Username:</strong> {user.username}</p>
+          <p><strong>Email:</strong> {user.email}</p>
+        </section>
+        
+        
+        <p>Go to <Link to="/">Movie Search</Link></p>
+      </>
+      :
+      (
+      <>
+        <p>You're currently not logged in</p>
+        <p>Click <Link to={{pathname: '/login'}}>here</Link> to go to the log in page</p>
+      </>
+      )
+      }
+    </section>
+  </>
+>>>>>>> 83d7959 (fixed searchongenre bug)
   )
-    ;
+  ;
 }
 
 export default Profile;
