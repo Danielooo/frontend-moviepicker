@@ -5,15 +5,13 @@ import { useNavigate } from 'react-router-dom';
 
 import {ShortlistContext} from "../../context/ShortlistContext";
 
-<<<<<<< HEAD
 
-function Shortlist({handleRemoveFromShortlist}) {
-    const { shortlist, clearShortlistAndLocalStorageShortlist } = useContext(ShortlistContext);
-=======
+
+// function Shortlist({handleRemoveFromShortlist}) {
+//     const { shortlist, clearShortlistAndLocalStorageShortlist } = useContext(ShortlistContext);
 function Shortlist({setMovies}) {
     const {shortlist, clearShortlistAndLocalStorageShortlist, handleRemoveFromShortlist
     } = useContext(ShortlistContext);
->>>>>>> feature/general-improvements
     
     const navigate = useNavigate();
     

@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
+import axios from 'axios';
 
 import './MovieSearch.css';
 
@@ -17,18 +18,25 @@ import MovieSelection from "../../components/movieselection/MovieSelection";
 import InfoButton from "../../components/infobutton/InfoButton";
 import SearchOnTitle from "../../components/searchontitle/SearchOnTitle";
 
-<<<<<<< HEAD
 // misc imports
-import {ShortlistContext} from "../../context/ShortlistContext";
-import {getMoviesByDecade} from "../../helpers/decadesearch/DecadeSearch";
-import Button from "../../components/button/Button";
-=======
+
 
 
 // context imports
 import {ShortlistContext} from "../../context/ShortlistContext";
 import {MoviesContext} from "../../context/MoviesContext";
->>>>>>> 0871bb0 (added working favorites page)
+
+
+
+
+// export const options = {
+//     method: 'GET',
+//     headers: {
+//         accept: 'application/json',
+//         Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN_ACTOR}`,
+//     },
+//     // signal: controller.signal,
+// };
 
 
 function MovieSearch() {
@@ -62,14 +70,10 @@ function MovieSearch() {
     const {movies, setMovies} = useContext(MoviesContext);
     const  {handleRemoveFromShortlist, handleAddToShortlist, isMovieInShortlist } = useContext(ShortlistContext);
     
+    
+    
     // Api endpoint header
-    const options = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN_ACTOR}`,
-        },
-    };
+    
     
     
     //  =========================
@@ -81,7 +85,7 @@ function MovieSearch() {
         toggleLoading(true)
         
         if (actorId) {
-            void getMoviesByActorId(toggleErrorActor, toggleLoading, setMovies, options, actorId)
+            void getMoviesByActorId(toggleErrorActor, toggleLoading, setMovies, actorId)
         }
         toggleLoading(false)
         
@@ -100,7 +104,7 @@ function MovieSearch() {
     
     // Mount only
     useEffect(() => {
-        void getGenresAndIdsOfApi(setGenreAndIdListOfApi, toggleErrorGenreList, options)
+        void getGenresAndIdsOfApi(setGenreAndIdListOfApi, toggleErrorGenreList)
         
     }, [])
     
@@ -108,7 +112,7 @@ function MovieSearch() {
     useEffect(() => {
         
         if (genreChoiceId !== undefined) {
-            void getMoviesByGenreId(setMovies, toggleLoading, toggleErrorGenre, genreChoiceId, options)
+            void getMoviesByGenreId(setMovies, toggleLoading, toggleErrorGenre, genreChoiceId)
         } else {
             // TODO uitzondering bedenken of else verwijderen
         }
@@ -130,7 +134,7 @@ function MovieSearch() {
     
     function handleActorSubmit(e) {
         e.preventDefault();
-        void getActorIdByName(toggleErrorActor, toggleLoading, setActorId, options, actorName)
+        void getActorIdByName(toggleErrorActor, toggleLoading, setActorId, actorName)
     }
     
     function handleGenreSubmit(e) {
@@ -140,12 +144,12 @@ function MovieSearch() {
     
     function handleDecadeSubmit(e) {
         e.preventDefault()
-        void getMoviesByDecade(setMovies, selectedDecade, toggleLoading, toggleErrorDecade, options);
+        void getMoviesByDecade(setMovies, selectedDecade, toggleLoading, toggleErrorDecade);
     }
     
     function handleTitleSubmit(e) {
         e.preventDefault()
-        void getMoviesByTitle(toggleErrorTitle, toggleLoading, setMovies, options, title)
+        void getMoviesByTitle(toggleErrorTitle, toggleLoading, setMovies, title)
     }
     
     // TODO: delete if shortlist functions work without
@@ -188,34 +192,34 @@ function MovieSearch() {
                         />
                     </div>
                     
-                    <SearchOnActor
-                        handleActorSubmit={handleActorSubmit}
-                        actorName={actorName}
-                        setActorName={setActorName}
-                        errorActor={errorActor}
-                    />
+                    {/*<SearchOnActor*/}
+                    {/*    handleActorSubmit={handleActorSubmit}*/}
+                    {/*    actorName={actorName}*/}
+                    {/*    setActorName={setActorName}*/}
+                    {/*    errorActor={errorActor}*/}
+                    {/*/>*/}
                     
                     
-                    {/*  GENRE  */}
+                    {/*/!*  GENRE  *!/*/}
                     
-                    <SearchOnGenre
-                        genreAndIdListOfApi={genreAndIdListOfApi}
-                        errorGenreList={errorGenreList}
-                        errorGenre={errorGenre}
-                        handleGenreSubmit={handleGenreSubmit}
-                        genreChoice={genreChoice}
-                        setGenreChoice={setGenreChoice}
-                    />
+                    {/*<SearchOnGenre*/}
+                    {/*    genreAndIdListOfApi={genreAndIdListOfApi}*/}
+                    {/*    errorGenreList={errorGenreList}*/}
+                    {/*    errorGenre={errorGenre}*/}
+                    {/*    handleGenreSubmit={handleGenreSubmit}*/}
+                    {/*    genreChoice={genreChoice}*/}
+                    {/*    setGenreChoice={setGenreChoice}*/}
+                    {/*/>*/}
                     
-                    {/*  DECADE  */}
+                    {/*/!*  DECADE  *!/*/}
                     
-                    <SearchOnDecade
-                        handleDecadeSubmit={handleDecadeSubmit}
-                        selectedDecade={selectedDecade}
-                        setSelectedDecade={setSelectedDecade}
-                        decades={decades}
-                        errorDecade={errorDecade}
-                    />
+                    {/*<SearchOnDecade*/}
+                    {/*    handleDecadeSubmit={handleDecadeSubmit}*/}
+                    {/*    selectedDecade={selectedDecade}*/}
+                    {/*    setSelectedDecade={setSelectedDecade}*/}
+                    {/*    decades={decades}*/}
+                    {/*    errorDecade={errorDecade}*/}
+                    {/*/>*/}
                     
                     {/*  TITLE  */}
                     
@@ -260,3 +264,5 @@ function MovieSearch() {
 }
 
 export default MovieSearch;
+
+
