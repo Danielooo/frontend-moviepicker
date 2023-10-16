@@ -8,14 +8,14 @@ export async function getMoviesByTitle(toggleErrorTitle, toggleLoading, setMovie
 		
 		const response = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${movieTitle}&include_adult=false&page=1`, options)
 		
-		setMovies(response.data.results)
+		setMovies(response.data.
 		
 		return function cleanup() {
 			controller.abort();
 		}
 		
 	} catch (e) {
-		toggleErrorTitle(true)
+		toggleErrorTitle(true)results)
 		console.error(e)
 	
 	} finally {

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import './SignUp.css'
+import Button from "../../components/button/Button";
 
 function SignUp() {
 
@@ -46,11 +47,8 @@ function SignUp() {
 
   return (
     <>
-      <main className='main-outer-container'>
-        <main className='main-inner-container'>
-          <section className='section-outer-container'>
-            <div className='section-inner-container'>
-
+      
+          <section className='section-container signup-set-width'>
               <h1>Sign Up</h1>
 
               <form onSubmit={handleSubmit(onFormSubmit)}>
@@ -121,20 +119,6 @@ function SignUp() {
                 </div>
                 {errors.password && <p className='error-message'>{errors.password.message}</p>}
 
-                {/*/!*  Personal info  *!/*/}
-                {/*<div className='section-input-line'>*/}
-                {/*  <label htmlFor="info-field">Personal info:</label>*/}
-                {/*  <input*/}
-                {/*    className='section-input-field'*/}
-                {/*    type="text"*/}
-                {/*    id="info-field"*/}
-                {/*    {...register('info', {*/}
-
-                {/*    })}*/}
-                {/*  />*/}
-                {/*</div>*/}
-                {/*{errors.info && <p className='error-message'>{errors.info.message}</p>}*/}
-
                 {/*  Role  */}
                 <div className='section-input-line'>
                   <label htmlFor="role-field">Admin or User:</label>
@@ -153,20 +137,16 @@ function SignUp() {
                 </div>
                 {errors.role && <p className='error-message'>{errors.role.message}</p>}
 
-                <button
+                <Button
                   className='regular-button'
                   type='submit'
                   disabled={loading}
-                >
-                  Sign Up
-                </button>
+                  text='Sign Up'
+                />
                 { errorMessage && <p className='error-message'>{ errorMessage }</p> }
-
               </form>
-            </div>
           </section>
-        </main>
-      </main>
+
 
     </>
   )

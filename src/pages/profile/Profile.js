@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import {AuthContext} from "../../context/AuthContext";
 import axios from 'axios';
 
+import './Profile.css'
+
 // TODO toon ook userid, info, role
 // TODO aanpas knop voor elementen
 // TODO wachtwoord veranderen
@@ -32,10 +34,7 @@ function Profile() {
   return (
 <<<<<<< HEAD
     <>
-      <main className='main-outer-container'>
-        <main className='main-inner-container'>
-          <section className='about-container section-outer-container'>
-            <div className='section-inner-container'>
+     <section className='section-container profile-set-width'>
               <h1>Profile</h1>
 
               {isAuth ?
@@ -46,7 +45,7 @@ function Profile() {
                   </section>
 
 
-                  <p>Go back to <Link to="/">Movie Search</Link></p>
+                  <p>Go to <Link to="/">Movie Search</Link></p>
                 </>
                 :
                 (
@@ -56,10 +55,8 @@ function Profile() {
                   </>
                 )
               }
-            </div>
-          </section>
-        </main>
-      </main>
+            
+</section>
     </>
 =======
   <>

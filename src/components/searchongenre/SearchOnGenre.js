@@ -15,11 +15,12 @@ function SearchOnGenre(
               <label htmlFor="genreInput">Genre:</label>
               <select
                 className='section-input-field'
+                // placeholder='Select a genre'
                 id='genreInput'
                 value={ genreChoice }
                 onChange={(e) => setGenreChoice(e.target.value)}
               >
-                <option value='' disabled={true}>Select a genre</option>
+                
                 {genreAndIdListOfApi.map((genre) => (
                   <option key={genre.id} value={genre.name}>
                     {genre.name}
@@ -27,7 +28,7 @@ function SearchOnGenre(
                 ))}
               </select>
               </div>
-              <button className='regular-button' type='submit' disabled={ genreChoice === '' }>Search Genre</button>
+              <button className='regular-button' type='submit' >Search Genre</button>
             </form>
             { errorGenre && <p className='error-message'>An error occurred. Please try again</p> }
 

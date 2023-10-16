@@ -26,7 +26,7 @@ function MovieSearch() {
     const navigate = useNavigate();
     
     // Actor search
-    const [actorName, setActorName] = useState('');
+    const [actorName, setActorName] = useState('Meryl Streep');
     const [actorId, setActorId] = useState(0)
     const [errorActor, toggleErrorActor] = useState(false)
     
@@ -141,12 +141,17 @@ function MovieSearch() {
     
     // >>>  helper  <<<
     function handleAddToShortlist(movie) {
-        setShortlist((prevShortlist) => [...prevShortlist, movie]);
-        setMovies((prevMovies) =>
-        prevMovies.map((prevMovie) =>
-        prevMovie.id === movie.id ? {...prevMovie, isAdded: true} : prevMovie
-        )
-        );
+        if (shortlist.length < 10) {
+            setShortlist((prevShortlist) => [...prevShortlist, movie]);
+            setMovies((prevMovies) =>
+            prevMovies.map((prevMovie) =>
+            prevMovie.id === movie.id ? {...prevMovie, isAdded: true} : prevMovie
+            )
+            );
+        } else {
+            alert('you can only have 10 movies in your Shortlist')
+        }
+        
     }
     
     function handleRemoveFromShortlist(movie) {
@@ -172,80 +177,76 @@ function MovieSearch() {
     return (
     
     // TODO: build css from the ground up. Only Nav, Footer and part global.css is uncommented
-    
-    <main className="main-container">
-        <div className="sections-container">
-            
-            {/*Movie Search  */}
-            
-            <section className='section-container'>
-                <div className='title-and-infobutton-line'>
-                    <h2 className='section-title'>Movie Search</h2>
+    <>
+        <div className='max-width-container'>
+            <div className="sections-container">
+                
+                {/*Movie Search  */}
+                
+                <section className='section-container section-set-width'>
+                    <div className='title-and-infobutton-line'>
+                        <h2 className='section-title'>Movie Search</h2>
+                        
+                        <InfoButton
+                        text={`You can search on Actor, Genre and Decade.\nCombining search queries is not possible.\nThe results in Movie Selection are the 20 best rated movies that have a minimum of 200 votes`}
+                        />
+                    </div>
                     
-                    <InfoButton
-                    text={`You can search on Actor, Genre and Decade.\nCombining search queries is not possible.\nThe results in Movie Selection are the 20 best rated movies that have a minimum of 200 votes`}
+                    <SearchOnActor
+                    handleActorSubmit={handleActorSubmit}
+                    actorName={actorName}
+                    setActorName={setActorName}
+                    errorActor={errorActor}
                     />
-                </div>
+                    
+                    
+                    {/*  GENRE  */}
+                    
+                    <SearchOnGenre
+                    genreAndIdListOfApi={genreAndIdListOfApi}
+                    errorGenreList={errorGenreList}
+                    errorGenre={errorGenre}
+                    handleGenreSubmit={handleGenreSubmit}
+                    genreChoice={genreChoice}
+                    setGenreChoice={setGenreChoice}
+                    />
+                    
+                    {/*  DECADE  */}
+                    
+                    <SearchOnDecade
+                    handleDecadeSubmit={handleDecadeSubmit}
+                    selectedDecade={selectedDecade}
+                    setSelectedDecade={setSelectedDecade}
+                    decades={decades}
+                    errorDecade={errorDecade}
+                    />
+                </section>
                 
-                <SearchOnActor
-                handleActorSubmit={handleActorSubmit}
-                actorName={actorName}
-                setActorName={setActorName}
-                errorActor={errorActor}
-                />
+                {/*Shortlist*/}
                 
-                
-                {/*  GENRE  */}
-                
-                <SearchOnGenre
-                genreAndIdListOfApi={genreAndIdListOfApi}
-                errorGenreList={errorGenreList}
-                errorGenre={errorGenre}
-                handleGenreSubmit={handleGenreSubmit}
-                genreChoice={genreChoice}
-                setGenreChoice={setGenreChoice}
-                />
-                
-                {/*  DECADE  */}
-                
-                <SearchOnDecade
-                handleDecadeSubmit={handleDecadeSubmit}
-                selectedDecade={selectedDecade}
-                setSelectedDecade={setSelectedDecade}
-                decades={decades}
-                errorDecade={errorDecade}
-                />
-            </section>
-            
-            {/*Shortlist*/}
-            
-            <section className='section-container'>
-                <h2 className='section-title'>Shortlist</h2>
-                <div className='shortlist-movies-container'>
+                <section className='section-container section-set-width'>
                     <ShortList handleRemoveFromShortlist={handleRemoveFromShortlist}
                     />
-                </div>
+                </section>
+            </div>
             
+            
+            {/*end sections-container*/}
+            
+            {/* Movie selection */}
+            
+            <section className='movie-selection section-container'>
+                <div className='section-inner-container'>
+                    <h1 className='section-title'>Movie Selection</h1>
+                    <MovieSelection
+                    loading={loading}
+                    movies={movies}
+                    handleAddToShortlist={handleAddToShortlist}
+                    isMovieInShortlist={isMovieInShortlist}/>
+                </div>
             </section>
         </div>
-        
-        
-        {/*end sections-container*/}
-        
-        
-        <section className='movie-selection section-outer-container'>
-            <div className='section-inner-container'>
-                <h1 className='section-title'>Movie Selection</h1>
-                <MovieSelection
-                loading={loading}
-                movies={movies}
-                handleAddToShortlist={handleAddToShortlist}
-                isMovieInShortlist={isMovieInShortlist}/>
-            </div>
-        </section>
-    
-    </main>
-    
+    </>
     
     )
 }
