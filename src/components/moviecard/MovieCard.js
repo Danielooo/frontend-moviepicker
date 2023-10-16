@@ -3,7 +3,7 @@ import axios from "axios";
 import './MovieCard.css';
 import './../popup/PopUp.css';
 import posterNotFound from './../../assets/images/404-poster-not-found.svg'
-import textEllipsis from "../../helpers/TextEllipsis";
+// import textEllipsis from "../../helpers/TextEllipsis";
 
 
 function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
@@ -47,7 +47,7 @@ function MovieCard({movie, handleAddToShortlist, isMovieInShortlist}) {
           </div>
         </div>
       
-        <p className='movie-title'>{textEllipsis(movie.title, 35) }</p>
+        <p className='movie-title'>{movie.title }</p>
       </div>
       
       <div className='movie-card-bottom'>
