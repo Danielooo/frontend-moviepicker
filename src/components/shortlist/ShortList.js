@@ -4,14 +4,16 @@ import Button from './../button/Button';
 import { useNavigate } from 'react-router-dom';
 
 import {ShortlistContext} from "../../context/ShortlistContext";
-<<<<<<< HEAD
-import textEllipsis from "../../helpers/textEllipsis";
-=======
->>>>>>> 0871bb0 (added working favorites page)
 
+<<<<<<< HEAD
+
+function Shortlist({handleRemoveFromShortlist}) {
+    const { shortlist, clearShortlistAndLocalStorageShortlist } = useContext(ShortlistContext);
+=======
 function Shortlist({setMovies}) {
     const {shortlist, clearShortlistAndLocalStorageShortlist, handleRemoveFromShortlist
     } = useContext(ShortlistContext);
+>>>>>>> feature/general-improvements
     
     const navigate = useNavigate();
     
@@ -34,7 +36,7 @@ function Shortlist({setMovies}) {
                     -
                 </button>
                 <p>
-                    {textEllipsis(movie.title, 37) }
+                    {movie.title }
                 </p>
             </div>
             )))
