@@ -26,6 +26,12 @@ function NavBar() {
           <NavLink className='nav-link' to='/'>
             Movie Search
           </NavLink>
+          
+          {/*{isAuth &&*/}
+            <NavLink className='nav-link' to='/favorites'>
+              Favorites
+            </NavLink>
+          {/*}*/}
 
           <NavLink className='nav-link' to='/about'>
             About
@@ -41,6 +47,9 @@ function NavBar() {
               Log in
             </NavLink>
           }
+          
+          
+          
           
 
           <NavLink className='nav-link' to='/signup'>
