@@ -187,24 +187,24 @@ function MovieSearch() {
                     
                     {/*/!*  GENRE  *!/*/}
                     
-                    {/*<SearchOnGenre*/}
-                    {/*    genreAndIdListOfApi={genreAndIdListOfApi}*/}
-                    {/*    errorGenreList={errorGenreList}*/}
-                    {/*    errorGenre={errorGenre}*/}
-                    {/*    handleGenreSubmit={handleGenreSubmit}*/}
-                    {/*    genreChoice={genreChoice}*/}
-                    {/*    setGenreChoice={setGenreChoice}*/}
-                    {/*/>*/}
+                    <SearchOnGenre
+                        genreAndIdListOfApi={genreAndIdListOfApi}
+                        errorGenreList={errorGenreList}
+                        errorGenre={errorGenre}
+                        handleGenreSubmit={handleGenreSubmit}
+                        genreChoice={genreChoice}
+                        setGenreChoice={setGenreChoice}
+                    />
                     
                     {/*/!*  DECADE  *!/*/}
                     
-                    {/*<SearchOnDecade*/}
-                    {/*    handleDecadeSubmit={handleDecadeSubmit}*/}
-                    {/*    selectedDecade={selectedDecade}*/}
-                    {/*    setSelectedDecade={setSelectedDecade}*/}
-                    {/*    decades={decades}*/}
-                    {/*    errorDecade={errorDecade}*/}
-                    {/*/>*/}
+                    <SearchOnDecade
+                        handleDecadeSubmit={handleDecadeSubmit}
+                        selectedDecade={selectedDecade}
+                        setSelectedDecade={setSelectedDecade}
+                        decades={decades}
+                        errorDecade={errorDecade}
+                    />
                     
                     {/*  TITLE  */}
                     

@@ -1,8 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
+  },
+};
+
 export async function getMoviesByDecade(
-  setMovies, selectedDecade, toggleLoading, toggleErrorDecade, options) {
+  setMovies, selectedDecade, toggleLoading, toggleErrorDecade) {
 
   try {
     toggleLoading(true);
