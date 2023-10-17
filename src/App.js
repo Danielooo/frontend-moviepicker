@@ -14,6 +14,7 @@ import {Routes, Route, useNavigate} from 'react-router-dom';
 import PageNotFound from "./pages/pagenotfound/PageNotFound";
 import Favorites from "./pages/favorites/Favorites";
 
+// TODO: camelcase directories, code Wheel ipv package, helper file kleine letters, componenten
 
 
 function App() {

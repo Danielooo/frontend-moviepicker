@@ -1,6 +1,9 @@
 import axios from "axios";
 // import {options} from "../../pages/moviesearch/MovieSearch";
 
+// const controller = new AbortController();
+// const signal = controller.signal;
+
 const options = {
 	method: 'GET',
 	headers: {
@@ -11,23 +14,21 @@ const options = {
 };
 
 export async function getMoviesByTitle(toggleErrorTitle, toggleLoading, setMovies, movieTitle) {
-	const controller = new AbortController();
-	const signal = controller.signal;
+	
 	
 	
 	try {
 		toggleErrorTitle(false)
 		console.log('movietitle: ', movieTitle)
 		
-		const response = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${movieTitle}&include_adult=false&page=1`, options, {signal: signal,}
-		)
-		
+		const response = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${movieTitle}&include_adult=false&page=1`, options)
+	
 		console.log('response results: ', response.data.results)
 		
 		// setMovies(response.data.results)
 		
 		return function cleanup() {
-			controller.abort();
+			// controller.abort();
 		}
 		
 	} catch (e) {

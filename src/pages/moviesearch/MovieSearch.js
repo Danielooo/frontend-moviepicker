@@ -4,10 +4,10 @@ import axios from 'axios';
 import './MovieSearch.css';
 
 // helper imports
-import {getActorIdByName, getMoviesByActorId} from "../../helpers/actorsearch/ActorSearch";
-import {getGenresAndIdsOfApi, getGenreIdByInput, getMoviesByGenreId} from "../../helpers/genresearch/GenreSearch";
-import {getMoviesByDecade} from "../../helpers/decadesearch/DecadeSearch";
-import {getMoviesByTitle} from "../../helpers/titlesearch/TitleSearch";
+import {getActorIdByName, getMoviesByActorId} from "../../helpers/actorSearch";
+import {getGenresAndIdsOfApi, getGenreIdByInput, getMoviesByGenreId} from "../../helpers/genreSearch";
+import {getMoviesByDecade} from "../../helpers/decadeSearch";
+import {getMoviesByTitle} from "../../helpers/titleSearch";
 
 // component imports
 import ShortList from "../../components/shortlist/ShortList";
@@ -21,22 +21,18 @@ import SearchOnTitle from "../../components/searchontitle/SearchOnTitle";
 // misc imports
 
 
-
 // context imports
 import {ShortlistContext} from "../../context/ShortlistContext";
 import {MoviesContext} from "../../context/MoviesContext";
 
 
-
-
-// export const options = {
-//     method: 'GET',
-//     headers: {
-//         accept: 'application/json',
-//         Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN_ACTOR}`,
-//     },
-//     // signal: controller.signal,
-// };
+export const options = {
+    method: 'GET',
+    headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN_ACTOR}`,
+    },
+};
 
 
 function MovieSearch() {
@@ -125,7 +121,7 @@ function MovieSearch() {
     // ===  FUNCTIES DECADE  ===
     // =========================
     
-    // In helper DecadeSearch.js
+    // In helper decadeSearch.js
     
     
     //  ========================

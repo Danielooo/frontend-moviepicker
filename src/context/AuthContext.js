@@ -5,7 +5,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import isTokenValid from "../helpers/IsTokenValid";
+import isTokenValid from "../helpers/isTokenValid";
 
 // zorgt ervoor dat andere pages kunnen abonneren op de context
 export const AuthContext = createContext(null);
