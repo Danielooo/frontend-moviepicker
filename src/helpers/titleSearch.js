@@ -1,8 +1,6 @@
 import axios from "axios";
-// import {options} from "../../pages/moviesearch/MovieSearch";
 
-// const controller = new AbortController();
-// const signal = controller.signal;
+
 
 const options = {
 	method: 'GET',
@@ -10,7 +8,6 @@ const options = {
 		accept: 'application/json',
 		Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
 	},
-	// signal: controller.signal,
 };
 
 export async function getMoviesByTitle(toggleErrorTitle, toggleLoading, setMovies, movieTitle) {
