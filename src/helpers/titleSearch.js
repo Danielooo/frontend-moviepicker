@@ -8,7 +8,7 @@ const options = {
 	method: 'GET',
 	headers: {
 		accept: 'application/json',
-		Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN_ACTOR}`,
+		Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
 	},
 	// signal: controller.signal,
 };
@@ -25,11 +25,8 @@ export async function getMoviesByTitle(toggleErrorTitle, toggleLoading, setMovie
 	
 		console.log('response results: ', response.data.results)
 		
-		// setMovies(response.data.results)
+		setMovies(response.data.results)
 		
-		return function cleanup() {
-			// controller.abort();
-		}
 		
 	} catch (e) {
 		toggleErrorTitle(true)

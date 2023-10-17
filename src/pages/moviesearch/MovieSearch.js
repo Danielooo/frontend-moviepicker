@@ -25,12 +25,11 @@ import SearchOnTitle from "../../components/searchontitle/SearchOnTitle";
 import {ShortlistContext} from "../../context/ShortlistContext";
 import {MoviesContext} from "../../context/MoviesContext";
 
-
 export const options = {
     method: 'GET',
     headers: {
         accept: 'application/json',
-        Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN_ACTOR}`,
+        Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
     },
 };
 
@@ -148,16 +147,6 @@ function MovieSearch() {
         void getMoviesByTitle(toggleErrorTitle, toggleLoading, setMovies, title)
     }
     
-    // TODO: delete if shortlist functions work without
-    // function handleClickRandomize(e) {
-    //     e.preventDefault()
-    //     navigate('/wheel')
-    // }
-    //
-    // function handleClearShortlist(e) {
-    //     e.preventDefault()
-    //     setShortlist([])
-    // }
     
     // ===================
     // ===  SHORTLIST  ===
@@ -188,34 +177,34 @@ function MovieSearch() {
                         />
                     </div>
                     
-                    {/*<SearchOnActor*/}
-                    {/*    handleActorSubmit={handleActorSubmit}*/}
-                    {/*    actorName={actorName}*/}
-                    {/*    setActorName={setActorName}*/}
-                    {/*    errorActor={errorActor}*/}
-                    {/*/>*/}
+                    <SearchOnActor
+                        handleActorSubmit={handleActorSubmit}
+                        actorName={actorName}
+                        setActorName={setActorName}
+                        errorActor={errorActor}
+                    />
                     
                     
                     {/*/!*  GENRE  *!/*/}
                     
-                    {/*<SearchOnGenre*/}
-                    {/*    genreAndIdListOfApi={genreAndIdListOfApi}*/}
-                    {/*    errorGenreList={errorGenreList}*/}
-                    {/*    errorGenre={errorGenre}*/}
-                    {/*    handleGenreSubmit={handleGenreSubmit}*/}
-                    {/*    genreChoice={genreChoice}*/}
-                    {/*    setGenreChoice={setGenreChoice}*/}
-                    {/*/>*/}
+                    <SearchOnGenre
+                        genreAndIdListOfApi={genreAndIdListOfApi}
+                        errorGenreList={errorGenreList}
+                        errorGenre={errorGenre}
+                        handleGenreSubmit={handleGenreSubmit}
+                        genreChoice={genreChoice}
+                        setGenreChoice={setGenreChoice}
+                    />
                     
                     {/*/!*  DECADE  *!/*/}
                     
-                    {/*<SearchOnDecade*/}
-                    {/*    handleDecadeSubmit={handleDecadeSubmit}*/}
-                    {/*    selectedDecade={selectedDecade}*/}
-                    {/*    setSelectedDecade={setSelectedDecade}*/}
-                    {/*    decades={decades}*/}
-                    {/*    errorDecade={errorDecade}*/}
-                    {/*/>*/}
+                    <SearchOnDecade
+                        handleDecadeSubmit={handleDecadeSubmit}
+                        selectedDecade={selectedDecade}
+                        setSelectedDecade={setSelectedDecade}
+                        decades={decades}
+                        errorDecade={errorDecade}
+                    />
                     
                     {/*  TITLE  */}
                     
