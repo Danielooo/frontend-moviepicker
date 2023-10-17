@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 function SearchOnActor({handleActorSubmit, actorName, setActorName, errorActor}) {
 
   return (
