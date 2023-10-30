@@ -12,8 +12,6 @@ const options = {
 
 export async function getMoviesByTitle(toggleErrorTitle, toggleLoading, setMovies, movieTitle) {
 	
-	
-	
 	try {
 		toggleErrorTitle(false)
 		console.log('movietitle: ', movieTitle)

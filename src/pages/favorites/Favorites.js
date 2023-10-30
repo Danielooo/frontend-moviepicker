@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, {useState, useContext} from 'react';
 import './Favorites.css';
 import MovieSelection from "../../components/movieselection/MovieSelection";
@@ -15,25 +17,25 @@ function Favorites() {
 	
 	// console.log(favorites)
 	console.log('Object.keys length: ', Object.keys(favorites))
-
+	
 	return (
 	<>
 		<div className='section-container'>
-
+			
 			<h1>Favorites</h1>
-
+			
 			<p>
-				Here's a list of all your favorite movies. <br />If you want you can add them to your shortlist
+				Here's a list of all your favorite movies. <br/>If you want you can add them to your shortlist
 			</p>
 			
 			{Object.keys(favorites).length > 0 &&
-				<Button handleClick={clearFavoritesAndLocalStorageFavorites} text='Clear Favorites' />
+			<Button handleClick={clearFavoritesAndLocalStorageFavorites} text='Clear Favorites'/>
 			}
-
+			
 			<MovieSelection
-				loading={loading}
-				movies={favorites}
-				setMovies={setMovies}
+			loading={loading}
+			movies={favorites}
+			setMovies={setMovies}
 			/>
 		</div>
 	</>
