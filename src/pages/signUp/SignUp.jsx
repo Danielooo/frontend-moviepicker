@@ -1,51 +1,51 @@
-/* eslint-disable f */
+/* eslint-disable */
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
-import {useForm} from "react-hook-form";
-import {useNavigate} from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import './SignUp.css'
-import Button from "../../components/button/Button";
+import Button from "../../components/button/Button.jsx";
 
 function SignUp() {
 	
 	// eslint-disable-next-line
-	const [error, toggleError] = useState(false);
-	const [errorMessage, setErrorMessage] = useState('')
-	const [loading, toggleLoading] = useState(false);
+	const [ error, toggleError ] = useState( false );
+	const [ errorMessage, setErrorMessage ] = useState( '' )
+	const [ loading, toggleLoading ] = useState( false );
 	const navigate = useNavigate();
-	const {register, handleSubmit, formState: {errors}} = useForm();
+	const { register, handleSubmit, formState: { errors } } = useForm();
 	
-	async function onFormSubmit({username, email, password, role}) {
+	async function onFormSubmit( { username, email, password, role } ) {
 		
 		
-		toggleError(false);
-		toggleLoading(true);
+		toggleError( false );
+		toggleLoading( true );
 		
 		try {
-			await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup', {
+			await axios.post( 'https://frontend-educational-backend.herokuapp.com/api/auth/signup', {
 				'username': username,
 				'email': email,
 				'password': password,
 				'role': role,
-			});
+			} );
 			
-			navigate('/signedup')
+			navigate( '/signedup' )
 			
-		} catch (e) {
-			console.error(e);
+		} catch ( e ) {
+			console.error( e );
 			
-			if (e.response.data.message) {
-				setErrorMessage(e.response.data.message)
+			if ( e.response.data.message ) {
+				setErrorMessage( e.response.data.message )
 			} else {
 				setErrorMessage(
-				`An unknown error occurred. Please check your input and try again. Error code: ${e.response.status}`)
+				`An unknown error occurred. Please check your input and try again. Error code: ${e.response.status}` )
 			}
 			
-			toggleError(true);
+			toggleError( true );
 		}
 		
-		toggleLoading(false);
+		toggleLoading( false );
 	}
 	
 	return (
@@ -54,7 +54,7 @@ function SignUp() {
 		<section className='section-container signup-set-width'>
 			<h1>Sign Up</h1>
 			
-			<form onSubmit={handleSubmit(onFormSubmit)}>
+			<form onSubmit={handleSubmit( onFormSubmit )}>
 				
 				{/*  Username  */}
 				<div className='section-input-line'>
@@ -63,7 +63,7 @@ function SignUp() {
 					className='section-input-field'
 					type="text"
 					id="username-field"
-					{...register('username', {
+					{...register( 'username', {
 						required: {
 							value: true,
 							message: 'Username is required'
@@ -76,7 +76,7 @@ function SignUp() {
 							value: 15,
 							message: 'Username must not exceed the maximum of 15 characters',
 						},
-					})}
+					} )}
 					/>
 				</div>
 				{errors.username && <p className='error-message'>{errors.username.message}</p>}
@@ -88,15 +88,15 @@ function SignUp() {
 					className='section-input-field'
 					type="text"
 					id="email-field"
-					{...register('email', {
+					{...register( 'email', {
 						required: {
 							value: true,
 							message: 'Email address is required'
 						},
 						minLength: 6,
 						message: 'Email address must contain at least 6 characters',
-						validate: (value) => value.includes('@') || 'Email address must contain @',
-					})}
+						validate: ( value ) => value.includes( '@' ) || 'Email address must contain @',
+					} )}
 					/>
 				</div>
 				{errors.email && <p className='error-message'>{errors.email.message}</p>}
@@ -108,15 +108,15 @@ function SignUp() {
 					className='section-input-field'
 					type="password"
 					id="password-field"
-					{...register('password', {
+					{...register( 'password', {
 						required: {
 							value: true,
 							message: 'Password is required'
 						},
 						minLength: 6,
 						message: 'Password must contain at least 6 characters',
-						validate: (value) => value.includes('@', '!', '#') || 'Password must contain characters \'@\', \'!\', \'#\'',
-					})}
+						validate: ( value ) => value.includes( '@', '!', '#' ) || 'Password must contain characters \'@\', \'!\', \'#\'',
+					} )}
 					
 					/>
 				</div>
@@ -129,10 +129,10 @@ function SignUp() {
 					<select
 					className='section-input-field'
 					id="role-field"
-					{...register('role', {
+					{...register( 'role', {
 						required: true,
 						message: 'This field is required'
-					})}
+					} )}
 					>
 						<option value="user">User</option>
 						<option value="admin">Admin</option>

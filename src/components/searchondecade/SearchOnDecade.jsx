@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import React, {useEffect} from 'react';
 
 function SearchOnDecade({handleDecadeSubmit, selectedDecade, setSelectedDecade, decades, errorDecade}) {

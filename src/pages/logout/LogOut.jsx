@@ -1,15 +1,15 @@
 /* eslint-disable */
 
-import React, {useContext} from "react";
-import Button from "../../components/button/Button";
+import React, { useContext } from "react";
+import Button from "../../components/button/Button.jsx";
 import './LogOut.css'
 
-import {AuthContext} from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext.jsx";
 
 
 function LogOut() {
 	
-	const {isAuth, user, logout} = useContext(AuthContext);
+	const { isAuth, user, logout } = useContext( AuthContext );
 	
 	
 	return (
