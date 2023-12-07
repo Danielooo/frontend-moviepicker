@@ -4,17 +4,17 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import './LoadingBar.css';
 
-// TODO: fix Uncaught TypeError: Cannot read properties of undefined (reading 'poster_path')
+// TODO: button ook uit LoadingBar halen. Button moet showRandomMovie op false zetten en op loadingComplete weer op true
 
-
-function LoadingBar( { startLoading, toggleStartLoading, afterLoadingCue, toggleAfterLoadingCue } ) {
+function LoadingBar( { onLoadingComplete } ) {
     
-    console.log( 'startLoading: ', startLoading );
-    console.log( 'afterLoadingCue: ', afterLoadingCue );
+    // console.log( 'startLoading: ', startLoading );
+    // console.log( 'afterLoadingCue: ', afterLoadingCue );
     
     const navigate = useNavigate();
     
     const [ progress, setProgress ] = useState( 0 );
+    const [ startLoading, setStartLoading ] = useState( false );
     
     
     useEffect( () => {
@@ -22,17 +22,14 @@ function LoadingBar( { startLoading, toggleStartLoading, afterLoadingCue, toggle
         
         if ( startLoading ) {
             // resetting states
-            toggleStartLoading( false );
-            toggleAfterLoadingCue( false );
-            
+            setStartLoading( false );
             setProgress( 0 );
             
-            const loop = setInterval( () => {
+            let loop = setInterval( () => {
                 setProgress( oldProgress => {
                     if ( oldProgress === 100 ) {
-                        // voor conditioneel renderen movie
-                        
-                        toggleAfterLoadingCue( true ); // << HIER KRIJG IK DE FOUTMELDING OP
+                        // geeft terug dat LoadingBar klaar is met laden
+                        onLoadingComplete();
                         
                         
                         clearInterval( loop );
@@ -49,19 +46,20 @@ function LoadingBar( { startLoading, toggleStartLoading, afterLoadingCue, toggle
         
         
         return function cleanup() {
-            console.log( "Het interval wordt gestopt!" );
+            // console.log( "Het interval wordt gestopt!" );
             clearInterval( loop );
         };
     }, [ startLoading ] );
     
     return (
       <>
+          {/* TODO: in CSS zetten LoadingBar Styling */}
           <div style={{ width: '100%', backgroundColor: '#ddd' }}>
               <div style={{ width: `${progress}%`, backgroundColor: 'blue', height: '10px' }}/>
           </div>
           
           {/*  disabled={Object.keys( shortlist ).length === 0}  */}
-          <button className='btn-toggle' type='button' onClick={() => toggleStartLoading( !startLoading )}>toggleLoading
+          <button className='btn-toggle' type='button' onClick={() => setStartLoading( !startLoading )}>setStartLoading
           </button>
       
       </>
