@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 
-
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from "react-router-dom";
@@ -21,17 +20,19 @@ const root = ReactDOM.createRoot( container );
 
 //render app to root
 root.render(
-<Router>
-	<AuthContextProvider>
-		<FavoritesContextProvider>
-			<ShortlistContextProvider>
-				<MoviesContextProvider>
-					<App/>
-				</MoviesContextProvider>
-			</ShortlistContextProvider>
-		</FavoritesContextProvider>
-	</AuthContextProvider>
-</Router>
+  <StrictMode>
+      <Router>
+          <AuthContextProvider>
+              <FavoritesContextProvider>
+                  <ShortlistContextProvider>
+                      <MoviesContextProvider>
+                          <App/>
+                      </MoviesContextProvider>
+                  </ShortlistContextProvider>
+              </FavoritesContextProvider>
+          </AuthContextProvider>
+      </Router>
+  </StrictMode>
 );
 
 

@@ -8,15 +8,13 @@ import Profile from './pages/profile/Profile.jsx';
 import LogIn from './pages/login/LogIn.jsx';
 import LogOut from './pages/logout/LogOut.jsx';
 import SignUp from './pages/signUp/SignUp.jsx';
-// import Wheel from './pages/wheel/Wheel.jsx';
 import Footer from './components/footer/Footer.jsx';
 import SignedUp from "./pages/signedup/SignedUp.jsx";
 
 
 import PageNotFound from "./pages/pageNotFound/PageNotFound.jsx";
 import Favorites from "./pages/favorites/Favorites.jsx";
-import Randomizer from './pages/randomizer/RandomMovie.jsx';
-import RandomMovie from './pages/randomizer/RandomMovie.jsx';
+import Randomizer from './pages/randomizer/Randomizer.jsx';
 
 // import DemoFetchPage from "./pages/demoFetchPage/DemoFetchPage";
 
@@ -28,11 +26,12 @@ function App() {
     
     return (
       <>
-          <NavBar/>
+          <header>
+              <NavBar/>
+          </header>
           
           <main>
               <Routes>
-                  {/*<Route exact path='/' element={<DemoFetchPage/>}/>*/}
                   <Route exact path='/' element={<MovieSearch/>}/>
                   <Route exact path='/favorites' element={<Favorites/>}/>
                   <Route exact path='/about' element={<About/>}/>
@@ -41,8 +40,7 @@ function App() {
                   <Route exact path='/logout' element={<LogOut/>}/>
                   <Route exact path='/signup' element={<SignUp/>}/>
                   <Route exact path='/signedup' element={<SignedUp/>}/>
-                  <Route exact path='/random-movie' element={<RandomMovie/>}/>
-                  {/*<Route exact path='/wheel' element={<Wheel/>}/>*/}
+                  <Route exact path='/randomizer' element={<Randomizer/>}/>
                   
                   
                   <Route path='*' element={<PageNotFound/>}/>
@@ -50,7 +48,9 @@ function App() {
               </Routes>
           </main>
           
-          <Footer/>
+          <footer>
+              <Footer/>
+          </footer>
       </>
     );
 }

@@ -9,7 +9,7 @@ nav {
   display: flex;
   height: 6em;
   justify-content: space-between;
-
+  
   position: sticky;
   top: 0;
   z-index: 1;
@@ -17,7 +17,7 @@ nav {
 
 .logo-container {
   /*border: 1px solid var(--med-yellow);*/
-
+  
   display: flex;
   width: 11em;
 }
@@ -53,6 +53,14 @@ nav {
   column-gap: 30px;
 }
 
+.nav-link-active {
+  text-decoration-line: underline;
+}
+
+.nav-link {
+  text-decoration-line: none;
+}
+
 .nav-links > .nav-link {
   display: flex;
 }
@@ -70,7 +78,7 @@ nav {
 /* PROFILE */
 .profile-container {
   /*border: 1px solid var(--med-yellow);*/
-
+  
   /*justify-content: stretch;*/
   display: flex;
   align-items: center;
