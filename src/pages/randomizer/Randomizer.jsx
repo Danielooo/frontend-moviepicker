@@ -7,21 +7,21 @@ import { Link } from 'react-router-dom';
 import { ShortlistContext } from '../../context/ShortlistContext.jsx';
 import './Randomizer.css';
 
+// TODO: 2. verwijderen movie uit shortlist > random movie naar default
+// TODO: 3. button opmaken
+// TODO: 4. opmaken loadingbar > div met margin en
+
 
 function Randomizer() {
     const { shortlist } = useContext( ShortlistContext );
     
-    const [ randomMovieDefault, toggleRandomMovieDefault ] = useState( true );
+    const [ randomMovie, setRandomMovie ] = useState( {} );
     const [ loadingComplete, toggleLoadingComplete ] = useState( false );
     
+    useEffect( () => {
+        toggleLoadingComplete( false );
+    }, [ shortlist ] );
     
-    // Fixes when chosen movie is removed from shortlist
-    // On shortlist change resets random movie to default
-    
-    
-    // TODO: 2. verwijderen movie uit shortlist > random movie naar default
-    // TODO: 3. button opmaken
-    // TODO: 4. opmaken loadingbar > div met margin en
     
     return (
         <>
@@ -33,15 +33,13 @@ function Randomizer() {
                 </section>
             </div>
             
-            {/* Moet na laden random movie conditioneel kunnen renderen */}
+            {/* Na laden conditioneel renderen met loadingComplete */}
             <LoadingBar
-                loadingComplete={loadingComplete}
                 boolComplete={toggleLoadingComplete}
             />
             
             <div className='random-movie-container'>
                 {/*   Conditioneel gerenderde random movie. >> Wordt getoond als LoadingBar geladen is   */}
-                {/*   idea: loadingComplete to false when current movie is removed */}
                 {loadingComplete && shortlist.length > 0 &&
                     <MovieCard
                         movie={shortlist[ getRandomInt( 0, Object.keys( shortlist ).length ) ]}

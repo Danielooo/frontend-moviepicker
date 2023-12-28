@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './LoadingBar.css';
 
 
-function LoadingBar( { loadingComplete, boolComplete } ) {
+function LoadingBar( { boolComplete } ) {
     
     
     const navigate = useNavigate();
@@ -54,7 +54,7 @@ function LoadingBar( { loadingComplete, boolComplete } ) {
     
     return (
         <>
-            {/* TODO: in CSS zetten LoadingBar Styling */}
+            {/* TODO: styling in CSS  */}
             <div style={{ width: '100%', backgroundColor: '#ddd' }}>
                 <div style={{ width: `${progress}%`, backgroundColor: 'blue', height: '10px' }}/>
             </div>
