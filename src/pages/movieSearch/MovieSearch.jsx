@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, Suspense } from 'react';
 import axios from 'axios';
 
 import './MovieSearch.css';
@@ -159,64 +159,95 @@ function MovieSearch() {
     
     
     return (
-      
-      <>
-          <div className='max-width-container'>
-              <div className='sections-container'>
-                  
-                  {/*Movie Search  */}
-                  
-                  <section className='section-container section-set-width'>
-                      <div className='title-and-infobutton-line'>
-                          <h1 className='section-title' id='movie-search'>Movie Search</h1>
-                          
-                          <InfoButton
-                            text={`You can search on Actor, Genre and Decade.\nCombining search queries is not possible.\nThe results in Movie Selection are the 20 best rated movies that have a minimum of 200 votes`}/>
-                      </div>
-                      
-                      <SearchOnActor handleActorSubmit={handleActorSubmit} actorName={actorName}
-                        setActorName={setActorName} errorActor={errorActor}/>
-                      
-                      
-                      {/*/!*  GENRE  *!/*/}
-                      
-                      <SearchOnGenre genreAndIdListOfApi={genreAndIdListOfApi} errorGenreList={errorGenreList}
-                        errorGenre={errorGenre} handleGenreSubmit={handleGenreSubmit} genreChoice={genreChoice}
-                        setGenreChoice={setGenreChoice}/>
-                      
-                      {/*/!*  DECADE  *!/*/}
-                      
-                      <SearchOnDecade handleDecadeSubmit={handleDecadeSubmit} selectedDecade={selectedDecade}
-                        setSelectedDecade={setSelectedDecade} decades={decades} errorDecade={errorDecade}/>
-                      
-                      {/*  TITLE  */}
-                      
-                      <SearchOnTitle handleTitleSubmit={handleTitleSubmit} title={title} setTitle={setTitle}
-                        errorTitle={errorTitle}/>
-                  
-                  </section>
-                  
-                  
-                  {/*Shortlist*/}
-                  
-                  <section className='section-container section-set-width'>
-                      <ShortList setMovies={setMovies} linkToRandomizePage={true}/>
-                  </section>
-              </div>
-              
-              
-              {/* end sections-container */}
-              
-              {/* Movie selection */}
-              
-              <section className='movie-selection section-container'>
-                  <div className='section-inner-container'>
-                      <h1 className='section-title'>Movie Selection</h1>
-                      <MovieSelection loading={loading} movies={movies} setMovies={setMovies}/>
-                  </div>
-              </section>
-          </div>
-      </>
+        
+        <>
+            <div className='max-width-container'>
+                <div className='sections-container'>
+                    
+                    {/*Movie Search  */}
+                    
+                    <section className='section-container section-set-width'>
+                        <div className='title-and-infobutton-line'>
+                            <h1
+                                className='section-title'
+                                id='movie-search'
+                            >Movie Search</h1>
+                            
+                            <InfoButton
+                                text={`You can search on Actor, Genre and Decade.\nCombining search queries is not possible.\nThe results in Movie Selection are the 20 best rated movies that have a minimum of 200 votes`}
+                            />
+                        </div>
+                        
+                        <SearchOnActor
+                            handleActorSubmit={handleActorSubmit}
+                            actorName={actorName}
+                            setActorName={setActorName}
+                            errorActor={errorActor}
+                        />
+                        
+                        
+                        {/*/!*  GENRE  *!/*/}
+                        
+                        <SearchOnGenre
+                            genreAndIdListOfApi={genreAndIdListOfApi}
+                            errorGenreList={errorGenreList}
+                            errorGenre={errorGenre}
+                            handleGenreSubmit={handleGenreSubmit}
+                            genreChoice={genreChoice}
+                            setGenreChoice={setGenreChoice}
+                        />
+                        
+                        {/*/!*  DECADE  *!/*/}
+                        
+                        <SearchOnDecade
+                            handleDecadeSubmit={handleDecadeSubmit}
+                            selectedDecade={selectedDecade}
+                            setSelectedDecade={setSelectedDecade}
+                            decades={decades}
+                            errorDecade={errorDecade}
+                        />
+                        
+                        {/*  TITLE  */}
+                        
+                        <SearchOnTitle
+                            handleTitleSubmit={handleTitleSubmit}
+                            title={title}
+                            setTitle={setTitle}
+                            errorTitle={errorTitle}
+                        />
+                    
+                    </section>
+                    
+                    
+                    {/*Shortlist*/}
+                    
+                    <section className='section-container section-set-width'>
+                        <ShortList
+                            setMovies={setMovies}
+                            linkToRandomizePage={true}
+                        />
+                    </section>
+                </div>
+                
+                
+                {/* end sections-container */}
+                
+                {/* Movie selection */}
+                
+                <section className='movie-selection section-container'>
+                    <div className='section-inner-container'>
+                        <h1 className='section-title'>Movie Selection</h1>
+                        <Suspense fallback={'Loading.'}>
+                            <MovieSelection
+                                loading={loading}
+                                movies={movies}
+                                setMovies={setMovies}
+                            />
+                        </Suspense>
+                    </div>
+                </section>
+            </div>
+        </>
     
     );
 }
