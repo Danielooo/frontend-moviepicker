@@ -15,6 +15,8 @@ function Randomizer() {
     const [ loadingComplete, toggleLoadingComplete ] = useState( false );
     
     
+    // Check change
+    
     // Fixes when chosen movie is removed from shortlist
     // On shortlist change resets random movie to default
     
@@ -47,7 +49,6 @@ function Randomizer() {
                         movie={shortlist[ getRandomInt( 0, Object.keys( shortlist ).length ) ]}
                         withIcons={false}
                     />
-                    
                     
                 }
                 
