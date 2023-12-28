@@ -53,17 +53,21 @@ function LoadingBar( { loadingComplete, boolComplete } ) {
     
     
     return (
-      <>
-          {/* TODO: in CSS zetten LoadingBar Styling */}
-          <div style={{ width: '100%', backgroundColor: '#ddd' }}>
-              <div style={{ width: `${progress}%`, backgroundColor: 'blue', height: '10px' }}/>
-          </div>
-          
-          {/*  disabled={Object.keys( shortlist ).length === 0}  */}
-          <button className='btn-toggle' type='button' onClick={clickHandler}>setStartLoading
-          </button>
-      
-      </>
+        <>
+            {/* TODO: in CSS zetten LoadingBar Styling */}
+            <div style={{ width: '100%', backgroundColor: '#ddd' }}>
+                <div style={{ width: `${progress}%`, backgroundColor: 'blue', height: '10px' }}/>
+            </div>
+            
+            {/*  disabled={Object.keys( shortlist ).length === 0}  */}
+            <button
+                className='btn-toggle'
+                type='button'
+                onClick={clickHandler}
+            >Random Movie
+            </button>
+        
+        </>
     );
 }
 
