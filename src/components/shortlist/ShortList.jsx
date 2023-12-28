@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useId } from 'react';
 import './ShortList.css';
 import Button from '../button/Button.jsx';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,8 @@ import { ShortlistContext } from "../../context/ShortlistContext.jsx";
 //     const { shortlist, clearShortlistAndLocalStorageShortlist } = useContext(ShortlistContext);
 
 function Shortlist( { linkToRandomizePage } ) {
+    const idPrefix = useId();
+    
     const {
         shortlist, setMovies, clearShortlistAndLocalStorageShortlist, handleRemoveFromShortlist
     } = useContext( ShortlistContext );
@@ -31,7 +33,7 @@ function Shortlist( { linkToRandomizePage } ) {
                 {shortlist.length > 0 ? (
                         shortlist.map( ( movie ) => (
                             <div
-                                key={movie.id}
+                                key={`${idPrefix}-${movie.id}`}
                                 className='shortlist-movie'
                             >
                                 <button

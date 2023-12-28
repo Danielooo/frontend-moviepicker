@@ -34,11 +34,7 @@ function MovieCard( { movie, withIcons } ) {
                     // console.log( 'response: ', response.data );
                     // console.log( 'response.status: ', response.status );
                     
-                    if ( response.status === 200 ) {
-                        setPosterImage( posterUrl );
-                    } else {
-                        setPosterImage( posterNotFound );
-                    }
+                    setPosterImage( posterUrl );
                     
                 } catch ( e ) {
                     setPosterImage( posterNotFound );

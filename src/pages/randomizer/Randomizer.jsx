@@ -18,9 +18,12 @@ function Randomizer() {
     const [ randomMovie, setRandomMovie ] = useState( {} );
     const [ loadingComplete, toggleLoadingComplete ] = useState( false );
     
-    useEffect( () => {
-        toggleLoadingComplete( false );
-    }, [ shortlist ] );
+    // maak aparte button met clickhandler die randomMovie vult
+    // randomMovie wordt in MovieCard geinjecteerd
+    
+    function handleClick() {
+        setRandomMovie( shortlist[ getRandomInt( 0, Object.keys( shortlist ).length ) ] );
+    }
     
     
     return (
@@ -34,20 +37,32 @@ function Randomizer() {
             </div>
             
             {/* Na laden conditioneel renderen met loadingComplete */}
-            <LoadingBar
-                boolComplete={toggleLoadingComplete}
-            />
+            {/*<LoadingBar*/}
+            {/*    boolComplete={toggleLoadingComplete}*/}
+            {/*/>*/}
             
             <div className='random-movie-container'>
-                {/*   Conditioneel gerenderde random movie. >> Wordt getoond als LoadingBar geladen is   */}
-                {loadingComplete && shortlist.length > 0 &&
+                {/*/!*Conditioneel gerenderde random movie. >> Wordt getoond als LoadingBar geladen is   *!/*/}
+                {/*{loadingComplete && shortlist.length > 0 &&*/}
+                {/*    <MovieCard*/}
+                {/*        movie={randomMovie}*/}
+                {/*        withIcons={false}*/}
+                {/*    />*/}
+                {/*}*/}
+                
+                <button
+                    type='button'
+                    onClick={handleClick}
+                >Test
+                </button>
+                
+                {Object.keys( randomMovie ).length > 0 &&
                     <MovieCard
-                        movie={shortlist[ getRandomInt( 0, Object.keys( shortlist ).length ) ]}
+                        movie={randomMovie}
                         withIcons={false}
                     />
-                    
-                    
                 }
+                
                 
                 {Object.keys( shortlist ).length === 0 &&
                     <>

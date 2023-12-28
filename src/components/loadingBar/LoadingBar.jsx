@@ -18,8 +18,6 @@ function LoadingBar( { boolComplete } ) {
         boolComplete( false );
     }
     
-    // useEffect weghalen
-    // bool startLoading > object start, neutral, completed
     useEffect( () => {
         let loop;
         
@@ -41,8 +39,6 @@ function LoadingBar( { boolComplete } ) {
                 } );
                 
             }, 10 );
-            
-            
         }
         
         return function cleanup() {
