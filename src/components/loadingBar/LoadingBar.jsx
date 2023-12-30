@@ -7,9 +7,6 @@ import './LoadingBar.css';
 
 function LoadingBar( { boolComplete } ) {
     
-    
-    const navigate = useNavigate();
-    
     const [ progress, setProgress ] = useState( 0 );
     const [ startLoading, setStartLoading ] = useState( false );
     
@@ -55,7 +52,7 @@ function LoadingBar( { boolComplete } ) {
                 <div style={{ width: `${progress}%`, backgroundColor: 'blue', height: '10px' }}/>
             </div>
             
-            {/*  disabled={Object.keys( shortlist ).length === 0}  */}
+            {/*disabled={Object.keys( shortlist ).length === 0}  */}
             <button
                 className='btn-toggle'
                 type='button'

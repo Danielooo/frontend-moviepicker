@@ -14,10 +14,10 @@ function MovieSelection( { loading, movies, setMovies } ) {
             className='movie-cards'
         >
             {/*{loading === true && <h3>Loading...</h3>}*/}
-            {movies.length > 0 ? movies.map( ( movie ) => (
-                    
-                    
-                    <Suspense fallback={<div>Loading poster...</div>}>
+            <Suspense fallback={<div>Loading poster...</div>}>
+                {movies.length > 0 ? movies.map( ( movie ) => (
+                        
+                        
                         <MovieCard
                             key={`${idPrefix}-${movie.id}`}
                             withIcons={true}
@@ -25,14 +25,14 @@ function MovieSelection( { loading, movies, setMovies } ) {
                             setMovies={setMovies}
                         
                         />
-                    </Suspense>
-                
-                ) )
-                :
-                <>
-                    <i>- Empty -</i>
-                </>
-            }
+                    
+                    ) )
+                    :
+                    <>
+                        <i>- Empty -</i>
+                    </>
+                }
+            </Suspense>
         </div>
     );
 }

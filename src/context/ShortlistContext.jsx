@@ -4,7 +4,7 @@ import ShortlistIconNoFill from './../assets/icons/shortlist/bookmark-simple.svg
 import ShortlistIconFill from './../assets/icons/shortlist/bookmark-simple-fill.svg';
 
 
-export const ShortlistContext = createContext( null );
+export const ShortlistContext = createContext( [] );
 
 function ShortlistContextProvider( { children } ) {
     const [ shortlist, setShortlist ] = useState( [] );
@@ -83,9 +83,9 @@ function ShortlistContextProvider( { children } ) {
             prevShortlist.filter( ( prevMovie ) => prevMovie.id !== movie.id )
         );
         setMovies( ( prevMovies ) =>
-            prevMovies.map( ( prevMovie ) =>
-                prevMovie.id === movie.id ? { ...prevMovie, isAdded: false } : prevMovie
-            )
+            prevMovies.map( ( prevMovie ) => {
+                return prevMovie.id === movie.id ? { ...prevMovie, isAdded: false } : prevMovie;
+            } )
         );
     }
     
