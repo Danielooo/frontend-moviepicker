@@ -47,7 +47,7 @@ function ShortlistContextProvider( { children } ) {
     
     function shortlistToLocalStorageShortlist() {
         const updatedShortlist = JSON.stringify( shortlist );
-        
+        console.log( 'shortlist stringified type and value: ', typeof shortlist, shortlist );
         localStorage.setItem( 'localStorageShortlist', updatedShortlist );
     }
     
@@ -78,10 +78,12 @@ function ShortlistContextProvider( { children } ) {
         
     }
     
-    function handleRemoveFromShortlist( movie, setMovies ) {
+    function handleRemoveFromShortlist( movie, setMovies = () => {
+    } ) {
         setShortlist( ( prevShortlist ) =>
             prevShortlist.filter( ( prevMovie ) => prevMovie.id !== movie.id )
         );
+        
         setMovies( ( prevMovies ) =>
             prevMovies.map( ( prevMovie ) => {
                 return prevMovie.id === movie.id ? { ...prevMovie, isAdded: false } : prevMovie;

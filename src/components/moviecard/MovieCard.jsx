@@ -43,7 +43,7 @@ function MovieCard( { movie, withIcons } ) {
             
             void checkPosterUrl();
             
-        }, [] );
+        }, [ movie.poster_path ] );
         
         
         return (

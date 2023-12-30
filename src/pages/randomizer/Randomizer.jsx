@@ -6,6 +6,7 @@ import getRandomInt from '../../helpers/getRandomInt.js';
 import { Link } from 'react-router-dom';
 import { ShortlistContext } from '../../context/ShortlistContext.jsx';
 import './Randomizer.css';
+import { random } from 'gsap/gsap-core';
 
 // TODO: 2. verwijderen movie uit shortlist > random movie naar default
 // TODO: 3. button opmaken
@@ -19,9 +20,13 @@ function Randomizer() {
     const [ loadingComplete, toggleLoadingComplete ] = useState( false );
     
     
-    // function handleClick() {
-    //     setRandomMovie( shortlist[ getRandomInt( 0, Object.keys( shortlist ).length ) ] );
-    // }
+    function handleClick() {
+        setRandomMovie( shortlist[ getRandomInt( 0, Object.keys( shortlist ).length - 1 ) ] );
+    }
+    
+    useEffect( () => {
+        console.log( 'randomMovie: ', randomMovie );
+    }, [ randomMovie ] );
     
     
     return (
@@ -35,9 +40,9 @@ function Randomizer() {
             </div>
             
             {/*Na laden conditioneel renderen met loadingComplete */}
-            <LoadingBar
-                boolComplete={toggleLoadingComplete}
-            />
+            {/*<LoadingBar*/}
+            {/*    boolComplete={toggleLoadingComplete}*/}
+            {/*/>*/}
             
             <div className='random-movie-container'>
                 {/*Conditioneel gerenderde random movie. >> Wordt getoond als LoadingBar geladen is   */}
@@ -48,19 +53,19 @@ function Randomizer() {
                     />
                 }
                 
-                {/*<button*/}
-                {/*    type='button'*/}
-                {/*    onClick={handleClick}*/}
-                {/*>Test*/}
-                {/*</button>*/}
+                <button
+                    className='btn-random-movie'
+                    type='button'
+                    onClick={handleClick}
+                >Get Random Movie
+                </button>
                 
-                {/*{Object.keys( randomMovie ).length > 0 &&*/}
-                {/*    <MovieCard*/}
-                {/*        movie={randomMovie}*/}
-                {/*        withIcons={false}*/}
-                {/*    />*/}
-                {/*}*/}
-                
+                {Object.keys( randomMovie ).length > 0 &&
+                    <MovieCard
+                        movie={randomMovie}
+                        withIcons={false}
+                    />
+                }
                 
                 {Object.keys( shortlist ).length === 0 &&
                     <>

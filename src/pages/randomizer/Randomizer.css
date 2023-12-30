@@ -4,3 +4,10 @@
   height: 400px;
   margin: 10px;
 }
+
+.btn-random-movie {
+  border-radius: 5%;
+  background: var(--med-blue);
+  color: white;
+  margin: 10px;
+}
