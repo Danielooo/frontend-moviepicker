@@ -51,7 +51,7 @@
 }
 
 .movie-year {
-  margin: 0;
+  margin: 0 0 0 5px;
   padding: 0;
 }
 
@@ -59,7 +59,7 @@
   align-self: flex-start;
   font-style: italic;
   font-size: small;
-  margin: 0;
+  margin: 0 0 0 5px;
   padding: 0;
 }
 

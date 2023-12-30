@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from "axios";
-import './MovieCard.css';
-import './../popup/PopUp.css';
+import styles from './MovieCard.module.css';
+import stylesPopUp from '../popup/PopUp.module.css';
 import posterNotFound from './../../assets/images/404-poster-not-found.svg';
 import favoritesNoFill from "../../assets/icons/favorites/heart-straight.svg";
 import favoritesFill from "../../assets/icons/favorites/heart-straight-fill.svg";
@@ -29,10 +29,7 @@ function MovieCard( { movie, withIcons } ) {
             async function checkPosterUrl() {
                 try {
                     const posterUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
-                    // console.log( 'posterUrl: ', posterUrl );
                     const response = await axios.get( posterUrl );
-                    // console.log( 'response: ', response.data );
-                    // console.log( 'response.status: ', response.status );
                     
                     setPosterImage( posterUrl );
                     
@@ -49,29 +46,29 @@ function MovieCard( { movie, withIcons } ) {
         return (
             <>
                 
-                <div className='movie-card'>
+                <div className={styles[ 'movie-card' ]}>
                     
-                    <div className='movie-poster-container'>
+                    <div className={styles[ 'movie-poster-container' ]}>
                         <img
-                            className='movie-poster'
+                            className={styles[ 'movie-poster' ]}
                             src={posterImage}
                             alt='poster not found'
                         />
-                        <div className='popup-container'>
-                            <p className='popup-container-text'>{movie.overview ? movie.overview :
-                                '- Overview not found,' +
-                                ' please try again - '}</p>
+                        <div className={stylesPopUp[ 'popup-container' ]}>
+                            <p className={stylesPopUp[ 'popup-container-text' ]}>
+                                {movie.overview ? movie.overview : '- Overview not found, please try again -'}
+                            </p>
                         </div>
                     </div>
                     
-                    <p className='movie-title'>{movie.title}</p>
+                    <p className={styles[ 'movie-title' ]}>{movie.title}</p>
                     
-                    <div className='movie-card-bottom'>
-                        <p className='movie-year'>{movie.release_date.substring( 0, 4 )}</p>
-                        <p className='movie-rating'>Rating: {movie.vote_average}</p>
+                    <div className={styles[ 'movie-card-bottom' ]}>
+                        <p className={styles[ 'movie-year' ]}>{movie.release_date.substring( 0, 4 )}</p>
+                        <p className={styles[ 'movie-rating' ]}>Rating: {movie.vote_average}</p>
                         
                         {withIcons &&
-                            <div className='icon-line'>
+                            <div className={styles[ 'icon-line' ]}>
                                 {isMovieInShortlist( movie.id ) ?
                                     <img
                                         onClick={() => handleRemoveFromShortlist( movie, setMovies )}

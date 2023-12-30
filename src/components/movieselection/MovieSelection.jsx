@@ -14,7 +14,7 @@ function MovieSelection( { loading, movies, setMovies } ) {
             className='movie-cards'
         >
             {/*{loading === true && <h3>Loading...</h3>}*/}
-            <Suspense fallback={<div>Loading poster...</div>}>
+            <Suspense fallback={<div>Searching database...</div>}>
                 {movies.length > 0 ? movies.map( ( movie ) => (
                         
                         
@@ -29,7 +29,7 @@ function MovieSelection( { loading, movies, setMovies } ) {
                     ) )
                     :
                     <>
-                        <i>- Empty -</i>
+                        <i>- So empty! Find a selection of movies through Movie Search -</i>
                     </>
                 }
             </Suspense>

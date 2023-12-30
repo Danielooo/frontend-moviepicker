@@ -78,6 +78,7 @@ function ShortlistContextProvider( { children } ) {
         
     }
     
+    // setMovies een standaardwaarde meegegeven als bugfix bij removing van shortlist
     function handleRemoveFromShortlist( movie, setMovies = () => {
     } ) {
         setShortlist( ( prevShortlist ) =>

@@ -18,7 +18,7 @@ function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     
     async function onFormSubmit( { username, email, password, role } ) {
-        
+        console.log( 'formsubmit invoked' );
         
         toggleError( false );
         toggleLoading( true );
@@ -90,8 +90,10 @@ function SignUp() {
                                     value: true,
                                     message: 'Email address is required'
                                 },
-                                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                                message: 'Email must have an \'@\' symbol; should contain a domain (like .com or .nl) ',
+                                pattern: {
+                                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                    message: 'Email must have an \'@\' symbol; should contain a domain (like .com or .nl) ',
+                                }
                             } )}
                         />
                     </div>
@@ -136,7 +138,6 @@ function SignUp() {
                     {errors.role && <p className='error-message'>{errors.role.message}</p>}
                     
                     <Button
-                        className='regular-button'
                         type='submit'
                         disabled={loading}
                         text='Sign Up'

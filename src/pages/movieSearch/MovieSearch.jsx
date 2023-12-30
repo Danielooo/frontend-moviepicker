@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, Suspense } from 'react';
+import React, { useState, useEffect, useContext, lazy, Suspense } from 'react';
 import axios from 'axios';
 
 import './MovieSearch.css';
@@ -14,17 +14,19 @@ import ShortList from "../../components/shortlist/ShortList.jsx";
 import SearchOnActor from "../../components/searchonactor/SearchOnActor.jsx";
 import SearchOnGenre from "../../components/searchongenre/SearchOnGenre.jsx";
 import SearchOnDecade from "../../components/searchondecade/SearchOnDecade.jsx";
-import MovieSelection from "../../components/movieselection/MovieSelection.jsx";
+// import MovieSelection from "../../components/movieselection/MovieSelection.jsx";
 import InfoButton from "../../components/infobutton/InfoButton.jsx";
 import SearchOnTitle from "../../components/searchontitle/SearchOnTitle.jsx";
 
-// misc imports
 
+// misc imports
 
 // context imports
 import { ShortlistContext } from "../../context/ShortlistContext.jsx";
 import { MoviesContext } from "../../context/MoviesContext.jsx";
 
+
+const MovieSelection = lazy( () => import("../../components/movieselection/MovieSelection.jsx") );
 
 export const options = {
     method: 'GET',
@@ -174,7 +176,7 @@ function MovieSearch() {
                             >Movie Search</h1>
                             
                             <InfoButton
-                                text={`You can search on Actor, Genre and Decade.\nCombining search queries is not possible.\nThe results in Movie Selection are the 20 best rated movies that have a minimum of 200 votes`}
+                                text={`You can search on Actor, Genre, Decade and Title.\nCombining search queries is not possible.\nThe results in Movie Selection are the 20 best rated movies that have a minimum of 200 votes`}
                             />
                         </div>
                         

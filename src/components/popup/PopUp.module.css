@@ -5,7 +5,6 @@
 .popup-container {
   overflow: visible;
   
-  
   visibility: hidden;
   background-color: var(--med-yellow);
   color: black;

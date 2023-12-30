@@ -6,9 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { ShortlistContext } from "../../context/ShortlistContext.jsx";
 
 
-// function Shortlist({handleRemoveFromShortlist}) {
-//     const { shortlist, clearShortlistAndLocalStorageShortlist } = useContext(ShortlistContext);
-
 function Shortlist( { linkToRandomizePage } ) {
     const idPrefix = useId();
     
@@ -52,9 +49,9 @@ function Shortlist( { linkToRandomizePage } ) {
                 }
             </section>
             <div className='shortlist-randomize-and-clear-container'>
-                {/*  TODO: conditioneel maken als prop true of false laten zien */}
                 {linkToRandomizePage &&
                     <Button
+                        type='button'
                         text='Randomize'
                         handleClick={handleClickRandomize}
                         disabled={false}
@@ -63,6 +60,7 @@ function Shortlist( { linkToRandomizePage } ) {
                 
                 
                 <Button
+                    type='button'
                     text='Clear Shortlist'
                     handleClick={clearShortlistAndLocalStorageShortlist}
                     disabled={false}

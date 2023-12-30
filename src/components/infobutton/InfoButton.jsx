@@ -1,5 +1,5 @@
 import React, { useId } from 'react';
-import './InfoButton.css';
+import styles from './InfoButton.module.css';
 
 
 function InfoButton( { text, id } ) {
@@ -12,9 +12,9 @@ function InfoButton( { text, id } ) {
     
     return (
         <>
-            <div className='infobutton-container'>
-                <span className='infobutton-circle'>i</span>
-                <div className='explain-popup'>
+            <div className={styles[ 'infobutton-container' ]}>
+                <span className={styles[ 'infobutton-circle' ]}>i</span>
+                <div className={styles[ 'explain-popup' ]}>
                     {sentences}
                 </div>
             </div>
