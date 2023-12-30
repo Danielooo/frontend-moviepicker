@@ -14,9 +14,9 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-
+  
   color: var(--white);
-
+  
   font-family: 'Verdana', 'Tahoma', sans-serif;
 }
 
@@ -26,16 +26,16 @@ body {
   --med-blue: #778DA9;
   --med-yellow: #F4D58D;
   --light-yellow: #FDF0D5;
-
+  
   --dark-black: #000000;
   --white: #FFFFFF;
-
+  
 }
 
 .all-content {
   /*border: 1px solid red;*/
   background-color: black;
-
+  
 }
 
 main {
@@ -45,7 +45,9 @@ main {
   flex-grow: 1;
   background-color: var(--dark-blue);
   align-items: center;
-
+  width: 100%;
+  min-width: 1000px;
+  
   padding: 30px;
 }
 
@@ -58,72 +60,72 @@ a {
 .main-container {
   /*border: 1px solid red;*/
   background-color: var(--dark-blue);
-
+  
   display: flex;
   flex-direction: column;
-
+  
   flex-basis: auto;
   flex-grow: 1;
-
+  
   align-items: center;
-  padding-top: 50px;
+  padding-top: 50;
 }
 
 .sections-container {
   /*border: 1px solid red;*/
-
+  
   display: flex;
   flex-direction: row;
   flex-basis: auto;
   width: 100%;
-
+  
   column-gap: 40px;
-
+  
   justify-content: space-between;
 }
 
 .section-container {
   border: 2px solid var(--med-yellow);
   background-color: var(--dark-purple);
-
+  
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   flex-grow: 0;
-
+  
   padding: 30px;
   box-shadow: 0 0 2em hsl(214, 53%, 2%);
   border-radius: 3em;
-
+  
   align-items: center;
 }
 
 .section-form {
   /*border: 1px solid var(--med-yellow);*/
-
+  
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-
+  
   margin-bottom: 1.5em;
 }
 
 .section-input-line {
   /*border: 1px solid var(--med-yellow);*/
-
+  
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-
+  
   caret-color: white;
   margin-top: 1em;
 }
 
 .section-input-field {
   /*border: 1px solid var(--med-yellow);*/
-
+  
   border: none;
   outline: none;
   background-color: transparent;
@@ -135,7 +137,6 @@ a {
 .section-input-field::placeholder {
   color: lightgrey;
 }
-
 
 
 /*  ERRORS  */
