@@ -1,6 +1,3 @@
-.movie-poster-container {
-  position: relative;
-}
 
 .popup-container {
   overflow: visible;
@@ -22,7 +19,7 @@
   height: auto;
 }
 
-.movie-poster-container:hover .popup-container {
+div:hover > .popup-container {
   overflow: auto;
   
   visibility: visible;

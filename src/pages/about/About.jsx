@@ -17,7 +17,7 @@ function About() {
                 <a
                     className='link-to-moviesearch'
                     href='/'
-                >Try Movie Picker!</a>
+                >Try Moo-V-Pickr!</a>
             
             </div>
         </>

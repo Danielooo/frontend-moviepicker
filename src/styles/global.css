@@ -1,14 +1,12 @@
-.test {
-  font-size: 200px;
+* {
+  box-sizing: border-box;
 }
+
 
 body {
   background-color: black;
 }
 
-* {
-  box-sizing: border-box;
-}
 
 #root {
   display: flex;
@@ -145,21 +143,10 @@ a {
 /*  ERRORS  */
 
 .error-message {
+  margin: 5px;
+  color: lightgrey;
   font-style: italic;
   font-size: smaller;
 }
 
-/*  Tablets  */
 
-@media screen and (min-width: 768px) {
-  p {
-    font-size: 14px
-  }
-}
-
-
-@media screen and (min-width: 992px) {
-  p {
-    font-size: 16px;
-  }
-}

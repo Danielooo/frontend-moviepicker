@@ -62,11 +62,15 @@ function Randomizer() {
                     </Button>
                 }
                 
-                {Object.keys( randomMovie ).length > 0 &&
-                    <MovieCard
-                        movie={randomMovie}
-                        withIcons={false}
-                    />
+                {Object.keys( randomMovie ).length > 0 && (
+                    <>
+                        <h2>Random Movie</h2>
+                        <MovieCard
+                            movie={randomMovie}
+                            withIcons={true}
+                        />
+                    </>
+                )
                 }
                 
                 {Object.keys( shortlist ).length === 0 ? (

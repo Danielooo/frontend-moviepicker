@@ -16,6 +16,10 @@
   padding-bottom: 0.5em;
 }
 
+.movie-poster-container {
+  position: relative;
+}
+
 .movie-card p {
   margin-bottom: 0.5em;
 }
@@ -37,6 +41,7 @@
 }
 
 .movie-title {
+  align-self: center;
   font-size: 1em;
   margin: 0.4em 0;
   padding: 0;

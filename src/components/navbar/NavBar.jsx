@@ -25,7 +25,6 @@ function NavBar() {
                         src={camera}
                         alt='camera-icon'
                     />
-                    {/*<h3 className='home-icon-title'>Movie Picker</h3>*/}
                 
                 </Link>
                 

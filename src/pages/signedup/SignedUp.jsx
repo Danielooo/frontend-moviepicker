@@ -11,8 +11,8 @@ function SignedUp() {
             <section className='section-container'>
                 <h2 className='login-title'>Sign up succesful!</h2>
                 
-                <p>You have succefully signed up for Movie Picker<br/>
-                    Click <Link to={{ pathname: '/login' }}>here</Link> to log in<br/>
+                <p>You have succefully signed up for Moo-V-Pickr<br/>
+                    Click <Link to='/login'>here</Link> to log in<br/>
                 </p>
             </section>
         

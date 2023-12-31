@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from "axios";
 import styles from './MovieCard.module.css';
-import stylesPopUp from '../popup/PopUp.module.css';
 import posterNotFound from './../../assets/images/404-poster-not-found.svg';
 import favoritesNoFill from "../../assets/icons/favorites/heart-straight.svg";
 import favoritesFill from "../../assets/icons/favorites/heart-straight-fill.svg";
@@ -14,6 +13,8 @@ import shortlistFill from './../../assets/icons/shortlist/bookmark-simple-fill.s
 import { ShortlistContext } from '../../context/ShortlistContext.jsx';
 import { FavoritesContext } from '../../context/FavoritesContext.jsx';
 import { MoviesContext } from '../../context/MoviesContext.jsx';
+import textShortener from '../../helpers/textShortener.js';
+import PopUp from '../popup/PopUp.jsx';
 
 
 function MovieCard( { movie, withIcons } ) {
@@ -23,6 +24,8 @@ function MovieCard( { movie, withIcons } ) {
     const { setMovies } = useContext( MoviesContext );
     
     const [ posterImage, setPosterImage ] = useState( null );
+    
+    const maxCharsMovieTitle = 30;
     
     if ( movie ) {
         useEffect( () => {
@@ -54,14 +57,14 @@ function MovieCard( { movie, withIcons } ) {
                             src={posterImage}
                             alt='poster not found'
                         />
-                        <div className={stylesPopUp[ 'popup-container' ]}>
-                            <p className={stylesPopUp[ 'popup-container-text' ]}>
-                                {movie.overview ? movie.overview : '- Overview not found, please try again -'}
-                            </p>
-                        </div>
+                        {/* popup component maken */}
+                        <PopUp
+                            text={movie.overview}
+                        />
                     </div>
                     
-                    <p className={styles[ 'movie-title' ]}>{movie.title}</p>
+                    <p className={styles[ 'movie-title' ]}>{movie.title.length <= maxCharsMovieTitle ? movie.title :
+                        textShortener( movie.title, maxCharsMovieTitle )}</p>
                     
                     <div className={styles[ 'movie-card-bottom' ]}>
                         <p className={styles[ 'movie-year' ]}>{movie.release_date.substring( 0, 4 )}</p>

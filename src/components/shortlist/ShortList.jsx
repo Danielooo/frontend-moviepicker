@@ -4,10 +4,12 @@ import Button from '../button/Button.jsx';
 import { useNavigate } from 'react-router-dom';
 
 import { ShortlistContext } from "../../context/ShortlistContext.jsx";
+import textShortener from '../../helpers/textShortener.js';
 
 
 function Shortlist( { linkToRandomizePage } ) {
     const idPrefix = useId();
+    const maxCharsMovieTitle = 35;
     
     const {
         shortlist, setMovies, clearShortlistAndLocalStorageShortlist, handleRemoveFromShortlist
@@ -39,9 +41,11 @@ function Shortlist( { linkToRandomizePage } ) {
                                 >
                                     -
                                 </button>
-                                <p>
-                                    {movie.title}
-                                </p>
+                                <p
+                                    className={styles[ 'movie-title' ]}
+                                >{movie.title.length <= maxCharsMovieTitle ?
+                                    movie.title :
+                                    textShortener( movie.title, maxCharsMovieTitle )}</p>
                             </div>
                         ) ) )
                     :

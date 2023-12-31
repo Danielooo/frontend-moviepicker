@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import './SignUp.module.css';
+import styles from './SignUp.module.css';
 import Button from "../../components/button/Button.jsx";
 
 
@@ -72,7 +72,7 @@ function SignUp() {
                                 },
                                 pattern: {
                                     value: /^[a-zA-Z0-9_]{6,20}$/,
-                                    message: 'Invalid username format',
+                                    message: 'Username must be between 6 and 20 characters and can only contain letters and numbers',
                                 },
                             } )}
                         />
@@ -112,8 +112,10 @@ function SignUp() {
                                     value: true,
                                     message: 'Password is required'
                                 },
-                                pattern: /^(?=.*[@!#])[a-zA-Z0-9@!#]{6,}$/,
-                                message: 'Password must contain at least 6 characters and include !, @ and #',
+                                pattern: {
+                                    value: /^(?=.*[@!#])[a-zA-Z0-9@!#]{6,}$/,
+                                    message: 'Password must contain at least 6 characters and include !, @ and #',
+                                }
                             } )}
                         
                         />
