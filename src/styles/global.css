@@ -68,7 +68,7 @@ a {
   flex-grow: 1;
   
   align-items: center;
-  padding-top: 50;
+  padding-top: 50px;
 }
 
 .sections-container {
@@ -138,6 +138,9 @@ a {
   color: lightgrey;
 }
 
+.link-to-moviesearch {
+  font-weight: bold;
+}
 
 /*  ERRORS  */
 

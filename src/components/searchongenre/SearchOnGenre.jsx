@@ -1,4 +1,5 @@
 import React, { useId } from 'react';
+import Button from '../button/Button.jsx';
 
 
 function SearchOnGenre(
@@ -34,11 +35,12 @@ function SearchOnGenre(
                                 ) )}
                             </select>
                         </div>
-                        <button
-                            className='regular-button'
+                        <Button
                             type='submit'
-                        >Search Genre
-                        </button>
+                            text='Search Genre'
+                            disabled={false}
+                        />
+                    
                     </form>
                     {errorGenre && <p className='error-message'>An error occurred. Please try again</p>}
                 

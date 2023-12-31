@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from "../../context/AuthContext.jsx";
 import axios from 'axios';
 
-import './Profile.css';
+import styles from './Profile.module.css';
 import MovieSelection from "../../components/movieselection/MovieSelection.jsx";
 
 // TODO toon ook userid, info, role
@@ -34,7 +34,7 @@ function Profile() {
     
     return (
         <>
-            <section className='section-container profile-set-width'>
+            <section className={`section-container ${styles[ 'profile-set-width' ]}`}>
                 <h1>Profile</h1>
                 
                 {isAuth ?
@@ -52,7 +52,7 @@ function Profile() {
                     (
                         <>
                             <p>You're currently not logged in</p>
-                            <p>Click <Link to={{ pathname: '/login' }}>here</Link> to go to the log in page</p>
+                            <p>Click <Link to='/login'>here</Link> to go to the log in page</p>
                         </>
                     )
                 }

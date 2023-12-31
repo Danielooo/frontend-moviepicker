@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import './SignUp.css';
+import './SignUp.module.css';
 import Button from "../../components/button/Button.jsx";
 
 
@@ -18,8 +18,6 @@ function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     
     async function onFormSubmit( { username, email, password, role } ) {
-        console.log( 'formsubmit invoked' );
-        
         toggleError( false );
         toggleLoading( true );
         
@@ -52,16 +50,19 @@ function SignUp() {
     return (
         <>
             
-            <section className='section-container signup-set-width'>
+            <section className={`section-container ${styles[ 'signup-set-width' ]}`}>
                 <h1>Sign Up</h1>
                 
-                <form onSubmit={handleSubmit( onFormSubmit )}>
+                <form
+                    className={styles[ 'signup-form' ]}
+                    onSubmit={handleSubmit( onFormSubmit )}
+                >
                     
                     {/*  Username  */}
                     <div className='section-input-line'>
                         <label htmlFor='username-field'>Username:</label>
                         <input
-                            className='section-input-field'
+                            className={styles[ 'section-input-field' ]}
                             type='text'
                             id='username-field'
                             {...register( 'username', {
@@ -82,7 +83,7 @@ function SignUp() {
                     <div className='section-input-line'>
                         <label htmlFor='email-field'>Email:</label>
                         <input
-                            className='section-input-field'
+                            className={styles[ 'section-input-field' ]}
                             type='text'
                             id='email-field'
                             {...register( 'email', {
@@ -103,7 +104,7 @@ function SignUp() {
                     <div className='section-input-line'>
                         <label htmlFor='password-field'>Password:</label>
                         <input
-                            className='section-input-field'
+                            className={styles[ 'section-input-field' ]}
                             type='password'
                             id='password-field'
                             {...register( 'password', {
@@ -124,7 +125,7 @@ function SignUp() {
                         <label htmlFor='role-field'>Admin or User:</label>
                         
                         <select
-                            className='section-input-field'
+                            className={styles[ 'section-input-field' ]}
                             id='role-field'
                             {...register( 'role', {
                                 required: true,

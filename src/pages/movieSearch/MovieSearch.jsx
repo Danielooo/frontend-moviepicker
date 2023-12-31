@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, lazy, Suspense } from 'react';
 import axios from 'axios';
 
-import './MovieSearch.css';
+import styles from './MovieSearch.module.css';
 
 // helper imports
 import { getActorIdByName, getMoviesByActorId } from "../../helpers/actorSearch";
@@ -105,11 +105,14 @@ function MovieSearch() {
     
     
     useEffect( () => {
+        // if ( genreChoiceId !== undefined ) {
+        //     void getMoviesByGenreId( setMovies, toggleLoading, toggleErrorGenre, genreChoiceId );
+        // } else {
         
-        if ( genreChoiceId !== undefined ) {
+        try {
             void getMoviesByGenreId( setMovies, toggleLoading, toggleErrorGenre, genreChoiceId );
-        } else {
-            // TODO uitzondering bedenken of else verwijderen
+        } catch ( e ) {
+            console.error( e );
         }
         
         toggleLoading( false );
@@ -163,13 +166,13 @@ function MovieSearch() {
     return (
         
         <>
-            <div className='max-width-container'>
+            <div className={styles[ 'max-width-container' ]}>
                 <div className='sections-container'>
                     
                     {/*Movie Search  */}
                     
-                    <section className='section-container section-set-width'>
-                        <div className='title-and-infobutton-line'>
+                    <section className={`section-container ${styles[ 'section-set-width' ]}`}>
+                        <div className={styles[ 'title-and-infobutton-line' ]}>
                             <h1
                                 className='section-title'
                                 id='movie-search'
@@ -223,7 +226,7 @@ function MovieSearch() {
                     
                     {/*Shortlist*/}
                     
-                    <section className='section-container section-set-width'>
+                    <section className={`section-container ${styles[ 'section-set-width' ]}`}>
                         <ShortList
                             setMovies={setMovies}
                             linkToRandomizePage={true}
@@ -236,7 +239,7 @@ function MovieSearch() {
                 
                 {/* Movie selection */}
                 
-                <section className='movie-selection section-container'>
+                <section className={`${styles[ 'movie-selection' ]} section-container`}>
                     <div className='section-inner-container'>
                         <h1 className='section-title'>Movie Selection</h1>
                         <Suspense fallback={'Loading.'}>

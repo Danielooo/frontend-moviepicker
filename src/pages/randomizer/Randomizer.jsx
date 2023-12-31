@@ -5,7 +5,7 @@ import MovieCard from '../../components/moviecard/MovieCard.jsx';
 import getRandomInt from '../../helpers/getRandomInt.js';
 import { Link } from 'react-router-dom';
 import { ShortlistContext } from '../../context/ShortlistContext.jsx';
-import './Randomizer.css';
+import styles from './Randomizer.module.css';
 import Button from '../../components/button/Button.jsx';
 
 
@@ -40,7 +40,7 @@ function Randomizer() {
             {/*    boolComplete={toggleLoadingComplete}*/}
             {/*/>*/}
             
-            <div className='random-movie-container'>
+            <div className={styles[ 'random-movie-container' ]}>
                 {/*Conditioneel gerenderde random movie. >> Wordt getoond als LoadingBar geladen is   */}
                 {loadingComplete && shortlist.length > 0 &&
                     <MovieCard

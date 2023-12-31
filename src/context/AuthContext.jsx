@@ -6,6 +6,8 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import isTokenValid from "../helpers/isTokenValid";
 
+// TODO: implement refresh token or prompt re-login
+
 // zorgt ervoor dat andere pages kunnen abonneren op de context
 export const AuthContext = createContext( {} );
 

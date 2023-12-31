@@ -7,7 +7,7 @@ import axios from "axios";
 
 import Button from "../../components/button/Button.jsx";
 
-import './LogIn.css';
+import styles from './Login.module.css';
 
 
 function LogIn() {
@@ -40,13 +40,13 @@ function LogIn() {
         <>
             <div className='section-container login-set-width'>
                 
-                <h1 className='login-title'>Log In</h1>
+                <h1 className={styles[ 'login-title' ]}>Log In</h1>
                 
                 
                 <form onSubmit={handleSubmit( handleFormSubmit )}>
                     
                     {/*  Username  */}
-                    <div className='login-section-input-line'>
+                    <div className={styles[ 'login-section-input-line' ]}>
                         <label
                             htmlFor='username-field'
                             className='login-label'
@@ -77,7 +77,6 @@ function LogIn() {
                     
                     <Button
                         type='submit'
-                        className='regular-button login-button'
                         text='Log In'
                     />
                     
@@ -87,7 +86,7 @@ function LogIn() {
                 {errorMessage && <p className='error-message'>
                     Log in failed. Please check username an password an try again (error code: {errorMessage})</p>}
                 
-                <p className='signup-line'>No account yet? <Link to='/signup'>Sign up here</Link></p>
+                <p className={styles[ 'signup-line' ]}>No account yet? <Link to='/signup'>Sign up here</Link></p>
             </div>
         </>
     )

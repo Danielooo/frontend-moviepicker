@@ -13,26 +13,23 @@ function MovieSelection( { loading, movies, setMovies } ) {
             key={idPrefix}
             className='movie-cards'
         >
-            {/*{loading === true && <h3>Loading...</h3>}*/}
-            <Suspense fallback={<div>Searching database...</div>}>
-                {movies.length > 0 ? movies.map( ( movie ) => (
-                        
-                        
-                        <MovieCard
-                            key={`${idPrefix}-${movie.id}`}
-                            withIcons={true}
-                            movie={movie}
-                            setMovies={setMovies}
-                        
-                        />
+            {movies.length > 0 ? movies.map( ( movie ) => (
                     
-                    ) )
-                    :
-                    <>
-                        <i>- So empty! Find a selection of movies through Movie Search -</i>
-                    </>
-                }
-            </Suspense>
+                    
+                    <MovieCard
+                        key={`${idPrefix}-${movie.id}`}
+                        withIcons={true}
+                        movie={movie}
+                        setMovies={setMovies}
+                    
+                    />
+                
+                ) )
+                :
+                <>
+                    <i>- So empty! Find a selection of movies through Movie Search -</i>
+                </>
+            }
         </div>
     );
 }

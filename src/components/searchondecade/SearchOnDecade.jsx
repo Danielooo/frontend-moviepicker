@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import React, { useEffect, useId } from 'react';
+import Button from '../button/Button.jsx';
 
 
 function SearchOnDecade( { handleDecadeSubmit, selectedDecade, setSelectedDecade, decades, errorDecade } ) {
@@ -30,11 +31,11 @@ function SearchOnDecade( { handleDecadeSubmit, selectedDecade, setSelectedDecade
                         ) )}
                     </select>
                 </div>
-                <button
-                    className='regular-button'
+                <Button
                     type='submit'
-                >Search Decade
-                </button>
+                    text='Search Decade'
+                    disabled={false}
+                />
             </form>
             {errorDecade && <p className='error-message'>An error occurred. Please try again</p>}
         </>
