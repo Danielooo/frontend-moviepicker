@@ -1,8 +1,16 @@
 import React from 'react';
-import './PopUp.css'
+import styles from './PopUp.module.css';
 
-// TODO create popup for movie overview and icons
 
-function PopUp({text}) {
-
+function PopUp( { text } ) {
+    
+    return (
+        <div className={styles[ 'popup-container' ]}>
+            <p className={styles[ 'popup-container-text' ]}>
+                {text ? text : '- Overview not found, please try again -'}
+            </p>
+        </div>
+    );
 }
+
+export default PopUp;

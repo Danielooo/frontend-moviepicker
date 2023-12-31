@@ -16,8 +16,6 @@ import PageNotFound from "./pages/pageNotFound/PageNotFound.jsx";
 import Favorites from "./pages/favorites/Favorites.jsx";
 import Randomizer from './pages/randomizer/Randomizer.jsx';
 
-// import DemoFetchPage from "./pages/demoFetchPage/DemoFetchPage";
-
 
 function App() {
     
@@ -25,33 +23,72 @@ function App() {
     
     
     return (
-      <>
-          <header>
-              <NavBar/>
-          </header>
-          
-          <main>
-              <Routes>
-                  <Route exact path='/' element={<MovieSearch/>}/>
-                  <Route exact path='/favorites' element={<Favorites/>}/>
-                  <Route exact path='/about' element={<About/>}/>
-                  <Route exact path='/profile' element={<Profile/>}/>
-                  <Route exact path='/login' element={<LogIn/>}/>
-                  <Route exact path='/logout' element={<LogOut/>}/>
-                  <Route exact path='/signup' element={<SignUp/>}/>
-                  <Route exact path='/signedup' element={<SignedUp/>}/>
-                  <Route exact path='/randomizer' element={<Randomizer/>}/>
-                  
-                  
-                  <Route path='*' element={<PageNotFound/>}/>
-              
-              </Routes>
-          </main>
-          
-          <footer>
-              <Footer/>
-          </footer>
-      </>
+        <>
+            <header>
+                <NavBar/>
+            </header>
+            
+            <main>
+                <Routes>
+                    <Route
+                        exact
+                        path='/'
+                        element={<MovieSearch/>}
+                    />
+                    <Route
+                        exact
+                        path='/favorites'
+                        element={<Favorites/>}
+                    />
+                    <Route
+                        exact
+                        path='/about'
+                        element={<About/>}
+                    />
+                    <Route
+                        exact
+                        path='/profile'
+                        element={<Profile/>}
+                    />
+                    <Route
+                        exact
+                        path='/login'
+                        element={<LogIn/>}
+                    />
+                    <Route
+                        exact
+                        path='/logout'
+                        element={<LogOut/>}
+                    />
+                    <Route
+                        exact
+                        path='/signup'
+                        element={<SignUp/>}
+                    />
+                    <Route
+                        exact
+                        path='/signedup'
+                        element={<SignedUp/>}
+                    />
+                    <Route
+                        exact
+                        path='/randomizer'
+                        element={<Randomizer/>}
+                    />
+                    
+                    
+                    <Route
+                        path='*'
+                        element={<PageNotFound/>}
+                    />
+                
+                </Routes>
+            </main>
+            
+            <footer>
+                <Footer/>
+            </footer>
+        </>
     );
 }
 

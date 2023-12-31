@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import isTokenValid from "../helpers/isTokenValid";
 
+
 // zorgt ervoor dat andere pages kunnen abonneren op de context
 export const AuthContext = createContext( {} );
 
@@ -19,21 +20,27 @@ function AuthContextProvider( { children } ) {
     } );
     
     useEffect( () => {
-        const token = localStorage.getItem( 'token' );
-        
-        if ( token && isTokenValid( token ) ) {
-            const decodedToken = jwt_decode( token );
-            void fetchUserData( decodedToken.sub, token, );
-        } else {
-            setAuth( {
-                ...auth,
-                status: 'done'
-            } );
+        try {
+            const token = localStorage.getItem( 'token' );
+            
+            if ( token && isTokenValid( token ) ) {
+                const decodedToken = jwt_decode( token );
+                void fetchUserData( decodedToken.sub, token, );
+            } else {
+                setAuth( {
+                    ...auth,
+                    status: 'done'
+                } );
+            }
+            
+        } catch ( e ) {
+            console.error( e );
         }
     }, [] );
     
     
     function login( JWT ) {
+        console.log( 'JWT: ', JWT );
         localStorage.setItem( 'token', JWT );
         
         const decodedToken = jwt_decode( JWT );
@@ -43,7 +50,8 @@ function AuthContextProvider( { children } ) {
     
     function logout() {
         // TODO: test localstorage.removeItem('token') so shortlist won't be cleared
-        localStorage.clear();
+        localStorage.removeItem( 'token' );
+        // localStorage.clear();
         
         setAuth( {
             ...auth,

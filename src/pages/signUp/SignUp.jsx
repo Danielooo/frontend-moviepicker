@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import './SignUp.css';
+import styles from './SignUp.module.css';
 import Button from "../../components/button/Button.jsx";
 
 
@@ -18,8 +18,6 @@ function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     
     async function onFormSubmit( { username, email, password, role } ) {
-        
-        
         toggleError( false );
         toggleLoading( true );
         
@@ -52,16 +50,19 @@ function SignUp() {
     return (
         <>
             
-            <section className='section-container signup-set-width'>
+            <section className={`section-container ${styles[ 'signup-set-width' ]}`}>
                 <h1>Sign Up</h1>
                 
-                <form onSubmit={handleSubmit( onFormSubmit )}>
+                <form
+                    className={styles[ 'signup-form' ]}
+                    onSubmit={handleSubmit( onFormSubmit )}
+                >
                     
                     {/*  Username  */}
                     <div className='section-input-line'>
                         <label htmlFor='username-field'>Username:</label>
                         <input
-                            className='section-input-field'
+                            className={styles[ 'section-input-field' ]}
                             type='text'
                             id='username-field'
                             {...register( 'username', {
@@ -71,7 +72,7 @@ function SignUp() {
                                 },
                                 pattern: {
                                     value: /^[a-zA-Z0-9_]{6,20}$/,
-                                    message: 'Invalid username format',
+                                    message: 'Username must be between 6 and 20 characters and can only contain letters and numbers',
                                 },
                             } )}
                         />
@@ -82,7 +83,7 @@ function SignUp() {
                     <div className='section-input-line'>
                         <label htmlFor='email-field'>Email:</label>
                         <input
-                            className='section-input-field'
+                            className={styles[ 'section-input-field' ]}
                             type='text'
                             id='email-field'
                             {...register( 'email', {
@@ -90,8 +91,10 @@ function SignUp() {
                                     value: true,
                                     message: 'Email address is required'
                                 },
-                                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                                message: 'Email must have an \'@\' symbol; should contain a domain (like .com or .nl) ',
+                                pattern: {
+                                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                    message: 'Email must have an \'@\' symbol; should contain a domain (like .com or .nl) ',
+                                }
                             } )}
                         />
                     </div>
@@ -101,7 +104,7 @@ function SignUp() {
                     <div className='section-input-line'>
                         <label htmlFor='password-field'>Password:</label>
                         <input
-                            className='section-input-field'
+                            className={styles[ 'section-input-field' ]}
                             type='password'
                             id='password-field'
                             {...register( 'password', {
@@ -109,8 +112,10 @@ function SignUp() {
                                     value: true,
                                     message: 'Password is required'
                                 },
-                                pattern: /^(?=.*[@!#])[a-zA-Z0-9@!#]{6,}$/,
-                                message: 'Password must contain at least 6 characters and include !, @ and #',
+                                pattern: {
+                                    value: /^(?=.*[@!#])[a-zA-Z0-9@!#]{6,}$/,
+                                    message: 'Password must contain at least 6 characters and include !, @ and #',
+                                }
                             } )}
                         
                         />
@@ -122,7 +127,7 @@ function SignUp() {
                         <label htmlFor='role-field'>Admin or User:</label>
                         
                         <select
-                            className='section-input-field'
+                            className={styles[ 'section-input-field' ]}
                             id='role-field'
                             {...register( 'role', {
                                 required: true,
@@ -136,7 +141,6 @@ function SignUp() {
                     {errors.role && <p className='error-message'>{errors.role.message}</p>}
                     
                     <Button
-                        className='regular-button'
                         type='submit'
                         disabled={loading}
                         text='Sign Up'

@@ -1,16 +1,15 @@
 import React, { useContext, useId } from 'react';
-import './ShortList.css';
+import styles from './ShortList.module.css';
 import Button from '../button/Button.jsx';
 import { useNavigate } from 'react-router-dom';
 
 import { ShortlistContext } from "../../context/ShortlistContext.jsx";
+import textShortener from '../../helpers/textShortener.js';
 
-
-// function Shortlist({handleRemoveFromShortlist}) {
-//     const { shortlist, clearShortlistAndLocalStorageShortlist } = useContext(ShortlistContext);
 
 function Shortlist( { linkToRandomizePage } ) {
     const idPrefix = useId();
+    const maxCharsMovieTitle = 35;
     
     const {
         shortlist, setMovies, clearShortlistAndLocalStorageShortlist, handleRemoveFromShortlist
@@ -28,33 +27,35 @@ function Shortlist( { linkToRandomizePage } ) {
     return (
         <>
             <h2 className='section-title'>Shortlist</h2>
-            <h4 className='shortlist-counter'>{shortlist.length}/10</h4>
-            <section className='shortlist-movies'>
+            <h4 className={styles[ 'shortlist-counter' ]}>{shortlist.length}/10</h4>
+            <section className={styles[ 'shortlist-movies' ]}>
                 {shortlist.length > 0 ? (
                         shortlist.map( ( movie ) => (
                             <div
                                 key={`${idPrefix}-${movie.id}`}
-                                className='shortlist-movie'
+                                className={styles[ 'shortlist-movie' ]}
                             >
                                 <button
-                                    className='button-remove-movie'
+                                    className={styles[ 'button-remove-movie' ]}
                                     onClick={() => handleRemoveFromShortlist( movie, setMovies )}
                                 >
                                     -
                                 </button>
-                                <p>
-                                    {movie.title}
-                                </p>
+                                <p
+                                    className={styles[ 'movie-title' ]}
+                                >{movie.title.length <= maxCharsMovieTitle ?
+                                    movie.title :
+                                    textShortener( movie.title, maxCharsMovieTitle )}</p>
                             </div>
                         ) ) )
                     :
-                    <i className='shortlist-empty-text'> - Empty - </i>
+                    <i className={styles[ 'shortlist-empty-text' ]}> - Empty - </i>
                 }
             </section>
-            <div className='shortlist-randomize-and-clear-container'>
-                {/*  TODO: conditioneel maken als prop true of false laten zien */}
+            <div className={styles[ 'shortlist-randomize-and-clear-container' ]}>
                 {linkToRandomizePage &&
                     <Button
+                        type='button'
                         text='Randomize'
                         handleClick={handleClickRandomize}
                         disabled={false}
@@ -63,6 +64,7 @@ function Shortlist( { linkToRandomizePage } ) {
                 
                 
                 <Button
+                    type='button'
                     text='Clear Shortlist'
                     handleClick={clearShortlistAndLocalStorageShortlist}
                     disabled={false}

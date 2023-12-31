@@ -5,12 +5,8 @@ import MovieCard from '../../components/moviecard/MovieCard.jsx';
 import getRandomInt from '../../helpers/getRandomInt.js';
 import { Link } from 'react-router-dom';
 import { ShortlistContext } from '../../context/ShortlistContext.jsx';
-import './Randomizer.css';
-import { random } from 'gsap/gsap-core';
-
-// TODO: 2. verwijderen movie uit shortlist > random movie naar default
-// TODO: 3. button opmaken
-// TODO: 4. opmaken loadingbar > div met margin en
+import styles from './Randomizer.module.css';
+import Button from '../../components/button/Button.jsx';
 
 
 function Randomizer() {
@@ -18,15 +14,15 @@ function Randomizer() {
     
     const [ randomMovie, setRandomMovie ] = useState( {} );
     const [ loadingComplete, toggleLoadingComplete ] = useState( false );
-    
+    const [ lastRandomMovieIndex, setLastRandomMovieIndex ] = useState( undefined );
     
     function handleClick() {
-        setRandomMovie( shortlist[ getRandomInt( 0, Object.keys( shortlist ).length - 1 ) ] );
+        const randomMovieIndex = getRandomInt( 0, Object.keys( shortlist ).length - 1, lastRandomMovieIndex );
+        console.log( 'randomMovieIndex: ', randomMovieIndex );
+        
+        setRandomMovie( shortlist[ randomMovieIndex ] );
+        setLastRandomMovieIndex( randomMovieIndex );
     }
-    
-    useEffect( () => {
-        console.log( 'randomMovie: ', randomMovie );
-    }, [ randomMovie ] );
     
     
     return (
@@ -44,7 +40,7 @@ function Randomizer() {
             {/*    boolComplete={toggleLoadingComplete}*/}
             {/*/>*/}
             
-            <div className='random-movie-container'>
+            <div className={styles[ 'random-movie-container' ]}>
                 {/*Conditioneel gerenderde random movie. >> Wordt getoond als LoadingBar geladen is   */}
                 {loadingComplete && shortlist.length > 0 &&
                     <MovieCard
@@ -53,26 +49,47 @@ function Randomizer() {
                     />
                 }
                 
-                <button
-                    className='btn-random-movie'
-                    type='button'
-                    onClick={handleClick}
-                >Get Random Movie
-                </button>
                 
-                {Object.keys( randomMovie ).length > 0 &&
-                    <MovieCard
-                        movie={randomMovie}
-                        withIcons={false}
-                    />
+                {shortlist.length > 1 &&
+                    <Button
+                        type='button'
+                        text='Get random movie'
+                        handleClick={handleClick}
+                        disabled={false}
+                    >
+                    
+                    
+                    </Button>
                 }
                 
-                {Object.keys( shortlist ).length === 0 &&
+                {Object.keys( randomMovie ).length > 0 && (
+                    <>
+                        <h2>Random Movie</h2>
+                        <MovieCard
+                            movie={randomMovie}
+                            withIcons={true}
+                        />
+                    </>
+                )
+                }
+                
+                {Object.keys( shortlist ).length === 0 ? (
                     <>
                         <p>No movies in shortlist</p>
                         <p>Go to <Link to='/'>MovieSearch</Link></p>
                     </>
-                }
+                ) : Object.keys( shortlist ).length === 1 ? (
+                    <>
+                        <p>Just one movie in shortlist. Add more in MovieSearch in order to Randomize</p>
+                        <p>Go to <Link to='/'>MovieSearch</Link></p>
+                    </>
+                ) : (
+                    <>
+                        <p>Want to add more movies to the shortlist?</p>
+                        <p>Go to <Link to='/'>MovieSearch</Link></p>
+                    </>
+                )}
+            
             </div>
         </>
     );

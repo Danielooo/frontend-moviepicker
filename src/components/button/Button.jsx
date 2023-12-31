@@ -1,21 +1,20 @@
 import React from 'react';
-import './Button.css';
-import { useNavigate } from 'react-router-dom';
-import logIn from "../../pages/login/LogIn.jsx";
+import styles from './Button.module.css';
 
-function Button( { text, handleClick, disabled } ) {
-	// const navigate = useNavigate();
-	
-	
-	return (
-	<button
-	className='regular-button'
-	onClick={handleClick}
-	disabled={disabled}
-	>
-		{text}
-	</button>
-	)
+
+function Button( { type, text, handleClick, disabled } ) {
+    
+    
+    return (
+        <button
+            type={type}
+            className={styles[ 'regular-button' ]}
+            onClick={handleClick}
+            disabled={disabled}
+        >
+            {text}
+        </button>
+    );
 }
 
 export default Button;

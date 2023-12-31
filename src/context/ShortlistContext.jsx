@@ -47,7 +47,6 @@ function ShortlistContextProvider( { children } ) {
     
     function shortlistToLocalStorageShortlist() {
         const updatedShortlist = JSON.stringify( shortlist );
-        console.log( 'shortlist stringified type and value: ', typeof shortlist, shortlist );
         localStorage.setItem( 'localStorageShortlist', updatedShortlist );
     }
     
@@ -58,7 +57,6 @@ function ShortlistContextProvider( { children } ) {
     function clearShortlistAndLocalStorageShortlist() {
         setShortlist( [] );
         localStorageShortlistToEmptyArray();
-        console.log( 'clear shortlist invoked' );
     }
     
     
@@ -78,6 +76,7 @@ function ShortlistContextProvider( { children } ) {
         
     }
     
+    // setMovies een standaardwaarde meegegeven als bugfix bij removing van shortlist
     function handleRemoveFromShortlist( movie, setMovies = () => {
     } ) {
         setShortlist( ( prevShortlist ) =>
