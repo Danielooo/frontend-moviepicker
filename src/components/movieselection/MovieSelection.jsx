@@ -2,8 +2,6 @@ import React, { useEffect, useState, useId, Suspense } from 'react';
 import MovieCard from "../moviecard/MovieCard.jsx";
 import './MovieSelection.css';
 
-// TODO: vragen of Suspense hier correct is gebruikt
-// TODO: foutmelding Warning: Each child in a list should have a unique "key" prop. bij regel 11 na refresh in Favorites
 
 function MovieSelection( { loading, movies, setMovies } ) {
     const idPrefix = useId();

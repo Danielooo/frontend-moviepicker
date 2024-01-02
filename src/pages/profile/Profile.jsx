@@ -6,9 +6,6 @@ import axios from 'axios';
 import styles from './Profile.module.css';
 import MovieSelection from "../../components/movieselection/MovieSelection.jsx";
 
-// TODO toon ook userid, info, role
-// TODO aanpas knop voor elementen
-// TODO wachtwoord veranderen
 
 function Profile() {
     const { isAuth, user } = useContext( AuthContext );
