@@ -1,5 +1,3 @@
-// TODO: create logout function
-
 import React, { createContext, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -49,9 +47,7 @@ function AuthContextProvider( { children } ) {
     }
     
     function logout() {
-        // TODO: test localstorage.removeItem('token') so shortlist won't be cleared
         localStorage.removeItem( 'token' );
-        // localStorage.clear();
         
         setAuth( {
             ...auth,
