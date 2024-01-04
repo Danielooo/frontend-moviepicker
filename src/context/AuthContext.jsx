@@ -38,7 +38,6 @@ function AuthContextProvider( { children } ) {
     
     
     function login( JWT ) {
-        console.log( 'JWT: ', JWT );
         localStorage.setItem( 'token', JWT );
         
         const decodedToken = jwt_decode( JWT );
@@ -55,7 +54,7 @@ function AuthContextProvider( { children } ) {
             user: null,
             status: 'done',
         } );
-        navigate( '/' );
+        navigate( '/loggedout' );
     }
     
     

@@ -10,7 +10,7 @@ import FavoritesContextProvider from "./context/FavoritesContext.jsx";
 import MoviesContextProvider from "./context/MoviesContext.jsx";
 
 // styles
-import './styles/global.css';
+import './global.css';
 
 
 const container = document.getElementById( 'root' );
@@ -20,19 +20,19 @@ const root = ReactDOM.createRoot( container );
 
 //render app to root
 root.render(
-  <StrictMode>
-      <Router>
-          <AuthContextProvider>
-              <FavoritesContextProvider>
-                  <ShortlistContextProvider>
-                      <MoviesContextProvider>
-                          <App/>
-                      </MoviesContextProvider>
-                  </ShortlistContextProvider>
-              </FavoritesContextProvider>
-          </AuthContextProvider>
-      </Router>
-  </StrictMode>
+    <StrictMode>
+        <Router>
+            <AuthContextProvider>
+                <FavoritesContextProvider>
+                    <ShortlistContextProvider>
+                        <MoviesContextProvider>
+                            <App/>
+                        </MoviesContextProvider>
+                    </ShortlistContextProvider>
+                </FavoritesContextProvider>
+            </AuthContextProvider>
+        </Router>
+    </StrictMode>
 );
 
 

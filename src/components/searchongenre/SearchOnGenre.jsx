@@ -5,7 +5,6 @@ import Button from '../button/Button.jsx';
 function SearchOnGenre(
     { genreAndIdListOfApi, errorGenreList, errorGenre, handleGenreSubmit, genreChoice, setGenreChoice } ) {
     
-    const idPrefix = useId();
     
     return (
         <>
@@ -27,7 +26,7 @@ function SearchOnGenre(
                                 
                                 {genreAndIdListOfApi.map( ( genre ) => (
                                     <option
-                                        key={`${idPrefix}-${genre.id}`}
+                                        key={genre.id}
                                         value={genre.name}
                                     >
                                         {genre.name}

@@ -4,31 +4,29 @@ import axios from 'axios';
 import styles from './MovieSearch.module.css';
 
 // helper imports
-import { getActorIdByName, getMoviesByActorId } from "../../helpers/actorSearch";
-import { getGenresAndIdsOfApi, getGenreIdByInput, getMoviesByGenreId } from "../../helpers/genreSearch";
+import getStartYearForDecade from '../../helpers/getStartYearForDecade.js';
+// import { getActorIdByName, getMoviesByActorId } from "../../helpers/actorSearch";
+// import { getGenreIdByInput } from "../../helpers/genreSearch";
 import { getMoviesByDecade } from "../../helpers/decadeSearch";
-import { getMoviesByTitle } from "../../helpers/titleSearch";
+// import { getMoviesByTitle } from "../../helpers/titleSearch";
+import fetchData from '../../helpers/useFetch.js';
 
 // component imports
 import ShortList from "../../components/shortlist/ShortList.jsx";
 import SearchOnActor from "../../components/searchonactor/SearchOnActor.jsx";
 import SearchOnGenre from "../../components/searchongenre/SearchOnGenre.jsx";
-import SearchOnDecade from "../../components/searchondecade/SearchOnDecade.jsx";
-// import MovieSelection from "../../components/movieselection/MovieSelection.jsx";
-import InfoButton from "../../components/infobutton/InfoButton.jsx";
 import SearchOnTitle from "../../components/searchontitle/SearchOnTitle.jsx";
-
-
-// misc imports
+import SearchOnDecade from "../../components/searchondecade/SearchOnDecade.jsx";
+import MovieSelection from "../../components/movieselection/MovieSelection.jsx";
+import InfoButton from "../../components/infobutton/InfoButton.jsx";
 
 // context imports
 import { ShortlistContext } from "../../context/ShortlistContext.jsx";
 import { MoviesContext } from "../../context/MoviesContext.jsx";
+import useFetch from '../../helpers/useFetch.js';
 
-
-const MovieSelection = lazy( () => import("../../components/movieselection/MovieSelection.jsx") );
-
-export const options = {
+// config for api requests
+const options = {
     method: 'GET',
     headers: {
         accept: 'application/json',
@@ -36,8 +34,11 @@ export const options = {
     },
 };
 
+// TODO: cleanup search helpers en opschonen MovieSearch
 
 function MovieSearch() {
+    const [ url, setUrl ] = useState( null );
+    const { dataFetch, loadingFetch, errorFetch } = useFetch( url );
     
     // Actor search
     const [ actorName, setActorName ] = useState( '' );
@@ -50,6 +51,7 @@ function MovieSearch() {
     const [ genreChoiceId, setGenreChoiceId ] = useState( 0 );
     const [ errorGenreList, toggleErrorGenreList ] = useState( false );
     const [ errorGenre, toggleErrorGenre ] = useState( false );
+    const genresUrl = 'https://api.themoviedb.org/3/genre/movie/list';
     
     // Decade search
     const [ errorDecade, toggleErrorDecade ] = useState( false );
@@ -69,93 +71,111 @@ function MovieSearch() {
     const { handleRemoveFromShortlist, handleAddToShortlist, isMovieInShortlist } = useContext( ShortlistContext );
     
     
-    // Api endpoint header
-    
+    // Custom hook
+    useEffect( () => {
+        if ( dataFetch ) {
+            setMovies( dataFetch.results );
+        }
+    }, [ dataFetch ] );
     
     //  =========================
     //  ===  FUNCTIES  ACTOR  ===
     //  =========================
     
+    function handleActorSubmit( e ) {
+        e.preventDefault();
+        
+        async function getActorIdByName() {
+            try {
+                
+                
+                const response = await axios.get(
+                    `https://api.themoviedb.org/3/search/person?query=${actorName}`, options );
+                setActorId( response.data.results[ 0 ].id );
+                
+            } catch ( e ) {
+                
+                console.error( e );
+            }
+        }
+        
+        void getActorIdByName();
+    }
     
     useEffect( () => {
-        toggleLoading( true );
-        
-        if ( actorId ) {
-            void getMoviesByActorId( toggleErrorActor, toggleLoading, setMovies, actorId );
-        }
-        toggleLoading( false );
-        
+        const actorUrl = `https://api.themoviedb.org/3/discover/movie?with_cast=${actorId}&sort_by=vote_average.desc&vote_average.gte=7.0&vote_count.gte=200&page=1?include_adult=false`;
+        setUrl( actorUrl );
     }, [ actorId ] );
-    
     
     //  =========================
     //  ===  FUNCTIES  TITEL  ===
     //  =========================
     
+    function handleTitleSubmit( e ) {
+        e.preventDefault();
+        const titleUrl = `https://api.themoviedb.org/3/search/movie?query=${title}&include_adult=false&page=1`;
+        console.log( 'titleUrl: ', titleUrl );
+        setUrl( titleUrl );
+    }
     
     //  =========================
     //  ===  FUNCTIES GENRE  ====
     //  =========================
     
-    // Mount only
+    // get all genres for dropdown
     useEffect( () => {
-        void getGenresAndIdsOfApi( setGenreAndIdListOfApi, toggleErrorGenreList );
+        toggleErrorGenreList( false );
         
-    }, [] );
-    
-    
-    useEffect( () => {
-        // if ( genreChoiceId !== undefined ) {
-        //     void getMoviesByGenreId( setMovies, toggleLoading, toggleErrorGenre, genreChoiceId );
-        // } else {
-        
-        try {
-            void getMoviesByGenreId( setMovies, toggleLoading, toggleErrorGenre, genreChoiceId );
-        } catch ( e ) {
-            console.error( e );
+        async function getGenresAndIdsOfApi() {
+            try {
+                const response = await axios.get( 'https://api.themoviedb.org/3/genre/movie/list', options );
+                
+                setGenreAndIdListOfApi( response.data.genres );
+            } catch ( e ) {
+                toggleErrorGenreList( true );
+                console.error( e );
+            }
         }
         
-        toggleLoading( false );
+        void getGenresAndIdsOfApi();
+    }, [] );
+    
+    // Make api request for movie selection
+    useEffect( () => {
+        const genreUrl = `https://api.themoviedb.org/3/discover/movie?with_genres=${genreChoiceId}&sort_by=vote_average.desc&vote_average.gte=7.0&vote_count.gte=200&page=1?include_adult=false`;
+        setUrl( genreUrl );
     }, [ genreChoiceId ] );
+    
+    
+    function handleGenreSubmit( e ) {
+        e.preventDefault();
+        if ( genreAndIdListOfApi.length > 0 && genreChoice ) {
+            try {
+                const genre = genreAndIdListOfApi.find(
+                    genre => genre.name.toLowerCase() === genreChoice.toLowerCase() );
+                setGenreChoiceId( genre.id );
+                
+            } catch ( e ) {
+                toggleLoading( false );
+                toggleErrorGenre( true );
+                console.error( e );
+            }
+        }
+    }
     
     
     // =========================
     // ===  FUNCTIES DECADE  ===
     // =========================
     
-    // In helper decadeSearch.js
-    
-    
-    //  ========================
-    //  ===  HANDLE SUBMITS  ===
-    //  ========================
-    
-    function handleActorSubmit( e ) {
-        e.preventDefault();
-        void getActorIdByName( toggleErrorActor, toggleLoading, setActorId, actorName );
-    }
-    
-    function handleGenreSubmit( e ) {
-        e.preventDefault();
-        void getGenreIdByInput( toggleLoading, toggleErrorGenre, setGenreChoiceId, genreAndIdListOfApi, genreChoice );
-    }
-    
     function handleDecadeSubmit( e ) {
         e.preventDefault();
-        void getMoviesByDecade( setMovies, selectedDecade, toggleLoading, toggleErrorDecade );
+        const currentYear = new Date().getFullYear();
+        const startYear = getStartYearForDecade( selectedDecade, currentYear );
+        const endYear = startYear + 9;
+        const decadeUrl = `https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=${startYear}&primary_release_date.lte=${endYear}&sort_by=vote_average.desc&vote_average.gte=7.0&vote_count.gte=200&page=1?include_adult=false`;
+        setUrl( decadeUrl );
     }
-    
-    function handleTitleSubmit( e ) {
-        e.preventDefault();
-        void getMoviesByTitle( toggleErrorTitle, toggleLoading, setMovies, title );
-    }
-    
-    
-    // ===================
-    // ===  SHORTLIST  ===
-    // ===================
-    
-    // >>>  helper  <<<
     
     
     //  ================
@@ -242,13 +262,15 @@ function MovieSearch() {
                 <section className={`${styles[ 'movie-selection' ]} section-container`}>
                     <div className='section-inner-container'>
                         <h1 className='section-title'>Movie Selection</h1>
-                        <Suspense fallback={'Loading.'}>
+                        
+                        {movies &&
                             <MovieSelection
                                 loading={loading}
                                 movies={movies}
                                 setMovies={setMovies}
                             />
-                        </Suspense>
+                            
+                        }
                     </div>
                 </section>
             </div>

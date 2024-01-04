@@ -31,7 +31,6 @@ body {
 }
 
 .all-content {
-  /*border: 1px solid red;*/
   background-color: black;
   
 }
@@ -56,51 +55,38 @@ a {
 /*  SECTIONS  */
 
 .main-container {
-  /*border: 1px solid red;*/
   background-color: var(--dark-blue);
-  
   display: flex;
   flex-direction: column;
-  
   flex-basis: auto;
   flex-grow: 1;
-  
   align-items: center;
   padding-top: 50px;
 }
 
 .sections-container {
-  /*border: 1px solid red;*/
-  
   display: flex;
   flex-direction: row;
   flex-basis: auto;
   width: 100%;
-  
   column-gap: 40px;
-  
   justify-content: space-between;
 }
 
 .section-container {
   border: 2px solid var(--med-yellow);
   background-color: var(--dark-purple);
-  
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   flex-grow: 0;
-  
   padding: 30px;
   box-shadow: 0 0 2em hsl(214, 53%, 2%);
   border-radius: 3em;
-  
   align-items: center;
 }
 
 .section-form {
-  /*border: 1px solid var(--med-yellow);*/
-  
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -110,20 +96,15 @@ a {
 }
 
 .section-input-line {
-  /*border: 1px solid var(--med-yellow);*/
-  
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-  
   caret-color: white;
   margin-top: 1em;
 }
 
 .section-input-field {
-  /*border: 1px solid var(--med-yellow);*/
-  
   border: none;
   outline: none;
   background-color: transparent;
@@ -148,5 +129,3 @@ a {
   font-style: italic;
   font-size: smaller;
 }
-
-

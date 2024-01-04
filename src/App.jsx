@@ -10,11 +10,10 @@ import LogOut from './pages/logout/LogOut.jsx';
 import SignUp from './pages/signUp/SignUp.jsx';
 import Footer from './components/footer/Footer.jsx';
 import SignedUp from "./pages/signedup/SignedUp.jsx";
-
-
 import PageNotFound from "./pages/pageNotFound/PageNotFound.jsx";
 import Favorites from "./pages/favorites/Favorites.jsx";
 import Randomizer from './pages/randomizer/Randomizer.jsx';
+import LoggedOut from './pages/loggedOut/LoggedOut.jsx';
 
 
 function App() {
@@ -75,12 +74,16 @@ function App() {
                         path='/randomizer'
                         element={<Randomizer/>}
                     />
-                    
-                    
                     <Route
                         path='*'
                         element={<PageNotFound/>}
                     />
+                    <Route
+                        exact
+                        path='/loggedout'
+                        element={<LoggedOut/>}
+                    />
+                
                 
                 </Routes>
             </main>
