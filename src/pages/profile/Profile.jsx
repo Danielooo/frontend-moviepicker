@@ -4,7 +4,6 @@ import { AuthContext } from "../../context/AuthContext.jsx";
 import axios from 'axios';
 
 import styles from './Profile.module.css';
-import MovieSelection from "../../components/movieselection/MovieSelection.jsx";
 
 
 function Profile() {
@@ -26,7 +25,9 @@ function Profile() {
             }
         }
         
-        void fetchProfileData();
+        if ( isAuth ) {
+            void fetchProfileData();
+        }
     }, [] );
     
     return (
