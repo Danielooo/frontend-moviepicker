@@ -1,11 +1,7 @@
-/* eslint-disable no-unused-vars */
-
-import React, { useEffect, useId } from 'react';
 import Button from '../button/Button.jsx';
 
 
 function SearchOnDecade( { handleDecadeSubmit, selectedDecade, setSelectedDecade, decades, errorDecade } ) {
-    const idPrefix = useId();
     
     return (
         <>
@@ -23,7 +19,7 @@ function SearchOnDecade( { handleDecadeSubmit, selectedDecade, setSelectedDecade
                     >
                         {decades.map( ( decade ) => (
                             <option
-                                key={`${idPrefix}-${decade}`}
+                                key={decade}
                                 value={decade}
                             >
                                 {decade}

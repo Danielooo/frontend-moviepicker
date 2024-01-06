@@ -1,4 +1,4 @@
-import React, { useContext, useId } from 'react';
+import React, { useContext } from 'react';
 import styles from './ShortList.module.css';
 import Button from '../button/Button.jsx';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +8,6 @@ import textShortener from '../../helpers/textShortener.js';
 
 
 function Shortlist( { linkToRandomizePage } ) {
-    const idPrefix = useId();
     const maxCharsMovieTitle = 35;
     
     const {
@@ -32,7 +31,7 @@ function Shortlist( { linkToRandomizePage } ) {
                 {shortlist.length > 0 ? (
                         shortlist.map( ( movie ) => (
                             <div
-                                key={`${idPrefix}-${movie.id}`}
+                                key={movie.id}
                                 className={styles[ 'shortlist-movie' ]}
                             >
                                 <button

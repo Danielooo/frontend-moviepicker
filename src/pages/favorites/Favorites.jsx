@@ -19,8 +19,11 @@ function Favorites() {
                 
                 <h1>Favorites</h1>
                 
-                <p>
-                    Here's a list of all your favorite movies. <br/>If you want you can add them to your shortlist </p>
+                {Object.keys( favorites ).length > 0 &&
+                    <p>
+                        Here's a list of all your favorite movies. <br/>If you want you can add them to your shortlist
+                    </p>
+                }
                 
                 {Object.keys( favorites ).length > 0 &&
                     <Button
