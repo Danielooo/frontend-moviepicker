@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import AuthContextProvider, { AuthContext } from "../../context/AuthContext.jsx";
+import { AuthContext } from "../../context/AuthContext.jsx";
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";

@@ -37,7 +37,6 @@ function useFetch( url ) {
                 setErrorFetch( getSearchCategoryFromUrl( url ) );
                 
                 if ( axios.isCancel( e ) ) {
-                    console.log( 'Fetch aborted: ', e );
                 }
                 
             } finally {

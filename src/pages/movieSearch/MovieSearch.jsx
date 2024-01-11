@@ -96,7 +96,6 @@ function MovieSearch() {
                 if ( !actorName.trim() ) {
                     setErrorActor( 'Nothing filled in. Please enter name of actor' );
                 } else {
-                    console.log( 'reached' );
                     setErrorActor( 'No actor id found. Please check input spelling and try again' );
                 }
             }
@@ -178,7 +177,6 @@ function MovieSearch() {
     function handleTitleSubmit( e ) {
         e.preventDefault();
         const titleUrl = `https://api.themoviedb.org/3/search/movie?query=${title}&include_adult=false&page=1`;
-        console.log( 'titleUrl: ', titleUrl );
         setUrl( titleUrl );
     }
     

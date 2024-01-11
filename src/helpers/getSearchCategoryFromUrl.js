@@ -1,6 +1,5 @@
 function getSearchCategoryFromUrl( url ) {
-    console.log( 'url: ', url );
-    console.log( 'url.includes : ', url.includes( 'movie?with_cast=' ) );
+    
     
     if ( url.includes( 'movie?with_cast=' ) ) {
         
