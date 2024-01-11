@@ -1,8 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
 
-import ShortlistIconNoFill from './../assets/icons/shortlist/bookmark-simple.svg';
-import ShortlistIconFill from './../assets/icons/shortlist/bookmark-simple-fill.svg';
-
 
 export const ShortlistContext = createContext( [] );
 

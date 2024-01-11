@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Shortlist from '../../components/shortlist/ShortList.jsx';
-import LoadingBar from '../../components/loadingBar/LoadingBar.jsx';
 import MovieCard from '../../components/moviecard/MovieCard.jsx';
 import getRandomInt from '../../helpers/getRandomInt.js';
 import { Link } from 'react-router-dom';

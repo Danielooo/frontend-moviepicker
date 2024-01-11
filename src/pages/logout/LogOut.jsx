@@ -1,8 +1,5 @@
-/* eslint-disable */
-
 import React, { useContext } from "react";
 import Button from "../../components/button/Button.jsx";
-import style from './LogOut.module.css';
 
 import { AuthContext } from "../../context/AuthContext.jsx";
 

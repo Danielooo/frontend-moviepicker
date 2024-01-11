@@ -1,8 +1,4 @@
 import { useEffect, useState, useContext } from 'react';
-import { ShortlistContext } from '../../context/ShortlistContext.jsx';
-import { Link, useNavigate } from 'react-router-dom';
-
-import styles from './LoadingBar.module.css';
 
 
 function LoadingBar( { boolComplete } ) {

@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import styles from './Favorites.module.css';
 import MovieSelection from "../../components/movieselection/MovieSelection.jsx";
 
 import { FavoritesContext } from "../../context/FavoritesContext.jsx";
