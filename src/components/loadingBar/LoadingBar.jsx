@@ -39,7 +39,6 @@ function LoadingBar( { boolComplete } ) {
         }
         
         return function cleanup() {
-            // console.log( "Het interval wordt gestopt!" );
             clearInterval( loop );
         };
     }, [ startLoading, boolComplete ] );
@@ -47,7 +46,6 @@ function LoadingBar( { boolComplete } ) {
     
     return (
         <>
-            {/* TODO: styling in CSS  */}
             <div style={{ width: '100%', backgroundColor: '#ddd' }}>
                 <div style={{ width: `${progress}%`, backgroundColor: 'blue', height: '10px' }}/>
             </div>

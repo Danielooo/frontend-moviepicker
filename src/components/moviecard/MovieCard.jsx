@@ -18,7 +18,6 @@ import PopUp from '../popup/PopUp.jsx';
 
 
 function MovieCard( { movie, withIcons } ) {
-    // TODO: loading state toevoegen
     
     const { isMovieInShortlist, handleAddToShortlist, handleRemoveFromShortlist } = useContext( ShortlistContext );
     const { isMovieInFavorites, handleRemoveFromFavorites, handleAddToFavorites } = useContext( FavoritesContext );

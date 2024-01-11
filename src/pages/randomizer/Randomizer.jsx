@@ -18,7 +18,6 @@ function Randomizer() {
     
     function handleClick() {
         const randomMovieIndex = getRandomInt( 0, Object.keys( shortlist ).length - 1, lastRandomMovieIndex );
-        console.log( 'randomMovieIndex: ', randomMovieIndex );
         
         setRandomMovie( shortlist[ randomMovieIndex ] );
         setLastRandomMovieIndex( randomMovieIndex );
