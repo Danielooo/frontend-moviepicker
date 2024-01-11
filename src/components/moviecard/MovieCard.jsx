@@ -57,7 +57,6 @@ function MovieCard( { movie, withIcons } ) {
                             src={posterImage}
                             alt='poster not found'
                         />
-                        {/* popup component maken */}
                         <PopUp
                             text={movie.overview}
                         />

@@ -26,6 +26,7 @@ function useFetch( url ) {
                 setDataFetch( response.data );
             } catch ( e ) {
                 setErrorFetch( e );
+                console.log( 'e: ', e);
             } finally {
                 setLoadingFetch( false );
             }

@@ -31,7 +31,7 @@ function SearchOnActor( { handleActorSubmit, actorName, setActorName, errorActor
             
             </form>
             {errorActor &&
-                <p className='error-message'>Actor is misspelled or not in database. Please check your entry. </p>}
+                <p className='error-message'>{errorActor}</p>}
         </>
     );
 }

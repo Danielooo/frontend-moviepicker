@@ -5,11 +5,7 @@ import styles from './MovieSearch.module.css';
 
 // helper imports
 import getStartYearForDecade from '../../helpers/getStartYearForDecade.js';
-// import { getActorIdByName, getMoviesByActorId } from "../../helpers/actorSearch";
-// import { getGenreIdByInput } from "../../helpers/genreSearch";
-import { getMoviesByDecade } from "../../helpers/decadeSearch";
-// import { getMoviesByTitle } from "../../helpers/titleSearch";
-import fetchData from '../../helpers/useFetch.js';
+// import fetchData from '../../helpers/useFetch.js';
 
 // component imports
 import ShortList from "../../components/shortlist/ShortList.jsx";
@@ -34,7 +30,6 @@ const options = {
     },
 };
 
-// TODO: cleanup search helpers en opschonen MovieSearch
 
 function MovieSearch() {
     const [ url, setUrl ] = useState( null );
@@ -43,7 +38,7 @@ function MovieSearch() {
     // Actor search
     const [ actorName, setActorName ] = useState( '' );
     const [ actorId, setActorId ] = useState( 0 );
-    const [ errorActor, toggleErrorActor ] = useState( false );
+    const [ errorActor, setErrorActor ] = useState( '' );
     
     // Genre search
     const [ genreAndIdListOfApi, setGenreAndIdListOfApi ] = useState( [] );
@@ -84,18 +79,25 @@ function MovieSearch() {
     
     function handleActorSubmit( e ) {
         e.preventDefault();
+        setErrorActor( '' );
+        
         
         async function getActorIdByName() {
             try {
-                
-                
                 const response = await axios.get(
                     `https://api.themoviedb.org/3/search/person?query=${actorName}`, options );
                 setActorId( response.data.results[ 0 ].id );
                 
             } catch ( e ) {
-                
                 console.error( e );
+                console.log( '1 reach' );
+                // if actorName empty or just spaces
+                if ( !actorName.trim() ) {
+                    setErrorActor( 'Nothing filled in. Please enter name of actor' );
+                } else {
+                    console.log( 'reached' );
+                    setErrorActor( 'No actor id found. Please check input spelling and try again' );
+                }
             }
         }
         
@@ -107,16 +109,6 @@ function MovieSearch() {
         setUrl( actorUrl );
     }, [ actorId ] );
     
-    //  =========================
-    //  ===  FUNCTIES  TITEL  ===
-    //  =========================
-    
-    function handleTitleSubmit( e ) {
-        e.preventDefault();
-        const titleUrl = `https://api.themoviedb.org/3/search/movie?query=${title}&include_adult=false&page=1`;
-        console.log( 'titleUrl: ', titleUrl );
-        setUrl( titleUrl );
-    }
     
     //  =========================
     //  ===  FUNCTIES GENRE  ====
@@ -140,7 +132,7 @@ function MovieSearch() {
         void getGenresAndIdsOfApi();
     }, [] );
     
-    // Make api request for movie selection
+    // Makes api request for movie selection by genre id
     useEffect( () => {
         const genreUrl = `https://api.themoviedb.org/3/discover/movie?with_genres=${genreChoiceId}&sort_by=vote_average.desc&vote_average.gte=7.0&vote_count.gte=200&page=1?include_adult=false`;
         setUrl( genreUrl );
@@ -161,6 +153,17 @@ function MovieSearch() {
                 console.error( e );
             }
         }
+    }
+    
+    //  =========================
+    //  ===  FUNCTIES  TITEL  ===
+    //  =========================
+    
+    function handleTitleSubmit( e ) {
+        e.preventDefault();
+        const titleUrl = `https://api.themoviedb.org/3/search/movie?query=${title}&include_adult=false&page=1`;
+        console.log( 'titleUrl: ', titleUrl );
+        setUrl( titleUrl );
     }
     
     
