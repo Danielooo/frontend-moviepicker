@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../button/Button.jsx';
 
 
-function SearchOnActor( { handleActorSubmit, actorName, setActorName, errorActor } ) {
+function SearchOnActor( { handleActorSubmit, actorName, setActorName, errorActor, errorFetch } ) {
     
     return (
         <>
@@ -30,8 +30,10 @@ function SearchOnActor( { handleActorSubmit, actorName, setActorName, errorActor
                 />
             
             </form>
+            {errorFetch === 'error actor' &&
+                <p className='error-message'>Error retrieving data. Please try again</p>}
             {errorActor &&
-                <p className='error-message'>Actor is misspelled or not in database. Please check your entry. </p>}
+                <p className='error-message'>{errorActor}</p>}
         </>
     );
 }
