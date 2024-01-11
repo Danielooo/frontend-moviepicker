@@ -18,12 +18,13 @@ import PopUp from '../popup/PopUp.jsx';
 
 
 function MovieCard( { movie, withIcons } ) {
+    // TODO: loading state toevoegen
     
     const { isMovieInShortlist, handleAddToShortlist, handleRemoveFromShortlist } = useContext( ShortlistContext );
     const { isMovieInFavorites, handleRemoveFromFavorites, handleAddToFavorites } = useContext( FavoritesContext );
     const { setMovies } = useContext( MoviesContext );
     
-    const [ posterImage, setPosterImage ] = useState( null );
+    const [ posterImage, setPosterImage ] = useState( '' );
     
     const maxCharsMovieTitle = 30;
     
@@ -38,6 +39,8 @@ function MovieCard( { movie, withIcons } ) {
                     
                 } catch ( e ) {
                     setPosterImage( posterNotFound );
+                } finally {
+                    // setLoading(false)
                 }
             }
             

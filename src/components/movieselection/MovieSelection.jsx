@@ -20,10 +20,12 @@ function MovieSelection( { loading, movies, setMovies } ) {
                 
                 ) )
                 :
+                
                 <>
                     <i>- So empty! Find a selection of movies through Movie Search -</i>
                 </>
             }
+            {loading && <b>Loading...</b>}
         </div>
     );
 }

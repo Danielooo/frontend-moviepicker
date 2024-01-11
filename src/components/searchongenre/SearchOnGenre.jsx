@@ -1,8 +1,9 @@
 import Button from '../button/Button.jsx';
+import React from 'react';
 
 
 function SearchOnGenre(
-    { genreAndIdListOfApi, errorGenreList, errorGenre, handleGenreSubmit, genreChoice, setGenreChoice } ) {
+    { genreAndIdListOfApi, errorGenreList, errorGenre, handleGenreSubmit, genreChoice, setGenreChoice, errorFetch } ) {
     
     
     return (
@@ -40,6 +41,8 @@ function SearchOnGenre(
                         />
                     
                     </form>
+                    {errorFetch === 'error genre' &&
+                        <p className='error-message'>Error retrieving data. Please try again</p>}
                     {errorGenre && <p className='error-message'>An error occurred. Please try again</p>}
                 
                 </>

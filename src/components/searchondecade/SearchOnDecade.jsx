@@ -1,7 +1,8 @@
 import Button from '../button/Button.jsx';
+import React from 'react';
 
 
-function SearchOnDecade( { handleDecadeSubmit, selectedDecade, setSelectedDecade, decades, errorDecade } ) {
+function SearchOnDecade( { handleDecadeSubmit, selectedDecade, setSelectedDecade, decades, errorDecade, errorFetch } ) {
     
     return (
         <>
@@ -33,6 +34,8 @@ function SearchOnDecade( { handleDecadeSubmit, selectedDecade, setSelectedDecade
                     disabled={false}
                 />
             </form>
+            {errorFetch === 'error decade' &&
+                <p className='error-message'>Error retrieving data. Please try again</p>}
             {errorDecade && <p className='error-message'>An error occurred. Please try again</p>}
         </>
     

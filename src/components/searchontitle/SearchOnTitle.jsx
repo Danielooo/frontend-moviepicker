@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../button/Button.jsx';
 
 
-function SearchOnTitle( { handleTitleSubmit, title, setTitle, errorTitle } ) {
+function SearchOnTitle( { handleTitleSubmit, title, setTitle, errorTitle, errorFetch } ) {
     
     return (
         <>
@@ -29,6 +29,8 @@ function SearchOnTitle( { handleTitleSubmit, title, setTitle, errorTitle } ) {
                 />
             
             </form>
+            {errorFetch === 'title error' &&
+                <p className='error-message'>Error retrieving data. Please try again</p>}
             {errorTitle &&
                 <p className='error-message'>Title is misspelled or not in database. Please check your entry. </p>}
         </>

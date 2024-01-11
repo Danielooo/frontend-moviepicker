@@ -73,14 +73,11 @@ function MovieSearch() {
         }
     }, [ dataFetch ] );
     
-    useEffect( () => {
-        console.log( 'errorFetch: ', errorFetch );
-        
-    }, [ errorFetch ] );
     
     //  =========================
     //  ===  FUNCTIES  ACTOR  ===
     //  =========================
+    
     
     function handleActorSubmit( e ) {
         e.preventDefault();
@@ -95,7 +92,6 @@ function MovieSearch() {
                 
             } catch ( e ) {
                 console.error( e );
-                console.log( '1 reach' );
                 // if actorName empty or just spaces
                 if ( !actorName.trim() ) {
                     setErrorActor( 'Nothing filled in. Please enter name of actor' );
@@ -160,17 +156,6 @@ function MovieSearch() {
         }
     }
     
-    //  =========================
-    //  ===  FUNCTIES  TITEL  ===
-    //  =========================
-    
-    function handleTitleSubmit( e ) {
-        e.preventDefault();
-        const titleUrl = `https://api.themoviedb.org/3/search/movie?query=${title}&include_adult=false&page=1`;
-        console.log( 'titleUrl: ', titleUrl );
-        setUrl( titleUrl );
-    }
-    
     
     // =========================
     // ===  FUNCTIES DECADE  ===
@@ -183,6 +168,18 @@ function MovieSearch() {
         const endYear = startYear + 9;
         const decadeUrl = `https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=${startYear}&primary_release_date.lte=${endYear}&sort_by=vote_average.desc&vote_average.gte=7.0&vote_count.gte=200&page=1?include_adult=false`;
         setUrl( decadeUrl );
+    }
+    
+    
+    //  =========================
+    //  ===  FUNCTIES  TITEL  ===
+    //  =========================
+    
+    function handleTitleSubmit( e ) {
+        e.preventDefault();
+        const titleUrl = `https://api.themoviedb.org/3/search/movie?query=${title}&include_adult=false&page=1`;
+        console.log( 'titleUrl: ', titleUrl );
+        setUrl( titleUrl );
     }
     
     
@@ -216,6 +213,7 @@ function MovieSearch() {
                             actorName={actorName}
                             setActorName={setActorName}
                             errorActor={errorActor}
+                            errorFetch={errorFetch}
                         />
                         
                         
@@ -228,6 +226,8 @@ function MovieSearch() {
                             handleGenreSubmit={handleGenreSubmit}
                             genreChoice={genreChoice}
                             setGenreChoice={setGenreChoice}
+                            errorFetch={errorFetch}
+                        
                         />
                         
                         {/*/!*  DECADE  *!/*/}
@@ -238,6 +238,8 @@ function MovieSearch() {
                             setSelectedDecade={setSelectedDecade}
                             decades={decades}
                             errorDecade={errorDecade}
+                            errorFetch={errorFetch}
+                        
                         />
                         
                         {/*  TITLE  */}
@@ -247,6 +249,7 @@ function MovieSearch() {
                             title={title}
                             setTitle={setTitle}
                             errorTitle={errorTitle}
+                            errorFetch={errorFetch}
                         />
                     
                     </section>
@@ -272,8 +275,9 @@ function MovieSearch() {
                         <h1 className='section-title'>Movie Selection</h1>
                         
                         {movies &&
+                            
                             <MovieSelection
-                                loading={loading}
+                                loading={loadingFetch}
                                 movies={movies}
                                 setMovies={setMovies}
                             />
