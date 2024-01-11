@@ -73,6 +73,11 @@ function MovieSearch() {
         }
     }, [ dataFetch ] );
     
+    useEffect( () => {
+        console.log( 'errorFetch: ', errorFetch );
+        
+    }, [ errorFetch ] );
+    
     //  =========================
     //  ===  FUNCTIES  ACTOR  ===
     //  =========================

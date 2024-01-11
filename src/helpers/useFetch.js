@@ -18,6 +18,9 @@ function useFetch( url ) {
     useEffect( () => {
         if ( !url ) return;
         
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+        
         async function fetchData() {
             
             try {
@@ -25,14 +28,21 @@ function useFetch( url ) {
                 const response = await axios.get( url, options );
                 setDataFetch( response.data );
             } catch ( e ) {
+                if ( axios.isCancel( e ) ) {
+                    console.log( 'Fetch aborted: ', e );
+                }
                 setErrorFetch( e );
-                console.log( 'e: ', e);
+                console.log( 'e: ', e );
             } finally {
                 setLoadingFetch( false );
             }
         }
         
         void fetchData();
+        
+        return () => {
+            abortController.abort();
+        };
         
     }, [ url ] );
     return { dataFetch, errorFetch, loadingFetch };
