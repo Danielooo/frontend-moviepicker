@@ -1,0 +1,77 @@
+.movie-card {
+  /*border: 1px solid var(--med-yellow);*/
+  
+  border-radius: 4px;
+  background-color: rgba(222, 76, 109, 0.87);
+  
+  overflow: visible;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  
+  margin: 1em;
+  width: 8em;
+  padding-bottom: 0.5em;
+}
+
+.movie-poster-container {
+  position: relative;
+}
+
+.movie-card p {
+  margin-bottom: 0.5em;
+}
+
+/*movie card poster and title*/
+.movie-card-top {
+  border-radius: 4px;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.movie-poster {
+  border-radius: 4px;
+  
+  width: 100%;
+  height: 195px;
+}
+
+.movie-title {
+  align-self: center;
+  font-size: 1em;
+  margin: 0.4em 0;
+  padding: 0;
+}
+
+/*movie card release year, rating, and add button*/
+.movie-card-bottom {
+  justify-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.movie-year {
+  margin: 0 0 0 5px;
+  padding: 0;
+}
+
+.movie-rating {
+  align-self: flex-start;
+  font-style: italic;
+  font-size: small;
+  margin: 0 0 0 5px;
+  padding: 0;
+}
+
+.icon-line {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-start;
+  column-gap: 5px;
+}

@@ -1,0 +1,10 @@
+
+.logged-out-title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.link {
+  font-weight: bold;
+}

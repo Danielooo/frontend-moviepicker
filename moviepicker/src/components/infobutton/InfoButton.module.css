@@ -1,0 +1,47 @@
+
+
+.infobutton-container {
+  position: relative;
+}
+
+.infobutton-circle {
+  cursor: pointer;
+
+  vertical-align: top;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  background-color: #778DA9;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  font-style: italic;
+  box-shadow: 3px 3px 5px hsl(327, 50%, 30%);
+  transform: translateY(45%);
+}
+
+.explain-popup {
+  visibility: hidden;
+  background-color: var(--med-yellow);
+  color: black;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  transform: translateX(-50%) translateY(5%);
+  opacity: 0;
+  transition: opacity 0.2s;
+
+  width: 400px;
+  font-size: smaller;
+}
+
+.infobutton-container:hover .explain-popup {
+  cursor: pointer;
+  visibility: visible;
+  opacity: 1;
+}

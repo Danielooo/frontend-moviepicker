@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+}
+
+
+body {
+  background-color: black;
+}
+
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  
+  color: var(--white);
+  
+  font-family: 'Verdana', 'Tahoma', sans-serif;
+}
+
+:root {
+  --dark-blue: #0C1B33;
+  --dark-purple: #8F2D56;
+  --med-blue: #778DA9;
+  --med-yellow: #F4D58D;
+  --light-yellow: #FDF0D5;
+  
+  --dark-black: #000000;
+  --white: #FFFFFF;
+  
+}
+
+.all-content {
+  background-color: black;
+  
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex-basis: auto;
+  flex-grow: 1;
+  background-color: var(--dark-blue);
+  align-items: center;
+  width: 100%;
+  min-width: 1000px;
+  
+  padding: 30px;
+}
+
+a {
+  color: var(--white)
+}
+
+/*  SECTIONS  */
+
+.main-container {
+  background-color: var(--dark-blue);
+  display: flex;
+  flex-direction: column;
+  flex-basis: auto;
+  flex-grow: 1;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.sections-container {
+  display: flex;
+  flex-direction: row;
+  flex-basis: auto;
+  width: 100%;
+  column-gap: 40px;
+  justify-content: space-between;
+}
+
+.section-container {
+  border: 2px solid var(--med-yellow);
+  background-color: var(--dark-purple);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  padding: 30px;
+  box-shadow: 0 0 2em hsl(214, 53%, 2%);
+  border-radius: 3em;
+  align-items: center;
+}
+
+.section-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  
+  margin-bottom: 1.5em;
+}
+
+.section-input-line {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  caret-color: white;
+  margin-top: 1em;
+}
+
+.section-input-field {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 1px solid white;
+  width: 13em;
+  color: white;
+}
+
+.section-input-field::placeholder {
+  color: lightgrey;
+}
+
+.link-to-moviesearch {
+  font-weight: bold;
+}
+
+/*  ERRORS  */
+
+.error-message {
+  margin: 5px;
+  color: lightgrey;
+  font-style: italic;
+  font-size: smaller;
+}
